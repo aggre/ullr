@@ -34,12 +34,28 @@ describe('Rendering', () => {
 		render(await html``, document.body)
 	})
 
-	it('Rendering html', async () => {
-		const template = html`<h1>The title</h1>`
-		render(await template, document.body)
-		const h1 = document.body.querySelector('h1')
-		expect(h1).to.be.ok()
-		expect((h1 as HTMLHeadingElement).innerText).to.be('The title')
+	describe('Rendering html', () => {
+		it('Rendering html', async () => {
+			const template = html`<h1>The title</h1>`
+			render(await template, document.body)
+			const h1 = document.body.querySelector('h1')
+			expect(h1).to.be.ok()
+			expect((h1 as HTMLHeadingElement).innerText).to.be('The title')
+		})
+
+		it('Nested templates are asynchronous rendering', async () => {
+			const h1 = html`<h1>The title</h1>`
+			const main = html`<main>${h1}</main>`
+			const getH1 = (el: HTMLElement) => el.querySelector('h1')
+			let h1El
+			render(await main, document.body)
+			const mainEl = document.body.querySelector('main')
+			expect(getH1(mainEl as HTMLElement) as HTMLHeadingElement).to.be(null)
+			await sleep(0)
+			h1El = getH1(mainEl as HTMLElement) as HTMLHeadingElement
+			expect(h1El).to.be.ok()
+			expect(h1El.innerText).to.be('The title')
+		})
 	})
 
 	describe('Rendering component', () => {
