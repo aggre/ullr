@@ -3,8 +3,8 @@ import { TemplateResult, NodePart, directive } from 'lit-html'
 
 export const subscribe = <T>(
 	observable: Observable<T>,
-	template: (x: T) => TemplateResult,
-	defaultContent?: TemplateResult
+	template: (x: T) => Promise<TemplateResult> | TemplateResult,
+	defaultContent?: Promise<TemplateResult> | TemplateResult
 ) =>
 	directive((part: NodePart) => {
 		observable.subscribe(x => part.setValue(template(x)))
