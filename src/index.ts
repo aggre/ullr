@@ -5,15 +5,16 @@ export const html = async (strings: TemplateStringsArray, ...values: any[]) =>
 
 export const render = _render
 
-export const component = async (template: TemplateResult) =>
-	html`<f-e-shadow>${template}</f-e-shadow>`
+export const component = async (
+	template: Promise<TemplateResult> | TemplateResult
+) => html`<f-e-shadow>${template}</f-e-shadow>`
 
 window.customElements.define(
 	'f-e-shadow',
 	class extends HTMLElement {
-		async connectedCallback() {
+		connectedCallback() {
 			_render(
-				await html`<slot></slot>`,
+				_html`<slot></slot>`,
 				this.shadowRoot || this.attachShadow({ mode: 'open' })
 			)
 		}
