@@ -1,4 +1,5 @@
-import { html as _html, render as _render, TemplateResult } from 'lit-html'
+import { html as _html, render as _render } from 'lit-html/lib/lit-extended'
+import { TemplateResult } from 'lit-html'
 
 export const html = async (strings: TemplateStringsArray, ...values: any[]) =>
 	Promise.resolve(_html(strings, ...values))
