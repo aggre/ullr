@@ -9,7 +9,8 @@
 		"build": "tsc -p ./",
 		"prebuild": "npm run lint",
 		"lint": "tslint --fix -p ./",
-		"format": "prettier --write '**/*.{json,md}'"
+		"format": "prettier --write '**/*.{json,md}'",
+		"prepare": "npm run build"
 	},
 	"author": "aggre",
 	"contributors": [
