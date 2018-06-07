@@ -1,5 +1,37 @@
-import { Observable } from 'rxjs'
-import { TemplateResult, NodePart, directive } from 'lit-html'
+import { Observable, Subscription } from 'rxjs'
+import { TemplateResult, NodePart, directive, render } from 'lit-html'
+import { html } from 'lit-html/lib/lit-extended'
+
+const random = () => btoa(`${Math.random()}`)
+const subscriptions: Map<string, Subscription> = new Map()
+
+window.customElements.define(
+	'f-e-subscribe',
+	class extends HTMLElement {
+		token: string
+		subscription: Subscription | undefined
+		static get observedAttributes() {
+			return ['token']
+		}
+		attributeChangedCallback(_, __, next) {
+			this.token = next
+			this.subscription = subscriptions.get(next)
+		}
+		connectedCallback() {
+			render(
+				html`<slot></slot>`,
+				this.shadowRoot || this.attachShadow({ mode: 'open' })
+			)
+		}
+		disconnectedCallback() {
+			if (!this.subscription) {
+				return
+			}
+			this.subscription.unsubscribe()
+			subscriptions.delete(this.token)
+		}
+	}
+)
 
 export const subscribe = <T>(
 	observable: Observable<T>,
@@ -7,7 +39,15 @@ export const subscribe = <T>(
 	defaultContent?: Promise<TemplateResult> | TemplateResult
 ) =>
 	directive((part: NodePart) => {
-		observable.subscribe(x => part.setValue(template(x)))
+		const token = random()
+		subscriptions.set(
+			token,
+			observable.subscribe(x =>
+				part.setValue(
+					html`<f-e-subscribe token$='${token}'>${template(x)}</f-e-subscribe>`
+				)
+			)
+		)
 		if (defaultContent) {
 			part.setValue(defaultContent)
 		}

@@ -9,6 +9,27 @@ const sleep = async (time: number) =>
 		setTimeout(() => resolve(), time)
 	})
 
+const slotSelector = (
+	element: Element | null,
+	slot: string,
+	selector: string
+) => {
+	if (!element) {
+		return
+	}
+	const { shadowRoot } = element
+	const slotEl = (shadowRoot || element).querySelector(slot)
+	if (!slotEl) {
+		return
+	}
+	const [assigned] = (slotEl as HTMLSlotElement).assignedNodes()
+	const { parentElement } = assigned
+	if (!parentElement) {
+		return
+	}
+	return parentElement.querySelector(selector)
+}
+
 describe('subscribe directive', () => {
 	afterEach(async () => {
 		render(await html``, document.body)
@@ -31,11 +52,17 @@ describe('subscribe directive', () => {
 			)}`,
 			document.body
 		)
-		const getP = () => document.body.querySelector('p') as HTMLParagraphElement
 		await sleep(0)
-		expect(getP().innerText).to.be('placeholder')
+		expect(
+			(document.body.querySelector('p') as HTMLParagraphElement).innerText
+		).to.be('placeholder')
 		await sleep(100)
-		expect(getP().innerText).to.be('10')
+		const p = slotSelector(
+			document.body.querySelector('f-e-subscribe'),
+			'slot',
+			'p'
+		)
+		expect((p as HTMLParagraphElement).innerText).to.be('10')
 		expect(count).to.be(10)
 	})
 })
