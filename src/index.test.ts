@@ -1,4 +1,5 @@
-import { html, render, component } from './index'
+import { html, component } from './index'
+import { render } from 'lit-html'
 
 const sleep = async (time: number) =>
 	new Promise(resolve => {

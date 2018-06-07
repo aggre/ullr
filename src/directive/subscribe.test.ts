@@ -1,7 +1,8 @@
 import { timer as _timer } from 'rxjs'
 import { take, filter } from 'rxjs/operators'
 import { subscribe } from './subscribe'
-import { render, html } from '../index'
+import { html } from '..'
+import { render } from 'lit-html'
 
 const sleep = async (time: number) =>
 	new Promise(resolve => {

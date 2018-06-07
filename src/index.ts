@@ -1,10 +1,8 @@
-import { html as _html, render as _render } from 'lit-html/lib/lit-extended'
+import { html as _html, render } from 'lit-html/lib/lit-extended'
 import { TemplateResult } from 'lit-html'
 
 export const html = async (strings: TemplateStringsArray, ...values: any[]) =>
 	Promise.resolve(_html(strings, ...values))
-
-export const render = _render
 
 export const component = async (
 	template: Promise<TemplateResult> | TemplateResult
@@ -14,7 +12,7 @@ window.customElements.define(
 	'f-e-shadow',
 	class extends HTMLElement {
 		connectedCallback() {
-			_render(
+			render(
 				_html`<slot></slot>`,
 				this.shadowRoot || this.attachShadow({ mode: 'open' })
 			)
