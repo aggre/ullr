@@ -17,7 +17,7 @@ describe('subscribe directive', () => {
 		)
 		let count = 0
 		render(
-			await html`${subscribe(timer, x => {
+			await html`${subscribe(timer, async x => {
 				count += 1
 				return html`<p>${x}</p>`
 			})}`,
@@ -41,7 +41,7 @@ describe('subscribe directive', () => {
 		render(
 			await html`${subscribe(
 				timer,
-				x => html`<p>${x}</p>`,
+				async x => html`<p>${x}</p>`,
 				html`<p>placeholder</p>`
 			)}`,
 			document.body
@@ -66,7 +66,7 @@ describe('subscribe directive', () => {
 		)
 		let count = 0
 		render(
-			await html`${subscribe(timer, x => {
+			await html`${subscribe(timer, async x => {
 				count += 1
 				return html`<p>${x}</p>`
 			})}`,
