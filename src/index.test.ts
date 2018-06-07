@@ -1,34 +1,6 @@
 import { html, component } from './index'
 import { render } from 'lit-html'
-
-const sleep = async (time: number) =>
-	new Promise(resolve => {
-		setTimeout(() => resolve(), time)
-	})
-
-const slotSelector = (
-	element: Element | null,
-	slot: string,
-	selector: string
-) => {
-	if (!element) {
-		return
-	}
-	const { shadowRoot } = element
-	if (!shadowRoot) {
-		return
-	}
-	const slotEl = shadowRoot.querySelector(slot)
-	if (!slotEl) {
-		return
-	}
-	const [assigned] = (slotEl as HTMLSlotElement).assignedNodes()
-	const { parentElement } = assigned
-	if (!parentElement) {
-		return
-	}
-	return parentElement.querySelector(selector)
-}
+import { sleep, slotSelector } from './lib/test'
 
 describe('Rendering', () => {
 	afterEach(async () => {
