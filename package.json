@@ -3,6 +3,13 @@
 	"version": "0.1.0",
 	"description": "Functional Web Components",
 	"main": "index.js",
+	"files": [
+		"./directive",
+		"./lib",
+		"./src",
+		"!./**/*.test.ts",
+		"index.d.ts"
+	],
 	"scripts": {
 		"test": "karma start",
 		"pretest": "rollup -c",
