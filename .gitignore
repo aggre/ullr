@@ -72,6 +72,7 @@ lib
 index.*js
 test.js
 **.ts
+!src/**/*
 
 # rollup build output
 .rpt2_cache
