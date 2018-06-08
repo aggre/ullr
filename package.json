@@ -7,7 +7,7 @@
 		"directive/",
 		"lib/",
 		"src/",
-		"!**/*.test.ts",
+		"!**/*.test.*",
 		"index.d.ts"
 	],
 	"scripts": {
