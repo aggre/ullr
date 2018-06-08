@@ -4,10 +4,10 @@
 	"description": "Functional Web Components",
 	"main": "index.js",
 	"files": [
-		"./directive",
-		"./lib",
-		"./src",
-		"!./**/*.test.ts",
+		"directive/",
+		"lib/",
+		"src/",
+		"!**/*.test.ts",
 		"index.d.ts"
 	],
 	"scripts": {
