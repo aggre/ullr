@@ -67,7 +67,11 @@ typings/
 .serverless
 
 # tsc build output
-dist
+directive
+lib
+index.*js
+test.js
+**.ts
 
 # rollup build output
 .rpt2_cache

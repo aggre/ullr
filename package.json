@@ -2,7 +2,7 @@
 	"name": "ullr",
 	"version": "0.0.1",
 	"description": "Functional Web Components",
-	"main": "src/index.ts",
+	"main": "index.js",
 	"scripts": {
 		"test": "karma start",
 		"pretest": "rollup -c",
