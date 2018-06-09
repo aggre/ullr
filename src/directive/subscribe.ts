@@ -1,8 +1,8 @@
 import { Observable, Subscription } from 'rxjs'
 import { TemplateResult, NodePart, directive, render } from 'lit-html'
 import { html } from 'lit-html/lib/lit-extended'
+import { random } from '../lib/element'
 
-const random = () => btoa(`${Math.random()}`)
 const subscriptions: Map<string, Subscription> = new Map()
 
 window.customElements.define(
