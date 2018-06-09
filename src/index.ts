@@ -1,6 +1,6 @@
-import { html as _html, render } from 'lit-html/lib/lit-extended'
+import { html as _html } from 'lit-html/lib/lit-extended'
 import { TemplateResult } from 'lit-html'
-import { random } from './lib/element'
+import { random, render, UllrElement } from './lib/element'
 
 const templates: Map<
 	string,
@@ -20,7 +20,7 @@ export const component = async (
 
 window.customElements.define(
 	'ullr-shdw',
-	class extends HTMLElement {
+	class extends UllrElement {
 		token: string
 		template: Promise<TemplateResult> | TemplateResult | undefined
 		static get observedAttributes() {
@@ -29,18 +29,23 @@ window.customElements.define(
 		attributeChangedCallback(_, __, next) {
 			this.token = next
 			this.template = templates.get(next)
+			if (this.connected) {
+				this._render()
+			}
 		}
-		async connectedCallback() {
-			render(
-				(await this.template) || _html``,
-				this.shadowRoot || this.attachShadow({ mode: 'open' })
-			)
+		connectedCallback() {
+			this._render()
 		}
 		disconnectedCallback() {
 			if (!this.template) {
 				return
 			}
 			templates.delete(this.token)
+		}
+		private _render() {
+			if (this.template) {
+				render(this.template, this)
+			}
 		}
 	}
 )

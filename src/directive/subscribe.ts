@@ -1,13 +1,13 @@
 import { Observable, Subscription } from 'rxjs'
-import { TemplateResult, NodePart, directive, render } from 'lit-html'
+import { TemplateResult, NodePart, directive } from 'lit-html'
 import { html } from 'lit-html/lib/lit-extended'
-import { random } from '../lib/element'
+import { random, UllrElement, render } from '../lib/element'
 
 const subscriptions: Map<string, Subscription> = new Map()
 
 window.customElements.define(
 	'ullr-sbsc',
-	class extends HTMLElement {
+	class extends UllrElement {
 		token: string
 		subscription: Subscription | undefined
 		static get observedAttributes() {
@@ -16,12 +16,12 @@ window.customElements.define(
 		attributeChangedCallback(_, __, next) {
 			this.token = next
 			this.subscription = subscriptions.get(next)
+			if (this.connected) {
+				this._render()
+			}
 		}
 		connectedCallback() {
-			render(
-				html`<slot></slot>`,
-				this.shadowRoot || this.attachShadow({ mode: 'open' })
-			)
+			this._render()
 		}
 		disconnectedCallback() {
 			if (!this.subscription) {
@@ -29,6 +29,9 @@ window.customElements.define(
 			}
 			this.subscription.unsubscribe()
 			subscriptions.delete(this.token)
+		}
+		private _render() {
+			render(html`<slot></slot>`, this)
 		}
 	}
 )
