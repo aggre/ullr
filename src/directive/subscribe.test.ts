@@ -1,13 +1,13 @@
 import { timer as _timer } from 'rxjs'
 import { take, filter } from 'rxjs/operators'
 import { subscribe } from './subscribe'
-import { html } from '..'
 import { render } from 'lit-html'
 import { sleep, slotSelector } from '../lib/test'
+import { html } from 'lit-html/lib/lit-extended'
 
 describe('subscribe directive', () => {
-	afterEach(async () => {
-		render(await html``, document.body)
+	afterEach(() => {
+		render(html``, document.body)
 	})
 
 	it('Subscribe to observable', async () => {
@@ -17,7 +17,7 @@ describe('subscribe directive', () => {
 		)
 		let count = 0
 		render(
-			await html`${subscribe(timer, async x => {
+			html`${subscribe(timer, x => {
 				count += 1
 				return html`<p>${x}</p>`
 			})}`,
@@ -39,18 +39,17 @@ describe('subscribe directive', () => {
 			take(1)
 		)
 		render(
-			await html`${subscribe(
+			html`${subscribe(
 				timer,
-				async x => html`<p>${x}</p>`,
+				x => html`<p>${x}</p>`,
 				html`<p>placeholder</p>`
 			)}`,
 			document.body
 		)
-		await sleep(0)
 		expect(
 			(document.body.querySelector('p') as HTMLParagraphElement).innerText
 		).to.be('placeholder')
-		await sleep(11)
+		await sleep(15)
 		const p = slotSelector(
 			document.body.querySelector('ullr-sbsc'),
 			'slot',
@@ -66,7 +65,7 @@ describe('subscribe directive', () => {
 		)
 		let count = 0
 		render(
-			await html`${subscribe(timer, async x => {
+			html`${subscribe(timer, x => {
 				count += 1
 				return html`<p>${x}</p>`
 			})}`,
@@ -80,7 +79,7 @@ describe('subscribe directive', () => {
 		)
 		expect((p as HTMLParagraphElement).innerText).to.be('1')
 		expect(count).to.be(1)
-		render(await html``, document.body)
+		render(html``, document.body)
 		await sleep(100)
 		expect(count).to.be(1)
 	})

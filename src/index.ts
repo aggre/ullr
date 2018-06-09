@@ -1,28 +1,20 @@
-import { html as _html } from 'lit-html/lib/lit-extended'
+import { html } from 'lit-html/lib/lit-extended'
 import { TemplateResult } from 'lit-html'
 import { random, render, UllrElement } from './lib/element'
 
-const templates: Map<
-	string,
-	Promise<TemplateResult> | TemplateResult
-> = new Map()
+const templates: Map<string, TemplateResult> = new Map()
 
-export const html = async (strings: TemplateStringsArray, ...values: any[]) =>
-	Promise.resolve(_html(strings, ...values))
-
-export const component = (
-	template: Promise<TemplateResult> | TemplateResult
-) => {
+export const component = (template: TemplateResult) => {
 	const token = random()
 	templates.set(token, template)
-	return _html`<ullr-shdw t$='${token}'></ullr-shdw>`
+	return html`<ullr-shdw t$='${token}'></ullr-shdw>`
 }
 
 window.customElements.define(
 	'ullr-shdw',
 	class extends UllrElement {
 		token: string
-		template: Promise<TemplateResult> | TemplateResult | undefined
+		template: TemplateResult | undefined
 		static get observedAttributes() {
 			return ['t']
 		}
@@ -33,22 +25,22 @@ window.customElements.define(
 				templates.delete(prev)
 			}
 			if (this.connected) {
-				this._render().catch()
+				this._render()
 			}
 		}
 		connectedCallback() {
 			super.connectedCallback()
-			this._render().catch()
+			this._render()
 		}
 		disconnectedCallback() {
 			super.disconnectedCallback()
 			templates.delete(this.token)
 		}
-		private async _render() {
+		private _render() {
 			if (!this.template) {
 				return
 			}
-			render(await this.template, this)
+			render(this.template, this)
 		}
 	}
 )

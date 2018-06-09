@@ -43,8 +43,8 @@ window.customElements.define(
 
 export const subscribe = <T>(
 	observable: Observable<T>,
-	template: (x: T) => Promise<TemplateResult> | TemplateResult,
-	defaultContent?: Promise<TemplateResult> | TemplateResult
+	template: (x: T) => TemplateResult,
+	defaultContent?: TemplateResult
 ) =>
 	directive((part: NodePart) => {
 		const token = random()
