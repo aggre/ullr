@@ -11,7 +11,7 @@ window.customElements.define(
 		token: string
 		subscription: Subscription | undefined
 		static get observedAttributes() {
-			return ['token']
+			return ['t']
 		}
 		attributeChangedCallback(_, __, next) {
 			this.token = next
@@ -43,9 +43,7 @@ export const subscribe = <T>(
 		subscriptions.set(
 			token,
 			observable.subscribe(x =>
-				part.setValue(
-					html`<ullr-sbsc token$='${token}'>${template(x)}</ullr-sbsc>`
-				)
+				part.setValue(html`<ullr-sbsc t$='${token}'>${template(x)}</ullr-sbsc>`)
 			)
 		)
 		if (defaultContent) {

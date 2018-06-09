@@ -15,7 +15,7 @@ export const component = async (
 ) => {
 	const token = random()
 	templates.set(token, template)
-	return html`<ullr-shdw token$='${token}'></ullr-shdw>`
+	return html`<ullr-shdw t$='${token}'></ullr-shdw>`
 }
 
 window.customElements.define(
@@ -24,7 +24,7 @@ window.customElements.define(
 		token: string
 		template: Promise<TemplateResult> | TemplateResult | undefined
 		static get observedAttributes() {
-			return ['token']
+			return ['t']
 		}
 		attributeChangedCallback(_, __, next) {
 			this.token = next
