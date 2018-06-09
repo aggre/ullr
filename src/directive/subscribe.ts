@@ -21,9 +21,11 @@ window.customElements.define(
 			}
 		}
 		connectedCallback() {
+			super.connectedCallback()
 			this._render()
 		}
 		disconnectedCallback() {
+			super.disconnectedCallback()
 			if (!this.subscription) {
 				return
 			}

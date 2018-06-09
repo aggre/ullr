@@ -10,12 +10,12 @@ const templates: Map<
 export const html = async (strings: TemplateStringsArray, ...values: any[]) =>
 	Promise.resolve(_html(strings, ...values))
 
-export const component = (
+export const component = async (
 	template: Promise<TemplateResult> | TemplateResult
 ) => {
 	const token = random()
 	templates.set(token, template)
-	return _html`<ullr-shdw t$='${token}'></ullr-shdw>`
+	return html`<ullr-shdw t$='${token}'></ullr-shdw>`
 }
 
 window.customElements.define(
@@ -34,9 +34,11 @@ window.customElements.define(
 			}
 		}
 		connectedCallback() {
+			super.connectedCallback()
 			this._render().catch()
 		}
 		disconnectedCallback() {
+			super.disconnectedCallback()
 			templates.delete(this.token)
 		}
 		private async _render() {
