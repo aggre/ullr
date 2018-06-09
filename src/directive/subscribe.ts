@@ -13,9 +13,12 @@ window.customElements.define(
 		static get observedAttributes() {
 			return ['t']
 		}
-		attributeChangedCallback(_, __, next) {
+		attributeChangedCallback(_, prev, next) {
 			this.token = next
 			this.subscription = subscriptions.get(next)
+			if (prev) {
+				subscriptions.delete(prev)
+			}
 			if (this.connected) {
 				this._render()
 			}

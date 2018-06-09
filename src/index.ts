@@ -26,9 +26,12 @@ window.customElements.define(
 		static get observedAttributes() {
 			return ['t']
 		}
-		attributeChangedCallback(_, __, next) {
+		attributeChangedCallback(_, prev, next) {
 			this.token = next
 			this.template = templates.get(next)
+			if (prev) {
+				templates.delete(prev)
+			}
 			if (this.connected) {
 				this._render().catch()
 			}
