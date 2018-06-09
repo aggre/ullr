@@ -25,7 +25,7 @@ describe('subscribe directive', () => {
 		)
 		await sleep(100)
 		const p = slotSelector(
-			document.body.querySelector('f-e-subscribe'),
+			document.body.querySelector('ullr-sbsc'),
 			'slot',
 			'p'
 		)
@@ -52,7 +52,7 @@ describe('subscribe directive', () => {
 		).to.be('placeholder')
 		await sleep(11)
 		const p = slotSelector(
-			document.body.querySelector('f-e-subscribe'),
+			document.body.querySelector('ullr-sbsc'),
 			'slot',
 			'p'
 		)
@@ -74,7 +74,7 @@ describe('subscribe directive', () => {
 		)
 		await sleep(15)
 		const p = slotSelector(
-			document.body.querySelector('f-e-subscribe'),
+			document.body.querySelector('ullr-sbsc'),
 			'slot',
 			'p'
 		)

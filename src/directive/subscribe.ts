@@ -6,7 +6,7 @@ import { random } from '../lib/element'
 const subscriptions: Map<string, Subscription> = new Map()
 
 window.customElements.define(
-	'f-e-subscribe',
+	'ullr-sbsc',
 	class extends HTMLElement {
 		token: string
 		subscription: Subscription | undefined
@@ -44,7 +44,7 @@ export const subscribe = <T>(
 			token,
 			observable.subscribe(x =>
 				part.setValue(
-					html`<f-e-subscribe token$='${token}'>${template(x)}</f-e-subscribe>`
+					html`<ullr-sbsc token$='${token}'>${template(x)}</ullr-sbsc>`
 				)
 			)
 		)
