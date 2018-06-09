@@ -1,6 +1,6 @@
 import { html, component } from './index'
 import { render } from 'lit-html'
-import { sleep, slotSelector } from './lib/test'
+import { sleep } from './lib/test'
 
 describe('Rendering', () => {
 	afterEach(async () => {
@@ -32,13 +32,15 @@ describe('Rendering', () => {
 	})
 
 	describe('Rendering component', () => {
-		it('Render to the slot in "ullr-shdw" element', async () => {
+		it('Render to the ShadowRoot in "ullr-shdw" element', async () => {
 			const app = async (content: string) =>
 				component(html`<main>${content}</main>`)
 			render(await app('App'), document.body)
 			const shadow = document.body.querySelector('ullr-shdw')
 			await sleep(0)
-			const main = slotSelector(shadow, 'slot', 'main')
+			const main = ((shadow as Element).shadowRoot as ShadowRoot).querySelector(
+				'main'
+			)
 			expect(main).to.be.ok()
 			expect((main as Element).innerHTML).to.be('<!---->App<!---->')
 		})
