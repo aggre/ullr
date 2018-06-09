@@ -32,6 +32,8 @@ window.customElements.define(
 		}
 		private _render() {
 			render(html`<slot></slot>`, this)
+				.then()
+				.catch()
 		}
 	}
 )

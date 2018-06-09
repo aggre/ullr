@@ -43,9 +43,12 @@ window.customElements.define(
 			templates.delete(this.token)
 		}
 		private _render() {
-			if (this.template) {
-				render(this.template, this)
+			if (!this.template) {
+				return
 			}
+			render(this.template, this)
+				.then()
+				.catch()
 		}
 	}
 )
