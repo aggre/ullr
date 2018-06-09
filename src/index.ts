@@ -15,11 +15,11 @@ export const component = async (
 ) => {
 	const token = random()
 	templates.set(token, template)
-	return html`<f-e-shadow token$='${token}'></f-e-shadow>`
+	return html`<ullr-shdw token$='${token}'></ullr-shdw>`
 }
 
 window.customElements.define(
-	'f-e-shadow',
+	'ullr-shdw',
 	class extends HTMLElement {
 		token: string
 		template: Promise<TemplateResult> | TemplateResult | undefined

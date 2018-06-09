@@ -32,11 +32,11 @@ describe('Rendering', () => {
 	})
 
 	describe('Rendering component', () => {
-		it('Render to the ShadowRoot in "f-e-shadow" element', async () => {
+		it('Render to the ShadowRoot in "ullr-shdw" element', async () => {
 			const app = async (content: string) =>
 				component(html`<main>${content}</main>`)
 			render(await app('App'), document.body)
-			const shadow = document.body.querySelector('f-e-shadow')
+			const shadow = document.body.querySelector('ullr-shdw')
 			await sleep(0)
 			const main = ((shadow as Element).shadowRoot as ShadowRoot).querySelector(
 				'main'
