@@ -10,6 +10,13 @@ export const component = (template: TemplateResult) => {
 	return html`<ullr-shdw t$='${token}'></ullr-shdw>`
 }
 
+export const customElements = (template: TemplateResult) =>
+	class extends HTMLElement {
+		connectedCallback() {
+			render(template, this)
+		}
+	}
+
 window.customElements.define(
 	'ullr-shdw',
 	class extends UllrElement {

@@ -1,4 +1,4 @@
-import { component } from './index'
+import { component, customElements } from './index'
 import { render } from 'lit-html'
 import { html } from 'lit-html/lib/lit-extended'
 
@@ -28,5 +28,19 @@ describe('Rendering', () => {
 			expect(main).to.be.ok()
 			expect((main as Element).innerHTML).to.be('<!---->App<!---->')
 		})
+	})
+})
+
+describe('Custom Elements', () => {
+	it('Create Custom Elements', () => {
+		const template = () => html`<main>App</main>`
+		const xApp = customElements(template())
+		window.customElements.define('x-app', xApp)
+		render(html`<x-app></x-app>`, document.body)
+		const app = document.body.querySelector('x-app')
+		expect(app).to.be.ok()
+		expect(((app as Element).shadowRoot as ShadowRoot).innerHTML).to.be(
+			'<main>App</main>'
+		)
 	})
 })
