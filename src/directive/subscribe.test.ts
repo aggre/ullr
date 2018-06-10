@@ -49,7 +49,7 @@ describe('subscribe directive', () => {
 		expect(
 			(document.body.querySelector('p') as HTMLParagraphElement).innerText
 		).to.be('placeholder')
-		await sleep(15)
+		await sleep(20)
 		const p = slotSelector(
 			document.body.querySelector('ullr-sbsc'),
 			'slot',
@@ -71,7 +71,7 @@ describe('subscribe directive', () => {
 			})}`,
 			document.body
 		)
-		await sleep(15)
+		await sleep(20)
 		const p = slotSelector(
 			document.body.querySelector('ullr-sbsc'),
 			'slot',
