@@ -10,10 +10,32 @@ export const component = (template: TemplateResult) => {
 	return html`<ullr-shdw t$='${token}'></ullr-shdw>`
 }
 
-export const customElements = (template: TemplateResult) =>
-	class extends HTMLElement {
+export const customElements = (
+	template: (props: string[]) => TemplateResult,
+	observedAttributes: string[] = []
+) =>
+	class extends UllrElement {
+		props: string[]
+		constructor() {
+			super()
+			this.props = []
+		}
+		static get observedAttributes() {
+			return observedAttributes
+		}
+		attributeChangedCallback(name, _, next) {
+			const index = observedAttributes.findIndex(n => n === name)
+			this.props[index] = next
+			if (this.connected) {
+				this._render()
+			}
+		}
 		connectedCallback() {
-			render(template, this)
+			super.connectedCallback()
+			this._render()
+		}
+		_render() {
+			render(template(this.props), this)
 		}
 	}
 
