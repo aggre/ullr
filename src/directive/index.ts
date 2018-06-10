@@ -1,3 +1,3 @@
-import _subscribe from './subscribe'
+import { subscribe } from './subscribe'
 
-export const subscribe = _subscribe
+export { subscribe }
