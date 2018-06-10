@@ -41,7 +41,7 @@ window.customElements.define(
 	}
 )
 
-export const subscribe = <T>(
+export default <T>(
 	observable: Observable<T>,
 	template: (x: T) => TemplateResult,
 	defaultContent?: TemplateResult

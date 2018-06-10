@@ -1,9 +1,9 @@
 import { timer as _timer } from 'rxjs'
 import { take, filter } from 'rxjs/operators'
-import { subscribe } from './subscribe'
 import { render } from 'lit-html'
 import { sleep, slotSelector } from '../lib/test'
 import { html } from 'lit-html/lib/lit-extended'
+import { subscribe } from '.'
 
 describe('subscribe directive', () => {
 	afterEach(() => {
