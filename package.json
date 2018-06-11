@@ -1,6 +1,6 @@
 {
 	"name": "ullr",
-	"version": "0.4.0",
+	"version": "0.4.1",
 	"description": "Functional Web Components",
 	"main": "index.js",
 	"files": [
