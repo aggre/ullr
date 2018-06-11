@@ -10,6 +10,12 @@ Functional Web Components
 
 ---
 
+# Install
+
+```
+npm i ullr lit-html rxjs
+```
+
 # APIs
 
 ## Component
