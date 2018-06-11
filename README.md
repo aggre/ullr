@@ -43,7 +43,7 @@ subscribe = <T>(observable: Observable<T>, template: (x: T) => TemplateResult, d
 Basic usage:
 
 ```ts
-import { component, customElements } from '../src/index'
+import { component, customElements } from 'ullr'
 import { html } from 'lit-html'
 
 // Create a template with lit-html
