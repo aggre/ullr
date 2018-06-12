@@ -10,7 +10,7 @@ Functional Web Components
 
 ---
 
-# Install
+# Installation
 
 ```
 npm i ullr lit-html rxjs
@@ -18,7 +18,7 @@ npm i ullr lit-html rxjs
 
 # APIs
 
-## Component
+## `component`
 
 `component` will capsule the result of `html` in the CSS scope(use Shadow DOM).
 
@@ -26,7 +26,7 @@ npm i ullr lit-html rxjs
 component = (template: TemplateResult) => TemplateResult
 ```
 
-## customElements
+## `customElements`
 
 `customElements` creates a class that can be passed to `customElements.define`.
 
@@ -34,7 +34,7 @@ component = (template: TemplateResult) => TemplateResult
 customElements = (template: (props: string[]) => TemplateResult, observedAttributes?: string[]) => HTMLElement // Extended HTMLElement
 ```
 
-## Subscribe
+## `subscribe`
 
 `subscribe` is a lit-html directive.
 
