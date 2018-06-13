@@ -23,7 +23,7 @@
 	"contributors": [
 		"aggre <hiroyuki.aggre@gmail.com> (https://github.com/aggre)"
 	],
-	"license": "Apache-2.0",
+	"license": "MIT",
 	"dependencies": {
 		"lit-html": "^0.10.0",
 		"rxjs": "^6.2.0",
