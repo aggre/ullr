@@ -38,7 +38,7 @@ customElements = (template: (props: string[]) => TemplateResult, observedAttribu
 
 `subscribe` is a lit-html directive.
 
-Subscribe to `Subscribe<T>` of RxJS and re-rendering with callback function.
+Subscribe to `Observable<T>` of RxJS and re-rendering with callback function.
 
 ```ts
 subscribe = <T>(observable: Observable<T>, template: (x: T) => TemplateResult, defaultContent?: TemplateResult | undefined) => (part: NodePart) => void
