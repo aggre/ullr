@@ -1,7 +1,8 @@
 import { Observable, Subscription } from 'rxjs'
-import { TemplateResult, NodePart, directive } from 'lit-html'
+import { NodePart, directive } from 'lit-html'
 import { html } from 'lit-html/lib/lit-extended'
 import { random, UllrElement, render } from '../lib/element'
+import { AsyncOrSyncTemplateResult } from '..'
 
 const subscriptions: Map<string, Subscription> = new Map()
 
@@ -43,8 +44,8 @@ window.customElements.define(
 
 export const subscribe = <T>(
 	observable: Observable<T>,
-	template: (x: T) => TemplateResult,
-	defaultContent?: TemplateResult
+	template: (x: T) => AsyncOrSyncTemplateResult,
+	defaultContent?: AsyncOrSyncTemplateResult
 ) =>
 	directive((part: NodePart) => {
 		const token = random()

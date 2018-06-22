@@ -2,16 +2,18 @@ import { html } from 'lit-html/lib/lit-extended'
 import { TemplateResult } from 'lit-html'
 import { random, render, UllrElement } from './lib/element'
 
-const templates: Map<string, TemplateResult> = new Map()
+export type AsyncOrSyncTemplateResult = TemplateResult | Promise<TemplateResult>
 
-export const component = (template: TemplateResult) => {
+const templates: Map<string, AsyncOrSyncTemplateResult> = new Map()
+
+export const component = (template: AsyncOrSyncTemplateResult) => {
 	const token = random()
 	templates.set(token, template)
 	return html`<ullr-shdw t$='${token}'></ullr-shdw>`
 }
 
 export const customElements = (
-	template: (props: string[]) => TemplateResult,
+	template: (props: string[]) => AsyncOrSyncTemplateResult,
 	observedAttributes: string[] = []
 ) =>
 	class extends UllrElement {
@@ -27,15 +29,15 @@ export const customElements = (
 			const index = observedAttributes.findIndex(n => n === name)
 			this.props[index] = next
 			if (this.connected) {
-				this._render()
+				this._render().catch()
 			}
 		}
 		connectedCallback() {
 			super.connectedCallback()
-			this._render()
+			this._render().catch()
 		}
-		_render() {
-			render(template(this.props), this)
+		async _render() {
+			render(await template(this.props), this)
 		}
 	}
 
@@ -43,7 +45,7 @@ window.customElements.define(
 	'ullr-shdw',
 	class extends UllrElement {
 		token: string
-		template: TemplateResult | undefined
+		template: AsyncOrSyncTemplateResult | undefined
 		static get observedAttributes() {
 			return ['t']
 		}
@@ -54,22 +56,22 @@ window.customElements.define(
 				templates.delete(prev)
 			}
 			if (this.connected) {
-				this._render()
+				this._render().catch()
 			}
 		}
 		connectedCallback() {
 			super.connectedCallback()
-			this._render()
+			this._render().catch()
 		}
 		disconnectedCallback() {
 			super.disconnectedCallback()
 			templates.delete(this.token)
 		}
-		private _render() {
+		private async _render() {
 			if (!this.template) {
 				return
 			}
-			render(this.template, this)
+			render(await this.template, this)
 		}
 	}
 )
