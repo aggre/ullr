@@ -16,6 +16,17 @@ describe('Rendering', () => {
 			expect(h1).to.be.ok()
 			expect((h1 as HTMLHeadingElement).innerText).to.be('The title')
 		})
+
+		it('Rendering asynchronous html', async () => {
+			const asyncTemplate = async () => html`<p>Asynchronous part</p>`
+			const template = html`<h1>The title</h1>${asyncTemplate()}`
+			render(template, document.body)
+			expect(document.body.querySelector('p')).to.be(null)
+			await sleep(0)
+			expect(
+				(document.body.querySelector('p') as HTMLParagraphElement).innerText
+			).to.be('Asynchronous part')
+		})
 	})
 
 	describe('Rendering component', () => {
