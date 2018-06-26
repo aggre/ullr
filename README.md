@@ -25,15 +25,22 @@ npm i ullr lit-html rxjs
 Encapsulate the template with Shadow DOM.
 
 ```ts
-component = (template: AsyncOrSyncTemplateResult) => (part: NodePart) => void
-```
+import { html } from 'lit-html'
+import { component } from 'ullr/directive'
 
-## `customElements`
-
-`customElements` creates a class that can be passed to `customElements.define`.
-
-```ts
-customElements = (template: (props: string[]) => TemplateResult, observedAttributes?: string[]) => HTMLElement // Extended HTMLElement
+export const main = (title: string, desc: string) => html`
+	${component(html`
+		<style>
+			h1 {
+				color: blue;
+			}
+		</style>
+		<main>
+			<h1>${title}</h1>
+			<p>${desc}</p>
+		</main>
+	`)}
+`
 ```
 
 ## `subscribe`
@@ -43,7 +50,31 @@ customElements = (template: (props: string[]) => TemplateResult, observedAttribu
 Subscribe to `Observable<T>` of RxJS and re-rendering with callback function.
 
 ```ts
-subscribe<T> = (observable: Observable<T>, template: (x: T) => TemplateResult, defaultContent?: TemplateResult | undefined) => (part: NodePart) => void
+import { html } from 'lit-html'
+import { subscribe } from 'ullr/directive'
+import { timer } from 'rxjs'
+
+export const template = html`
+	<main>
+		${subscribe(timer(10, 1), x => html`<p>${x}</p>`, html`<p>Default content</p>`)}
+	</main>
+`
+```
+
+## `customElements`
+
+`customElements` creates a class that can be passed to `customElements.define`.
+
+```ts
+import { customElements } from 'ullr'
+import { main } from './main'
+
+const xApp = customElements(([title, desc]) => main(title, desc), [
+	'title',
+	'desc'
+])
+
+window.customElements.define('x-app', xApp)
 ```
 
 # Usage
