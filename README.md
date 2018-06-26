@@ -25,7 +25,7 @@ npm i ullr lit-html rxjs
 Encapsulate the template with Shadow DOM.
 
 ```ts
-component = (template: TemplateResult) => TemplateResult
+component = (template: AsyncOrSyncTemplateResult) => (part: NodePart) => void
 ```
 
 ## `customElements`
