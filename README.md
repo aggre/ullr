@@ -82,33 +82,62 @@ window.customElements.define('x-app', xApp)
 Basic usage:
 
 ```ts
-import { component, customElements } from 'ullr'
-import { html } from 'lit-html'
+import { html, render } from 'lit-html'
+import { component } from 'ullr/directive'
 
-// Create a template with lit-html
 const template = (title: string, desc: string) => html`
-	<style>
-		h1 {
-			font-weight: 400;
-		}
-		p {
-			font-size: 1rem;
-		}
-	</style>
 	<h1>${title}</h1>
 	<p>${desc}</p>
 `
 
-// Create a CSS scope with `component()`
-const app = (title: string, desc: string) => html`${component(template(title, desc))}`
+const app = (title: string, desc: string) => html`
+	${component(html`
+		<style>
+			h1 {
+				font-weight: 400;
+			}
+			p {
+				font-size: 1rem;
+			}
+		</style>
+		${template(title, desc)}
+	`)}
+`
 
-// Create a Custom Elements with `customElements()`
+render(app('The title', 'lorem ipsum'), document.getElementById('root'))
+```
+
+Create a Custom Elements:
+
+```ts
+import { html } from 'lit-html'
+import { customElements } from 'ullr'
+import { component } from 'ullr/directive'
+
+const template = (title: string, desc: string) => html`
+	<h1>${title}</h1>
+	<p>${desc}</p>
+`
+
+const app = (title: string, desc: string) => html`
+	${component(html`
+		<style>
+			h1 {
+				font-weight: 400;
+			}
+			p {
+				font-size: 1rem;
+			}
+		</style>
+		${template(title, desc)}
+	`)}
+`
+
 const xApp = customElements(([title, desc]) => app(title, desc), [
 	'title',
 	'desc'
 ])
 
-// Register the Custom Elements with `customElements.define()`.
 window.customElements.define('x-app', xApp)
 ```
 
@@ -124,7 +153,7 @@ const timer = _timer(10, 1).pipe(
 	take(10)
 )
 
-const template = html`
+export const template = html`
 	<main>
 		${subscribe(
 			timer,
