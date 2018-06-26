@@ -1,3 +1,4 @@
+import { component } from './component'
 import { subscribe } from './subscribe'
 
-export { subscribe }
+export { component, subscribe }

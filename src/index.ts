@@ -1,16 +1,8 @@
-import { html } from 'lit-html/lib/lit-extended'
 import { TemplateResult } from 'lit-html'
-import { random, render, UllrElement } from './lib/element'
+import { render, UllrElement } from './lib/element'
+import { componentFn } from './directive/component'
 
 export type AsyncOrSyncTemplateResult = TemplateResult | Promise<TemplateResult>
-
-const templates: Map<string, AsyncOrSyncTemplateResult> = new Map()
-
-export const component = (template: AsyncOrSyncTemplateResult) => {
-	const token = random()
-	templates.set(token, template)
-	return html`<ullr-shdw t$='${token}'></ullr-shdw>`
-}
 
 export const customElements = (
 	template: (props: string[]) => AsyncOrSyncTemplateResult,
@@ -41,37 +33,9 @@ export const customElements = (
 		}
 	}
 
-window.customElements.define(
-	'ullr-shdw',
-	class extends UllrElement {
-		token: string
-		template: AsyncOrSyncTemplateResult | undefined
-		static get observedAttributes() {
-			return ['t']
-		}
-		attributeChangedCallback(_, prev, next) {
-			this.token = next
-			this.template = templates.get(next)
-			if (prev) {
-				templates.delete(prev)
-			}
-			if (this.connected) {
-				this._render().catch()
-			}
-		}
-		connectedCallback() {
-			super.connectedCallback()
-			this._render().catch()
-		}
-		disconnectedCallback() {
-			super.disconnectedCallback()
-			templates.delete(this.token)
-		}
-		private async _render() {
-			if (!this.template) {
-				return
-			}
-			render(await this.template, this)
-		}
-	}
-)
+export const component = <T extends AsyncOrSyncTemplateResult>(template: T) => {
+	console.info(
+		'This function is deprecated. The recommended API is the `component` directive function in "ullr/directive".'
+	)
+	return componentFn(template)
+}

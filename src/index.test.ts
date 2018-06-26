@@ -1,4 +1,4 @@
-import { component, customElements } from './index'
+import { customElements } from './index'
 import { render } from 'lit-html'
 import { html } from 'lit-html/lib/lit-extended'
 import { sleep } from './lib/test'
@@ -26,20 +26,6 @@ describe('Rendering', () => {
 			expect(
 				(document.body.querySelector('p') as HTMLParagraphElement).innerText
 			).to.be('Asynchronous part')
-		})
-	})
-
-	describe('Rendering component', () => {
-		it('Render to the ShadowRoot in "ullr-shdw" element', async () => {
-			const app = (content: string) => component(html`<main>${content}</main>`)
-			render(app('App'), document.body)
-			await sleep(0)
-			const shadow = document.body.querySelector('ullr-shdw')
-			const main = ((shadow as Element).shadowRoot as ShadowRoot).querySelector(
-				'main'
-			)
-			expect(main).to.be.ok()
-			expect((main as Element).innerHTML).to.be('<!---->App<!---->')
 		})
 	})
 })
