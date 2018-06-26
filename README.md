@@ -20,7 +20,9 @@ npm i ullr lit-html rxjs
 
 ## `component`
 
-`component` will capsule the result of `html` in the CSS scope(use Shadow DOM).
+`component` is a lit-html directive.
+
+Encapsulate the template with Shadow DOM.
 
 ```ts
 component = (template: TemplateResult) => TemplateResult
@@ -67,7 +69,7 @@ const template = (title: string, desc: string) => html`
 `
 
 // Create a CSS scope with `component()`
-const app = (title: string, desc: string) => component(template(title, desc))
+const app = (title: string, desc: string) => html`${component(template(title, desc))}`
 
 // Create a Custom Elements with `customElements()`
 const xApp = customElements(([title, desc]) => app(title, desc), [
