@@ -1,5 +1,7 @@
 Functional Web Components
 
+**Building Web Components with Functional Programming.**
+
 ```
  __  __     __         __         ______
 /\ \/\ \   /\ \       /\ \       /\  == \
