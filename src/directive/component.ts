@@ -3,7 +3,7 @@ import { html } from 'lit-html/lib/lit-extended'
 import { random, render, UllrElement } from '../lib/element'
 import { AsyncOrSyncTemplateResult } from '..'
 
-const templates: Map<string, AsyncOrSyncTemplateResult> = new Map()
+const templates = new Map()
 
 window.customElements.define(
 	'ullr-shdw',

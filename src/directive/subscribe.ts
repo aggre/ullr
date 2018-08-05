@@ -4,7 +4,7 @@ import { html } from 'lit-html/lib/lit-extended'
 import { random, UllrElement, render } from '../lib/element'
 import { AsyncOrSyncTemplateResult } from '..'
 
-const subscriptions: Map<string, Subscription> = new Map()
+const subscriptions = new Map()
 
 window.customElements.define(
 	'ullr-sbsc',
