@@ -9,7 +9,7 @@ window.customElements.define(
 	'ullr-shdw',
 	class extends UllrElement {
 		token: string
-		template: AsyncOrSyncTemplateResult | undefined
+		template: AsyncOrSyncTemplateResult
 		static get observedAttributes() {
 			return ['t']
 		}

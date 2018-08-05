@@ -10,7 +10,7 @@ window.customElements.define(
 	'ullr-sbsc',
 	class extends UllrElement {
 		token: string
-		subscription: Subscription | undefined
+		subscription: Subscription
 		static get observedAttributes() {
 			return ['t']
 		}
