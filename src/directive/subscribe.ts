@@ -1,6 +1,5 @@
 import { Observable, Subscription } from 'rxjs'
-import { NodePart, directive } from 'lit-html'
-import { html } from 'lit-html/lib/lit-extended'
+import { html, NodePart, directive } from 'lit-html'
 import { random, UllrElement, render } from '../lib/element'
 import { AsyncOrSyncTemplateResult } from '..'
 
@@ -51,11 +50,13 @@ export const subscribe = <T>(
 		const token = random()
 		subscriptions.set(
 			token,
-			observable.subscribe(x =>
-				part.setValue(html`<ullr-sbsc t$='${token}'>${template(x)}</ullr-sbsc>`)
-			)
+			observable.subscribe(x => {
+				part.setValue(html`<ullr-sbsc t='${token}'>${template(x)}</ullr-sbsc>`)
+				part.commit()
+			})
 		)
 		if (defaultContent) {
 			part.setValue(defaultContent)
+			part.commit()
 		}
 	})

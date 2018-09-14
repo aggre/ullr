@@ -1,5 +1,4 @@
-import { NodePart, directive } from 'lit-html'
-import { html } from 'lit-html/lib/lit-extended'
+import { html, NodePart, directive } from 'lit-html'
 import { random, render, UllrElement } from '../lib/element'
 import { AsyncOrSyncTemplateResult } from '..'
 
@@ -43,10 +42,11 @@ window.customElements.define(
 export const componentFn = (template: AsyncOrSyncTemplateResult) => {
 	const token = random()
 	templates.set(token, template)
-	return html`<ullr-shdw t$='${token}'></ullr-shdw>`
+	return html`<ullr-shdw t='${token}'></ullr-shdw>`
 }
 
 export const component = (template: AsyncOrSyncTemplateResult) =>
 	directive((part: NodePart) => {
 		part.setValue(componentFn(template))
+		part.commit()
 	})

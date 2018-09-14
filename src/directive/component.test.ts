@@ -1,6 +1,5 @@
-import { render } from 'lit-html'
+import { html, render } from 'lit-html'
 import { sleep } from '../lib/test'
-import { html } from 'lit-html/lib/lit-extended'
 import { component } from '.'
 
 describe('component directive', () => {

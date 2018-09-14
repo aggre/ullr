@@ -1,6 +1,5 @@
 import { customElements } from './index'
-import { render } from 'lit-html'
-import { html } from 'lit-html/lib/lit-extended'
+import { html, render } from 'lit-html'
 import { sleep } from './lib/test'
 
 describe('Rendering', () => {
@@ -39,9 +38,12 @@ describe('Custom Elements', () => {
 		await sleep(0)
 		const app = document.body.querySelector('x-app')
 		expect(app).to.be.ok()
-		expect(((app as Element).shadowRoot as ShadowRoot).innerHTML).to.be(
-			'<main>App</main>'
-		)
+		expect(
+			((app as Element).shadowRoot as ShadowRoot).innerHTML.replace(
+				/<\!---->/g,
+				''
+			)
+		).to.be('<main>App</main>')
 	})
 	describe('When the second argument is provided as an array', () => {
 		it('Re-render when changing attribute values', async () => {
