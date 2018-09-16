@@ -1,7 +1,7 @@
 import { timer as _timer } from 'rxjs'
 import { take, filter } from 'rxjs/operators'
 import { html, render } from 'lit-html'
-import { sleep, slotSelector } from '../lib/test'
+import { sleep } from '../lib/test'
 import { subscribe } from '.'
 
 describe('subscribe directive', () => {
@@ -23,11 +23,9 @@ describe('subscribe directive', () => {
 			document.body
 		)
 		await sleep(100)
-		const p = slotSelector(
-			document.body.querySelector('ullr-sbsc'),
-			'slot',
-			'p'
-		)
+		const p = (document.body.querySelector(
+			'ullr-sbsc'
+		) as Element).querySelector('p')
 		expect((p as HTMLParagraphElement).innerText).to.be('10')
 		expect(count).to.be(10)
 	})
@@ -45,15 +43,14 @@ describe('subscribe directive', () => {
 			)}`,
 			document.body
 		)
+		await sleep(0)
 		expect(
 			(document.body.querySelector('p') as HTMLParagraphElement).innerText
 		).to.be('placeholder')
 		await sleep(20)
-		const p = slotSelector(
-			document.body.querySelector('ullr-sbsc'),
-			'slot',
-			'p'
-		)
+		const p = (document.body.querySelector(
+			'ullr-sbsc'
+		) as Element).querySelector('p')
 		expect((p as HTMLParagraphElement).innerText).to.be('1')
 	})
 
@@ -71,11 +68,9 @@ describe('subscribe directive', () => {
 			document.body
 		)
 		await sleep(20)
-		const p = slotSelector(
-			document.body.querySelector('ullr-sbsc'),
-			'slot',
-			'p'
-		)
+		const p = (document.body.querySelector(
+			'ullr-sbsc'
+		) as Element).querySelector('p')
 		expect((p as HTMLParagraphElement).innerText).to.be('1')
 		expect(count).to.be(1)
 		render(html``, document.body)

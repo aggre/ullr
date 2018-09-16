@@ -1,62 +1,43 @@
 import { Observable, Subscription } from 'rxjs'
-import { html, NodePart, directive } from 'lit-html'
-import { random, UllrElement, render } from '../lib/element'
+import { html, NodePart, directive, render } from 'lit-html'
 import { AsyncOrSyncTemplateResult } from '..'
 
-const subscriptions = new Map()
+type TemplateCallback = <T>(x: T) => AsyncOrSyncTemplateResult
 
 window.customElements.define(
 	'ullr-sbsc',
-	class extends UllrElement {
-		token: string
+	class<T> extends HTMLElement {
+		observable: Observable<T>
+		template: TemplateCallback
 		subscription: Subscription
-		static get observedAttributes() {
-			return ['t']
-		}
-		attributeChangedCallback(_, prev, next) {
-			this.token = next
-			this.subscription = subscriptions.get(next)
-			if (prev) {
-				subscriptions.delete(prev)
+		defaultContent: AsyncOrSyncTemplateResult
+		async connectedCallback() {
+			if (this.defaultContent) {
+				render(await this.defaultContent, this)
 			}
-			if (this.connected) {
-				this._render()
-			}
-		}
-		connectedCallback() {
-			super.connectedCallback()
-			this._render()
-		}
-		disconnectedCallback() {
-			super.disconnectedCallback()
-			if (!this.subscription) {
+			if (!this.observable) {
 				return
 			}
-			this.subscription.unsubscribe()
-			subscriptions.delete(this.token)
+			this.subscription = this.observable.subscribe(async x => {
+				render(await this.template(x), this)
+			})
 		}
-		private _render() {
-			render(html`<slot></slot>`, this)
+		disconnectedCallback() {
+			if (this.subscription) {
+				this.subscription.unsubscribe()
+			}
 		}
 	}
 )
 
 export const subscribe = <T>(
 	observable: Observable<T>,
-	template: (x: T) => AsyncOrSyncTemplateResult,
+	template: TemplateCallback,
 	defaultContent?: AsyncOrSyncTemplateResult
 ) =>
 	directive((part: NodePart) => {
-		const token = random()
-		subscriptions.set(
-			token,
-			observable.subscribe(x => {
-				part.setValue(html`<ullr-sbsc t='${token}'>${template(x)}</ullr-sbsc>`)
-				part.commit()
-			})
+		part.setValue(
+			html`<ullr-sbsc .observable='${observable}' .template='${template}' .defaultContent='${defaultContent}'></ullr-sbsc>`
 		)
-		if (defaultContent) {
-			part.setValue(defaultContent)
-			part.commit()
-		}
+		part.commit()
 	})

@@ -1,36 +1,12 @@
 import { html, NodePart, directive } from 'lit-html'
-import { random, render, UllrElement } from '../lib/element'
+import { render } from '../lib/element'
 import { AsyncOrSyncTemplateResult } from '..'
-
-const templates = new Map()
 
 window.customElements.define(
 	'ullr-shdw',
-	class extends UllrElement {
-		token: string
+	class extends HTMLElement {
 		template: AsyncOrSyncTemplateResult
-		static get observedAttributes() {
-			return ['t']
-		}
-		attributeChangedCallback(_, prev, next) {
-			this.token = next
-			this.template = templates.get(next)
-			if (prev) {
-				templates.delete(prev)
-			}
-			if (this.connected) {
-				this._render().catch()
-			}
-		}
-		connectedCallback() {
-			super.connectedCallback()
-			this._render().catch()
-		}
-		disconnectedCallback() {
-			super.disconnectedCallback()
-			templates.delete(this.token)
-		}
-		private async _render() {
+		async connectedCallback() {
 			if (!this.template) {
 				return
 			}
@@ -40,9 +16,7 @@ window.customElements.define(
 )
 
 export const componentFn = (template: AsyncOrSyncTemplateResult) => {
-	const token = random()
-	templates.set(token, template)
-	return html`<ullr-shdw t='${token}'></ullr-shdw>`
+	return html`<ullr-shdw .template='${template}'></ullr-shdw>`
 }
 
 export const component = (template: AsyncOrSyncTemplateResult) =>

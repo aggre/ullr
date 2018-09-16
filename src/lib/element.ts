@@ -1,7 +1,5 @@
 import { render as _render, TemplateResult } from 'lit-html'
 
-export const random = () => btoa(`${Math.random()}`)
-
 export const render = (template: TemplateResult, el: HTMLElement) =>
 	_render(template, el.shadowRoot || el.attachShadow({ mode: 'open' }))
 
