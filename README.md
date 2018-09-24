@@ -157,11 +157,7 @@ const timer = _timer(10, 1).pipe(
 
 export const template = html`
 	<main>
-		${subscribe(
-			timer,
-			x => html`<p>${x}</p>`,
-			html`<p>Default content</p>`
-		)}
+		${subscribe(timer, x => html`<p>${x}</p>`, html`<p>Default content</p>`)}
 	</main>
 `
 ```
