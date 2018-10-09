@@ -30,12 +30,11 @@ describe('Rendering', () => {
 })
 
 describe('Custom Elements', () => {
-	it('Create Custom Elements', async () => {
+	it('Create Custom Elements', () => {
 		const template = () => html`<main>App</main>`
 		const xApp = customElements(() => template())
 		window.customElements.define('x-app', xApp)
 		render(html`<x-app></x-app>`, document.body)
-		await sleep(0)
 		const app = document.body.querySelector('x-app')
 		expect(app).to.be.ok()
 		expect(
@@ -46,7 +45,7 @@ describe('Custom Elements', () => {
 		).to.be('<main>App</main>')
 	})
 	describe('When the second argument is provided as an array', () => {
-		it('Re-render when changing attribute values', async () => {
+		it('Re-render when changing attribute values', () => {
 			const template = ([message, description]) =>
 				html`<p>${message}</p><p>${description}</p>`
 			const xApp = customElements(template, ['message', 'description'])
@@ -55,11 +54,9 @@ describe('Custom Elements', () => {
 					.shadowRoot as ShadowRoot).querySelector(c)
 			window.customElements.define('x-app-2', xApp)
 			render(html`<x-app-2></x-app-2>`, document.body)
-			await sleep(0)
 			const app = document.body.querySelector('x-app-2') as Element
 			app.setAttribute('message', 'Test message')
 			app.setAttribute('description', 'Test description')
-			await sleep(0)
 			expect((select('x-app-2', 'p') as HTMLParagraphElement).innerText).to.be(
 				'Test message'
 			)

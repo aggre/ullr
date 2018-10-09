@@ -1,8 +1,7 @@
 import { Observable, Subscription } from 'rxjs'
-import { html, NodePart, directive, render } from 'lit-html'
-import { AsyncOrSyncTemplateResult } from '..'
+import { html, NodePart, directive, render, TemplateResult } from 'lit-html'
 
-type TemplateCallback = <T>(x: T) => AsyncOrSyncTemplateResult
+type TemplateCallback = <T>(x: T) => TemplateResult
 
 window.customElements.define(
 	'ullr-sbsc',
@@ -10,16 +9,16 @@ window.customElements.define(
 		observable: Observable<T>
 		template: TemplateCallback
 		subscription: Subscription
-		defaultContent: AsyncOrSyncTemplateResult
-		async connectedCallback() {
+		defaultContent: TemplateResult
+		connectedCallback() {
 			if (this.defaultContent) {
-				render(await this.defaultContent, this)
+				render(this.defaultContent, this)
 			}
 			if (!this.observable) {
 				return
 			}
-			this.subscription = this.observable.subscribe(async x => {
-				render(await this.template(x), this)
+			this.subscription = this.observable.subscribe(x => {
+				render(this.template(x), this)
 			})
 		}
 		disconnectedCallback() {
@@ -33,7 +32,7 @@ window.customElements.define(
 export const subscribe = <T>(
 	observable: Observable<T>,
 	template: TemplateCallback,
-	defaultContent?: AsyncOrSyncTemplateResult
+	defaultContent?: TemplateResult
 ) =>
 	directive((part: NodePart) => {
 		part.setValue(

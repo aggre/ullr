@@ -43,7 +43,6 @@ describe('subscribe directive', () => {
 			)}`,
 			document.body
 		)
-		await sleep(0)
 		expect(
 			(document.body.querySelector('p') as HTMLParagraphElement).innerText
 		).to.be('placeholder')

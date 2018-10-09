@@ -2,10 +2,8 @@ import { TemplateResult } from 'lit-html'
 import { render, UllrElement } from './lib/element'
 import { componentFn } from './directive/component'
 
-export type AsyncOrSyncTemplateResult = TemplateResult | Promise<TemplateResult>
-
 export const customElements = (
-	template: (props: string[]) => AsyncOrSyncTemplateResult,
+	template: (props: string[]) => TemplateResult,
 	observedAttributes: string[] = []
 ) =>
 	class extends UllrElement {
@@ -21,19 +19,19 @@ export const customElements = (
 			const index = observedAttributes.findIndex(n => n === name)
 			this.props[index] = next
 			if (this.connected) {
-				this._render().catch()
+				this._render()
 			}
 		}
 		connectedCallback() {
 			super.connectedCallback()
-			this._render().catch()
+			this._render()
 		}
-		async _render() {
-			render(await template(this.props), this)
+		_render() {
+			render(template(this.props), this)
 		}
 	}
 
-export const component = <T extends AsyncOrSyncTemplateResult>(template: T) => {
+export const component = (template: TemplateResult) => {
 	console.info(
 		'This function is deprecated. The recommended API is the `component` directive function in "ullr/directive".'
 	)
