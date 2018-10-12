@@ -69,6 +69,7 @@ typings/
 # tsc build output
 directive
 lib
+ssr
 index.*js
 test.js
 **.ts
