@@ -79,6 +79,30 @@ const xApp = customElements(([title, desc]) => main(title, desc), [
 window.customElements.define('x-app', xApp)
 ```
 
+## `ssr`
+
+Render the template with Node.js (server side).
+
+The API receives a template and testing function. Continue rendering until the testing function returns `true`.
+
+You can use the emulated DOM in the testing function. (Use `jsdom`)
+
+```ts
+import { ssr } from 'ullr/ssr'
+import { main } from './main'
+;(async () => {
+	const [document, template] = await ssr(main, doc =>
+		Boolean(doc.querySelector('main > p'))
+	)
+
+	console.log(document)
+	// <html><head></head><body><main>...</main></body></html>
+
+	console.log(template)
+	// <main>...<p>...</p>...</main>
+})()
+```
+
 # Usage
 
 Basic usage:
