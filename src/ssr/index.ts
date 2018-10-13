@@ -1,14 +1,16 @@
 import { dom } from './dom'
 import { TemplateResult, render } from 'lit-html'
 
+const removeComment = (h: string) => h.replace(/<\!---->/g, '')
+
 export const ssr = async (
 	template: TemplateResult,
-	cond: (h: HTMLElement) => boolean
+	cond: (h: Document) => boolean
 ) => {
 	const target = dom.window.document.body
 	const obs = await new Promise<MutationObserver>(resolve => {
 		const observer = new MutationObserver(() => {
-			if (cond(target)) {
+			if (cond(dom.window.document)) {
 				observer.disconnect()
 				resolve(observer)
 			}
@@ -22,5 +24,5 @@ export const ssr = async (
 		render(template, target)
 	})
 	obs.disconnect()
-	return target
+	return [removeComment(dom.serialize()), removeComment(target.innerHTML)]
 }
