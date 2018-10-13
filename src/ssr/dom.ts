@@ -53,5 +53,6 @@ global.MutationObserver = (window as any).MutationObserver
 // tslint:disable-next-line:no-require-imports no-var-requires
 require('@webcomponents/custom-elements')
 global.customElements = (window as any).customElements
+global.customElements.polyfillWrapFlushCallback()
 
 export const dom = d

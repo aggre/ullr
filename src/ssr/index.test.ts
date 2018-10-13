@@ -1,13 +1,10 @@
 import { ssr } from '.'
 import { html } from 'lit-html'
+import { strictEqual } from 'assert'
 
 describe('SSR', () => {
-	it('SSR', done => {
-		const observer = ssr(html`<div>Test</div>`, result => {
-			console.log(result)
-			observer.disconnect()
-			expect(result).to.be.ok()
-			done()
-		})
+	it('Rendering a static template', async () => {
+		const result = await ssr(html`<div>Test</div>`, () => true)
+		strictEqual(result, '<div>Test</div>')
 	})
 })
