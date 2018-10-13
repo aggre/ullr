@@ -13,7 +13,7 @@ const plugins = [
 ]
 
 export default {
-	input: ['src/**/*.test.ts'],
+	input: ['src/**/*.test.ts', '!src/ssr/*'],
 	output: {
 		file: 'dist/test.js',
 		format: 'umd'
