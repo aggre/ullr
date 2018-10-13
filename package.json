@@ -12,7 +12,8 @@
 		"index.d.ts"
 	],
 	"scripts": {
-		"test": "mocha -r esm ssr/index.test.js",
+		"test": "karma start && mocha -r esm ssr/index.test.js",
+		"pretest": "rollup -c",
 		"build": "tsc -p ./",
 		"prebuild": "npm run lint",
 		"lint": "tslint --fix -p ./",
