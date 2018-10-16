@@ -11,7 +11,6 @@ export const ssr = async (
 	const obs = await new Promise<MutationObserver>(resolve => {
 		const observer = new MutationObserver(() => {
 			if (cond(dom.window.document)) {
-				observer.disconnect()
 				resolve(observer)
 			}
 		})
