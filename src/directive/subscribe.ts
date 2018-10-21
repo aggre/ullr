@@ -1,13 +1,13 @@
 import { Observable, Subscription } from 'rxjs'
 import { html, NodePart, directive, render, TemplateResult } from 'lit-html'
 
-type TemplateCallback = <T>(x: T) => TemplateResult
+type TemplateCallback<T> = (x: T) => TemplateResult
 
 window.customElements.define(
 	'ullr-sbsc',
 	class<T> extends HTMLElement {
 		observable: Observable<T>
-		template: TemplateCallback
+		template: TemplateCallback<T>
 		subscription: Subscription
 		defaultContent: TemplateResult
 		connectedCallback() {
@@ -31,7 +31,7 @@ window.customElements.define(
 
 export const subscribe = <T>(
 	observable: Observable<T>,
-	template: TemplateCallback,
+	template: TemplateCallback<T>,
 	defaultContent?: TemplateResult
 ) =>
 	directive((part: NodePart) => {
