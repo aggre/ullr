@@ -2,6 +2,8 @@ Functional Web Components
 
 **Building Web Components with Functional Programming.**
 
+[![Build Status](https://travis-ci.org/aggre/ullr.svg?branch=master)](https://travis-ci.org/aggre/ullr)
+
 ```
  __  __     __         __         ______
 /\ \/\ \   /\ \       /\ \       /\  == \
