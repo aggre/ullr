@@ -11,6 +11,7 @@ declare global {
 			document: Document
 			navigator: Navigator
 			location: DOMWindow['location']
+			history: History
 			Window: Window
 			self: Window
 			DocumentFragment: DOMWindow['DocumentFragment']
@@ -43,6 +44,7 @@ global.NodeFilter = d.window.NodeFilter
 global.Event = d.window.Event
 global.CustomEvent = d.window.CustomEvent
 global.window.Symbol = Symbol
+global.history = d.window.history
 ;(Window as any).prototype = {
 	addEventListener: d.window.addEventListener,
 	removeEventListener: d.window.removeEventListener
@@ -53,7 +55,7 @@ global.MutationObserver = (window as any).MutationObserver
 // tslint:disable-next-line:no-require-imports no-var-requires
 require('@webcomponents/custom-elements')
 global.customElements = (window as any).customElements
-global.customElements.polyfillWrapFlushCallback()
+global.customElements.polyfillWrapFlushCallback(() => null)
 
 export const dom = (html = '') => {
 	const trueDom = new JSDOM(html)

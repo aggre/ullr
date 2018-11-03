@@ -1,6 +1,7 @@
 import { ssr } from '.'
 import { html } from 'lit-html'
 import { strictEqual } from 'assert'
+import { component } from '../directive'
 
 describe('SSR', () => {
 	it('Rendering a static template', async () => {
@@ -20,6 +21,15 @@ describe('SSR', () => {
 		)
 		strictEqual(doc, '<html><head></head><body><div>Test</div></body></html>')
 		strictEqual(template, '<div>Test</div>')
+	})
+
+	it('Rendering fails with Custom Elements', async () => {
+		const [doc, template] = await ssr(
+			html`<div>${component(html`Hi`)}</div>`,
+			h => Boolean(h.querySelector('ullr-shdw'))
+		)
+		strictEqual(doc, '<html><head></head><body></body></html>')
+		strictEqual(template, '')
 	})
 
 	it('Using html and target options', async () => {

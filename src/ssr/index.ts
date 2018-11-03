@@ -37,7 +37,12 @@ export const ssr = async (
 			childList: true,
 			characterData: true
 		})
-		render(template, target)
+		try {
+			render(template, target)
+		} catch (err) {
+			console.error('rendering ended forcibly', err)
+			resolve(observer)
+		}
 	})
 	obs.disconnect()
 	return [
