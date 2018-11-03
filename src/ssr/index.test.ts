@@ -21,4 +21,32 @@ describe('SSR', () => {
 		strictEqual(doc, '<html><head></head><body><div>Test</div></body></html>')
 		strictEqual(template, '<div>Test</div>')
 	})
+
+	it('Using html and target options', async () => {
+		const [doc, template] = await ssr(
+			html`<div>Options Test</div>`,
+			() => true,
+			{
+				target: '#testApp',
+				html: `
+				<!DOCTYPE html><html><head></head><body><div id=testApp></div></body></html>
+			`
+			}
+		)
+		strictEqual(
+			doc,
+			'<!DOCTYPE html><html><head></head><body><div id="testApp"><div>Options Test</div></div></body></html>'
+		)
+		strictEqual(template, '<div>Options Test</div>')
+	})
+
+	it('Catch an invalid target in options', async () => {
+		const error = await ssr(html`<div>Options Test</div>`, () => true, {
+			target: '#ERROR',
+			html: `
+				<!DOCTYPE html><html><head></head><body></body></html>
+			`
+		}).catch(err => err)
+		strictEqual(error.message, 'target is not found!')
+	})
 })

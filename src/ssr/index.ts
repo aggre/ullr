@@ -1,16 +1,33 @@
 import { dom } from './dom'
 import { TemplateResult, render } from 'lit-html'
 
-const removeComment = (h: string) => h.replace(/<\!---->/g, '')
+interface SSROptions {
+	target: string
+	html: string
+}
+
+const defaultOptions = {
+	target: 'body',
+	html: ''
+}
+
+const removeCommentsLineBreaks = (h: string) =>
+	h.replace(/<\!---->/g, '').replace(/(\r\n\t|\n|\r|\t)/gm, '')
 
 export const ssr = async (
 	template: TemplateResult,
-	cond: (h: Document) => boolean
+	cond: (h: Document) => boolean,
+	options: SSROptions = defaultOptions
 ) => {
-	const target = dom.window.document.body
+	const { target: selector, html } = options
+	const ssrDom = dom(html)
+	const target = ssrDom.window.document.querySelector(selector)
+	if (!target) {
+		throw new Error('target is not found!')
+	}
 	const obs = await new Promise<MutationObserver>(resolve => {
 		const observer = new MutationObserver(() => {
-			if (cond(dom.window.document)) {
+			if (cond(ssrDom.window.document)) {
 				resolve(observer)
 			}
 		})
@@ -23,5 +40,8 @@ export const ssr = async (
 		render(template, target)
 	})
 	obs.disconnect()
-	return [removeComment(dom.serialize()), removeComment(target.innerHTML)]
+	return [
+		removeCommentsLineBreaks(ssrDom.serialize()),
+		removeCommentsLineBreaks(target.innerHTML)
+	]
 }

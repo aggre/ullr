@@ -28,7 +28,7 @@ declare global {
 	}
 }
 
-const d = new JSDOM()
+let d = new JSDOM()
 global.window = global.Window = global.self = d.window
 global.document = d.window.document
 global.navigator = d.window.navigator
@@ -55,4 +55,8 @@ require('@webcomponents/custom-elements')
 global.customElements = (window as any).customElements
 global.customElements.polyfillWrapFlushCallback()
 
-export const dom = d
+export const dom = (html = '') => {
+	const trueDom = new JSDOM(html)
+	d = trueDom
+	return trueDom
+}
