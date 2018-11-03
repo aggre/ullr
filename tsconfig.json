@@ -6,7 +6,7 @@
 		"strictNullChecks": true,
 		"declaration": true,
 		"outDir": "./",
-		"module": "esnext",
+		"module": "umd",
 		"plugins": [
 			{
 				"name": "typescript-lit-html-plugin"
