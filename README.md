@@ -105,6 +105,31 @@ import { main } from './main'
 })()
 ```
 
+You can optionally pass the rendering target and full-document.
+
+```ts
+import { ssr } from 'ullr/ssr'
+import { main } from './main'
+;(async () => {
+	const [document, template] = await ssr(
+		main,
+		doc => Boolean(doc.querySelector('main > p')),
+		{
+			target: '#testApp',
+			html: `
+				<!DOCTYPE html><html><head></head><body><div id=myApp></div></body></html>
+			`
+		}
+	)
+
+	console.log(document)
+	// <!DOCTYPE html><html><head></head><body><div id="myApp"><main>...</main></div></body></html>
+
+	console.log(template)
+	// <main>...<p>...</p>...</main>
+})()
+```
+
 # Usage
 
 Basic usage:
