@@ -115,7 +115,7 @@ import { main } from './main'
 		main,
 		doc => Boolean(doc.querySelector('main > p')),
 		{
-			target: '#testApp',
+			target: '#myApp',
 			html: `
 				<!DOCTYPE html><html><head></head><body><div id=myApp></div></body></html>
 			`
