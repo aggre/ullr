@@ -9,11 +9,13 @@ describe('component directive', () => {
 	it('Render to the ShadowRoot in "ullr-shdw" element', () => {
 		const app = (content: string) =>
 			html`
-				${component(
-					html`
+				${
+					component(
+						html`
 							<main>${content}</main>
 						`
-				)}
+					)
+				}
 			`
 		render(app('App'), document.body)
 		const shadow = document.body.querySelector('ullr-shdw')
