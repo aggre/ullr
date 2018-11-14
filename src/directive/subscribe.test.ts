@@ -17,14 +17,12 @@ describe('subscribe directive', () => {
 		let count = 0
 		render(
 			html`
-				${
-					subscribe(timer, x => {
-						count += 1
-						return html`
+				${subscribe(timer, x => {
+					count += 1
+					return html`
 							<p>${x}</p>
 						`
-					})
-				}
+				})}
 			`,
 			document.body
 		)
@@ -43,18 +41,16 @@ describe('subscribe directive', () => {
 		)
 		render(
 			html`
-				${
-					subscribe(
-						timer,
-						x =>
-							html`
+				${subscribe(
+					timer,
+					x =>
+						html`
 								<p>${x}</p>
 							`,
-						html`
+					html`
 							<p>placeholder</p>
 						`
-					)
-				}
+				)}
 			`,
 			document.body
 		)
@@ -76,14 +72,12 @@ describe('subscribe directive', () => {
 		let count = 0
 		render(
 			html`
-				${
-					subscribe(timer, x => {
-						count += 1
-						return html`
+				${subscribe(timer, x => {
+					count += 1
+					return html`
 							<p>${x}</p>
 						`
-					})
-				}
+				})}
 			`,
 			document.body
 		)

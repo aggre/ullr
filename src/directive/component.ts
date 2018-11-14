@@ -1,4 +1,4 @@
-import { directive, html, TemplateResult } from 'lit-html'
+import { directive, html, TemplateResult, Part } from 'lit-html'
 import { random, render, UllrElement } from '../lib/element'
 
 const templates = new Map()
@@ -46,7 +46,8 @@ export const componentFn = (template: TemplateResult) => {
 	`
 }
 
-export const component = (template: TemplateResult) =>
-	directive(part => {
+export const component = directive(
+	(template: TemplateResult) => (part: Part) => {
 		part.setValue(componentFn(template))
-	})
+	}
+)
