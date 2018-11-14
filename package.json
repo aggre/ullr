@@ -7,12 +7,11 @@
 		"directive/",
 		"lib/",
 		"src/",
-		"ssr/",
 		"!**/*.test.*",
 		"index.d.ts"
 	],
 	"scripts": {
-		"test": "karma start && mocha -r esm ssr/*.test.js",
+		"test": "karma start",
 		"pretest": "npm run build && rollup -c",
 		"build": "tsc -p ./",
 		"lint": "tslint --fix -p ./",
@@ -25,19 +24,14 @@
 	],
 	"license": "MIT",
 	"dependencies": {
-		"@webcomponents/custom-elements": "^1.2.1",
-		"jsdom": "^13.0.0",
 		"lit-html": "^0.13.0",
-		"mutationobserver-shim": "^0.3.2",
 		"rxjs": "^6.3.3",
 		"typescript": "^3.1.6"
 	},
 	"devDependencies": {
 		"@types/expect.js": "^0.3.29",
-		"@types/jsdom": "^12.2.0",
 		"@types/mocha": "^5.2.5",
 		"@types/node": "^10.12.7",
-		"esm": "^3.0.84",
 		"expect.js": "^0.3.1",
 		"karma": "^3.1.1",
 		"karma-chrome-launcher": "^2.2.0",
