@@ -16,10 +16,16 @@ describe('subscribe directive', () => {
 		)
 		let count = 0
 		render(
-			html`${subscribe(timer, x => {
-				count += 1
-				return html`<p>${x}</p>`
-			})}`,
+			html`
+				${
+					subscribe(timer, x => {
+						count += 1
+						return html`
+							<p>${x}</p>
+						`
+					})
+				}
+			`,
 			document.body
 		)
 		await sleep(100)
@@ -36,11 +42,20 @@ describe('subscribe directive', () => {
 			take(1)
 		)
 		render(
-			html`${subscribe(
-				timer,
-				x => html`<p>${x}</p>`,
-				html`<p>placeholder</p>`
-			)}`,
+			html`
+				${
+					subscribe(
+						timer,
+						x =>
+							html`
+								<p>${x}</p>
+							`,
+						html`
+							<p>placeholder</p>
+						`
+					)
+				}
+			`,
 			document.body
 		)
 		expect(
@@ -60,10 +75,16 @@ describe('subscribe directive', () => {
 		)
 		let count = 0
 		render(
-			html`${subscribe(timer, x => {
-				count += 1
-				return html`<p>${x}</p>`
-			})}`,
+			html`
+				${
+					subscribe(timer, x => {
+						count += 1
+						return html`
+							<p>${x}</p>
+						`
+					})
+				}
+			`,
 			document.body
 		)
 		await sleep(20)

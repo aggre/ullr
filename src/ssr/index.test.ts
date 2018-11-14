@@ -5,16 +5,27 @@ import { component } from '../directive'
 
 describe('SSR', () => {
 	it('Rendering a static template', async () => {
-		const [doc, template] = await ssr(html`<div>Test</div>`, () => true)
+		const [doc, template] = await ssr(
+			html`
+				<div>Test</div>
+			`,
+			() => true
+		)
 		strictEqual(doc, '<html><head></head><body><div>Test</div></body></html>')
 		strictEqual(template, '<div>Test</div>')
 	})
 
 	it('Rendering a async template', async () => {
 		const [doc, template] = await ssr(
-			html`<div>${new Promise(resolve => {
-				setTimeout(() => resolve('Test'), 500)
-			})}</div>`,
+			html`
+				<div>
+					${
+						new Promise(resolve => {
+							setTimeout(() => resolve('Test'), 500)
+						})
+					}
+				</div>
+			`,
 			h =>
 				(h.querySelector('div') as HTMLDivElement).innerHTML ===
 				'<!---->Test<!---->'
@@ -25,7 +36,17 @@ describe('SSR', () => {
 
 	it('Rendering fails with Custom Elements', async () => {
 		const [doc, template] = await ssr(
-			html`<div>${component(html`Hi`)}</div>`,
+			html`
+				<div>
+					${
+						component(
+							html`
+								Hi
+							`
+						)
+					}
+				</div>
+			`,
 			h => Boolean(h.querySelector('ullr-shdw'))
 		)
 		strictEqual(doc, '<html><head></head><body></body></html>')
@@ -34,7 +55,9 @@ describe('SSR', () => {
 
 	it('Using html and target options', async () => {
 		const [doc, template] = await ssr(
-			html`<div>Options Test</div>`,
+			html`
+				<div>Options Test</div>
+			`,
 			() => true,
 			{
 				target: '#testApp',
@@ -51,12 +74,18 @@ describe('SSR', () => {
 	})
 
 	it('Catch an invalid target in options', async () => {
-		const error = await ssr(html`<div>Options Test</div>`, () => true, {
-			target: '#ERROR',
-			html: `
+		const error = await ssr(
+			html`
+				<div>Options Test</div>
+			`,
+			() => true,
+			{
+				target: '#ERROR',
+				html: `
 				<!DOCTYPE html><html><head></head><body></body></html>
 			`
-		}).catch(err => err)
+			}
+		).catch(err => err)
 		strictEqual(error.message, 'target is not found!')
 	})
 })

@@ -1,4 +1,4 @@
-import { NodePart, directive, html, TemplateResult } from 'lit-html'
+import { directive, html, TemplateResult } from 'lit-html'
 import { random, render, UllrElement } from '../lib/element'
 
 const templates = new Map()
@@ -41,10 +41,12 @@ window.customElements.define(
 export const componentFn = (template: TemplateResult) => {
 	const token = random()
 	templates.set(token, template)
-	return html`<ullr-shdw t='${token}'></ullr-shdw>`
+	return html`
+		<ullr-shdw t="${token}"></ullr-shdw>
+	`
 }
 
 export const component = (template: TemplateResult) =>
-	directive((part: NodePart) => {
+	directive(part => {
 		part.setValue(componentFn(template))
 	})

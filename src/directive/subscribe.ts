@@ -1,5 +1,5 @@
 import { Observable, Subscription } from 'rxjs'
-import { html, NodePart, directive, render, TemplateResult } from 'lit-html'
+import { html, directive, render, TemplateResult } from 'lit-html'
 
 type TemplateCallback<T> = (x: T) => TemplateResult
 
@@ -34,9 +34,15 @@ export const subscribe = <T>(
 	template: TemplateCallback<T>,
 	defaultContent?: TemplateResult
 ) =>
-	directive((part: NodePart) => {
+	directive(part => {
 		part.setValue(
-			html`<ullr-sbsc .observable='${observable}' .template='${template}' .defaultContent='${defaultContent}'></ullr-sbsc>`
+			html`
+				<ullr-sbsc
+					.observable="${observable}"
+					.template="${template}"
+					.defaultContent="${defaultContent}"
+				></ullr-sbsc>
+			`
 		)
 		part.commit()
 	})
