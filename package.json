@@ -15,7 +15,6 @@
 		"test": "karma start && mocha -r esm ssr/*.test.js",
 		"pretest": "npm run build && rollup -c",
 		"build": "tsc -p ./",
-		"prebuild": "npm run lint",
 		"lint": "tslint --fix -p ./",
 		"format": "prettier --write '**/*.{json,md,yml}'",
 		"prepare": "npm run build"
