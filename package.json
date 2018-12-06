@@ -24,32 +24,32 @@
 	],
 	"license": "MIT",
 	"dependencies": {
-		"lit-html": "^0.13.0",
+		"lit-html": "^0.14.0",
 		"rxjs": "^6.3.3",
-		"typescript": "^3.1.6"
+		"typescript": "^3.2.1"
 	},
 	"devDependencies": {
 		"@types/expect.js": "^0.3.29",
 		"@types/mocha": "^5.2.5",
-		"@types/node": "^10.12.7",
+		"@types/node": "^10.12.12",
 		"expect.js": "^0.3.1",
-		"karma": "^3.1.1",
+		"karma": "^3.1.3",
 		"karma-chrome-launcher": "^2.2.0",
 		"karma-mocha": "^1.3.0",
 		"karma-mocha-reporter": "^2.2.5",
 		"mocha": "^5.2.0",
-		"prettier": "^1.15.2",
-		"puppeteer": "^1.10.0",
-		"rollup": "^0.67.1",
+		"prettier": "^1.15.3",
+		"puppeteer": "^1.11.0",
+		"rollup": "^0.67.4",
 		"rollup-plugin-commonjs": "^9.2.0",
 		"rollup-plugin-multi-entry": "^2.0.2",
 		"rollup-plugin-node-resolve": "^3.4.0",
 		"rollup-plugin-typescript2": "^0.18.0",
 		"tslint": "^5.11.0",
-		"tslint-config-prettier": "^1.16.0",
+		"tslint-config-prettier": "^1.17.0",
 		"tslint-plugin-prettier": "^2.0.1",
 		"tslint-xo": "^0.10.0",
-		"typescript-lit-html-plugin": "^0.7.0"
+		"typescript-lit-html-plugin": "^0.9.0"
 	},
 	"repository": {
 		"type": "git",
