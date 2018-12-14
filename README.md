@@ -55,6 +55,8 @@ export const main = (title: string, desc: string) => html`
 
 Subscribe to `Observable<T>` of RxJS and re-rendering with callback function.
 
+When the detective part is removed, it will automatically `unsubscribe`.
+
 ```ts
 import { html } from 'lit-html'
 import { subscribe } from 'ullr/directive'
