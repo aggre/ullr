@@ -33,17 +33,19 @@ import { html } from 'lit-html'
 import { component } from 'ullr/directive'
 
 export const main = (title: string, desc: string) => html`
-	${component(html`
-		<style>
-			h1 {
-				color: blue;
-			}
-		</style>
-		<main>
-			<h1>${title}</h1>
-			<p>${desc}</p>
-		</main>
-	`)}
+	${
+		component(html`
+			<style>
+				h1 {
+					color: blue;
+				}
+			</style>
+			<main>
+				<h1>${title}</h1>
+				<p>${desc}</p>
+			</main>
+		`)
+	}
 `
 ```
 
@@ -60,7 +62,18 @@ import { timer } from 'rxjs'
 
 export const template = html`
 	<main>
-		${subscribe(timer(10, 1), x => html`<p>${x}</p>`, html`<p>Default content</p>`)}
+		${
+			subscribe(
+				timer(10, 1),
+				x =>
+					html`
+						<p>${x}</p>
+					`,
+				html`
+					<p>Default content</p>
+				`
+			)
+		}
 	</main>
 `
 ```
@@ -95,17 +108,19 @@ const template = (title: string, desc: string) => html`
 `
 
 const app = (title: string, desc: string) => html`
-	${component(html`
-		<style>
-			h1 {
-				font-weight: 400;
-			}
-			p {
-				font-size: 1rem;
-			}
-		</style>
-		${template(title, desc)}
-	`)}
+	${
+		component(html`
+			<style>
+				h1 {
+					font-weight: 400;
+				}
+				p {
+					font-size: 1rem;
+				}
+			</style>
+			${template(title, desc)}
+		`)
+	}
 `
 
 render(app('The title', 'lorem ipsum'), document.getElementById('root'))
@@ -124,17 +139,19 @@ const template = (title: string, desc: string) => html`
 `
 
 const app = (title: string, desc: string) => html`
-	${component(html`
-		<style>
-			h1 {
-				font-weight: 400;
-			}
-			p {
-				font-size: 1rem;
-			}
-		</style>
-		${template(title, desc)}
-	`)}
+	${
+		component(html`
+			<style>
+				h1 {
+					font-weight: 400;
+				}
+				p {
+					font-size: 1rem;
+				}
+			</style>
+			${template(title, desc)}
+		`)
+	}
 `
 
 const xApp = customElements(([title, desc]) => app(title, desc), [
@@ -159,7 +176,18 @@ const timer = _timer(10, 1).pipe(
 
 export const template = html`
 	<main>
-		${subscribe(timer, x => html`<p>${x}</p>`, html`<p>Default content</p>`)}
+		${
+			subscribe(
+				timer,
+				x =>
+					html`
+						<p>${x}</p>
+					`,
+				html`
+					<p>Default content</p>
+				`
+			)
+		}
 	</main>
 `
 ```
