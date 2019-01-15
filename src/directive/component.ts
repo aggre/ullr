@@ -38,7 +38,7 @@ window.customElements.define(
 	}
 )
 
-export const componentFn = (template: TemplateResult) => {
+const componentFn = (template: TemplateResult) => {
 	const token = random()
 	templates.set(token, template)
 	return html`
@@ -46,8 +46,8 @@ export const componentFn = (template: TemplateResult) => {
 	`
 }
 
-export const component = directive(
-	(template: TemplateResult) => (part: Part) => {
-		part.setValue(componentFn(template))
-	}
-)
+const f = (template: TemplateResult) => (part: Part) => {
+	part.setValue(componentFn(template))
+}
+
+export const component = directive(f)

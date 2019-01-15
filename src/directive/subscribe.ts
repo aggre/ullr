@@ -29,21 +29,21 @@ window.customElements.define(
 	}
 )
 
-export const subscribe = directive(
-	<T>(
-		observable: Observable<T>,
-		template: TemplateCallback<T>,
-		defaultContent?: TemplateResult
-	) => (part: Part) => {
-		part.setValue(
-			html`
-				<ullr-sbsc
-					.observable="${observable}"
-					.template="${template}"
-					.defaultContent="${defaultContent}"
-				></ullr-sbsc>
-			`
-		)
-		part.commit()
-	}
-)
+const f = <T>(
+	observable: Observable<T>,
+	template: TemplateCallback<T>,
+	defaultContent?: TemplateResult
+) => (part: Part) => {
+	part.setValue(
+		html`
+			<ullr-sbsc
+				.observable="${observable}"
+				.template="${template}"
+				.defaultContent="${defaultContent}"
+			></ullr-sbsc>
+		`
+	)
+	part.commit()
+}
+
+export const subscribe = directive(f)
