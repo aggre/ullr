@@ -37,7 +37,7 @@ describe('subscribe directive', () => {
 	})
 
 	it('When the third argument is provided, its value is rendered as initial content', async () => {
-		const timer = _timer(10, 1).pipe(
+		const timer = _timer(50, 1).pipe(
 			filter(x => x > 0),
 			take(1)
 		)
@@ -61,7 +61,7 @@ describe('subscribe directive', () => {
 		expect(
 			(document.body.querySelector('p') as HTMLParagraphElement).innerText
 		).to.be('placeholder')
-		await sleep(20)
+		await sleep(100)
 		const p = (document.body.querySelector(
 			'ullr-sbsc'
 		) as Element).querySelector('p')
