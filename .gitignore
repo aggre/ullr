@@ -67,12 +67,12 @@ typings/
 .serverless
 
 # tsc build output
-directive
-lib
-index.*js
-test.js
-**.ts
-!src/**/*
+**/*.js
+**/*.d.ts
+
+# ignore config files
+!karma.conf.js
+!rollup.config.js
 
 # rollup build output
 .rpt2_cache
