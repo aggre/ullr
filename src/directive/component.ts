@@ -1,7 +1,9 @@
 import { directive, html, TemplateResult, Part } from 'lit-html'
+import { isEqual } from 'lodash'
 import { random, render, UllrElement } from '../lib/element'
 
 const templates = new Map()
+const parts = new WeakMap()
 
 window.customElements.define(
 	'ullr-shdw',
@@ -47,6 +49,11 @@ const componentFn = (template: TemplateResult) => {
 }
 
 const f = (template: TemplateResult) => (part: Part) => {
+	const prev = parts.get(part)
+	if (prev && isEqual(prev, template)) {
+		return
+	}
+	parts.set(part, template)
 	part.setValue(componentFn(template))
 }
 
