@@ -1,4 +1,4 @@
-import { html, render } from 'lit-html'
+import { html, render, TemplateResult } from 'lit-html'
 import { component } from '.'
 
 describe('component directive', () => {
@@ -7,15 +7,13 @@ describe('component directive', () => {
 	})
 
 	it('Render to the ShadowRoot in "ullr-shdw" element', () => {
-		const app = (content: string) =>
+		const app = (content: string): TemplateResult =>
 			html`
-				${
-					component(
-						html`
-							<main>${content}</main>
-						`
-					)
-				}
+				${component(
+					html`
+						<main>${content}</main>
+					`
+				)}
 			`
 		render(app('App'), document.body)
 		const shadow = document.body.querySelector('ullr-shdw')
@@ -27,15 +25,13 @@ describe('component directive', () => {
 	})
 
 	it('Re-render if the template different from last time', () => {
-		const app = (main: string, content: string) =>
+		const app = (main: string, content: string): TemplateResult =>
 			html`
-				${
-					component(
-						html`
-							<main>${main}</main>
-						`
-					)
-				}
+				${component(
+					html`
+						<main>${main}</main>
+					`
+				)}
 				<p>${content}</p>
 			`
 		render(app('Prev', 'App'), document.body)
@@ -47,15 +43,13 @@ describe('component directive', () => {
 	})
 
 	it('Not re-render if the same template', () => {
-		const app = (main: string, content: string) =>
+		const app = (main: string, content: string): TemplateResult =>
 			html`
-				${
-					component(
-						html`
-							<main>${main}</main>
-						`
-					)
-				}
+				${component(
+					html`
+						<main>${main}</main>
+					`
+				)}
 				<p>${content}</p>
 			`
 		render(app('Immutable', 'App'), document.body)

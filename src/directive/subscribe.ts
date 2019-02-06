@@ -1,5 +1,6 @@
 import { Observable, Subscription } from 'rxjs'
 import { html, directive, render, TemplateResult, Part } from 'lit-html'
+import { DirectiveFunction } from '.'
 
 type TemplateCallback<T> = (x: T) => TemplateResult
 
@@ -10,7 +11,7 @@ window.customElements.define(
 		template: TemplateCallback<T>
 		subscription: Subscription
 		defaultContent: TemplateResult
-		connectedCallback() {
+		connectedCallback(): void {
 			if (this.defaultContent) {
 				render(this.defaultContent, this)
 			}
@@ -21,7 +22,7 @@ window.customElements.define(
 				render(this.template(x), this)
 			})
 		}
-		disconnectedCallback() {
+		disconnectedCallback(): void {
 			if (this.subscription) {
 				this.subscription.unsubscribe()
 			}
@@ -29,11 +30,12 @@ window.customElements.define(
 	}
 )
 
+// tslint:disable:no-unnecessary-type-annotation
 const f = <T>(
 	observable: Observable<T>,
 	template: TemplateCallback<T>,
 	defaultContent?: TemplateResult
-) => (part: Part) => {
+): DirectiveFunction => (part: Part): void => {
 	part.setValue(
 		html`
 			<ullr-sbsc

@@ -1,5 +1,5 @@
 import { customElements } from './index'
-import { html, render } from 'lit-html'
+import { html, render, TemplateResult } from 'lit-html'
 
 describe('Rendering', () => {
 	afterEach(() => {
@@ -21,11 +21,11 @@ describe('Rendering', () => {
 
 describe('Custom Elements', () => {
 	it('Create Custom Elements', () => {
-		const template = () =>
+		const template = (): TemplateResult =>
 			html`
 				<main>App</main>
 			`
-		const xApp = customElements(() => template())
+		const xApp = customElements(template)
 		window.customElements.define('x-app', xApp)
 		render(
 			html`
@@ -44,13 +44,13 @@ describe('Custom Elements', () => {
 	})
 	describe('When the second argument is provided as an array', () => {
 		it('Re-render when changing attribute values', () => {
-			const template = ([message, description]) =>
+			const template = ([message, description]: string[]): TemplateResult =>
 				html`
 					<p>${message}</p>
 					<p>${description}</p>
 				`
 			const xApp = customElements(template, ['message', 'description'])
-			const select = (p: string, c: string) =>
+			const select = (p: string, c: string): Element | null =>
 				((document.body.querySelector(p) as Element)
 					.shadowRoot as ShadowRoot).querySelector(c)
 			window.customElements.define('x-app-2', xApp)

@@ -1,31 +1,37 @@
 import { TemplateResult } from 'lit-html'
 import { render, UllrElement } from './lib/element'
 
+type Props = (string | null)[]
+
 export const customElements = (
-	template: (props: string[]) => TemplateResult,
+	template: (props: Props) => TemplateResult,
 	observedAttributes: string[] = []
-) =>
+): typeof UllrElement =>
 	class extends UllrElement {
-		props: string[]
+		props: Props
 		constructor() {
 			super()
 			this.props = []
 		}
-		static get observedAttributes() {
+		static get observedAttributes(): string[] {
 			return observedAttributes
 		}
-		attributeChangedCallback(name, _, next) {
+		attributeChangedCallback(
+			name: string,
+			_: string | null,
+			next: string | null
+		): void {
 			const index = observedAttributes.findIndex(n => n === name)
 			this.props[index] = next
 			if (this.connected) {
 				this._render()
 			}
 		}
-		connectedCallback() {
+		connectedCallback(): void {
 			super.connectedCallback()
 			this._render()
 		}
-		_render() {
+		_render(): void {
 			render(template(this.props), this)
 		}
 	}

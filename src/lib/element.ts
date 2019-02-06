@@ -1,16 +1,17 @@
 import { render as _render, TemplateResult } from 'lit-html'
 
-export const random = () => `${Math.random()}`.slice(2)
+export const random = (): string => `${Math.random()}`.slice(2)
 
-export const render = (template: TemplateResult, el: HTMLElement) =>
+export const render = (template: TemplateResult, el: HTMLElement): void => {
 	_render(template, el.shadowRoot || el.attachShadow({ mode: 'open' }))
+}
 
 export class UllrElement extends HTMLElement {
 	connected: boolean
-	connectedCallback() {
+	connectedCallback(): void {
 		this.connected = true
 	}
-	disconnectedCallback() {
+	disconnectedCallback(): void {
 		this.connected = false
 	}
 }

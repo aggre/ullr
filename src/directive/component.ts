@@ -1,21 +1,29 @@
+// tslint:disable:no-unnecessary-type-annotation
 import { directive, html, TemplateResult, Part } from 'lit-html'
 import { isEqual } from 'lodash'
 import { random, render, UllrElement } from '../lib/element'
+import { DirectiveFunction } from '.'
 
-const templates = new Map()
-const parts = new WeakMap()
+const templates: Map<string, TemplateResult> = new Map()
+const parts: WeakMap<Part, TemplateResult> = new WeakMap()
 
 window.customElements.define(
 	'ullr-shdw',
 	class extends UllrElement {
 		token: string
-		template: TemplateResult
-		static get observedAttributes() {
+		template: TemplateResult | undefined
+		static get observedAttributes(): string[] {
 			return ['t']
 		}
-		attributeChangedCallback(_, prev, next) {
-			this.token = next
-			this.template = templates.get(next)
+		attributeChangedCallback(
+			_: string,
+			prev: string | null,
+			next: string | null
+		): void {
+			this.token = next as string
+			if (next) {
+				this.template = templates.get(next)
+			}
 			if (prev) {
 				templates.delete(prev)
 			}
@@ -23,15 +31,15 @@ window.customElements.define(
 				this._render()
 			}
 		}
-		connectedCallback() {
+		connectedCallback(): void {
 			super.connectedCallback()
 			this._render()
 		}
-		disconnectedCallback() {
+		disconnectedCallback(): void {
 			super.disconnectedCallback()
 			templates.delete(this.token)
 		}
-		private _render() {
+		private _render(): void {
 			if (!this.template) {
 				return
 			}
@@ -40,7 +48,7 @@ window.customElements.define(
 	}
 )
 
-const componentFn = (template: TemplateResult) => {
+const componentFn = (template: TemplateResult): TemplateResult => {
 	const token = random()
 	templates.set(token, template)
 	return html`
@@ -48,7 +56,9 @@ const componentFn = (template: TemplateResult) => {
 	`
 }
 
-const f = (template: TemplateResult) => (part: Part) => {
+const f = (template: TemplateResult): DirectiveFunction => (
+	part: Part
+): void => {
 	const prev = parts.get(part)
 	if (prev && isEqual(prev, template)) {
 		return
