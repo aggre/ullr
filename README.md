@@ -16,7 +16,15 @@ Functional Web Components
 
 # Installation
 
+Add to lit-html project:
+
+```bash
+npm i ullr
 ```
+
+When creating a new project using lit-html as template and RxJS as the state management:
+
+```bash
 npm i ullr lit-html rxjs
 ```
 
@@ -32,8 +40,8 @@ Encapsulate the template with Shadow DOM.
 import { html } from 'lit-html'
 import { component } from 'ullr/directive'
 
-export const main = (title: string, desc: string) => html`
-	${component(html`
+export const main = (title: string, desc: string) =>
+	component(html`
 		<style>
 			h1 {
 				color: blue;
@@ -43,37 +51,35 @@ export const main = (title: string, desc: string) => html`
 			<h1>${title}</h1>
 			<p>${desc}</p>
 		</main>
-	`)}
-`
+	`)
 ```
+
+💡 How to preprocess style tags with PostCSS: 💅 https://github.com/aggre/lit-style
 
 ## `subscribe`
 
 `subscribe` is a lit-html directive.
 
-Subscribe to `Observable<T>` of RxJS and re-rendering with callback function.
+Subscribe to `Observable<T>` of RxJS and re-rendering with a callback function.
 
-When the detective part is removed, it will automatically `unsubscribe`.
+When the directive part is removed, it will automatically `unsubscribe`.
 
 ```ts
 import { html } from 'lit-html'
 import { subscribe } from 'ullr/directive'
-import { timer } from 'rxjs'
+import { timer as _timer } from 'rxjs'
 
-export const template = html`
-	<main>
-		${subscribe(
-			timer(10, 1),
-			x =>
-				html`
-					<p>${x}</p>
-				`,
+export const timer = (initialDelay: number, period: number) =>
+	subscribe(
+		_timer(initialDelay, period),
+		x =>
 			html`
-				<p>Default content</p>
-			`
-		)}
-	</main>
-`
+				<p>${x}</p>
+			`,
+		html`
+			<p>Default content</p>
+		`
+	)
 ```
 
 ## `customElements`
@@ -84,102 +90,12 @@ export const template = html`
 import { customElements } from 'ullr'
 import { main } from './main'
 
-const xApp = customElements(([title, desc]) => main(title, desc), [
-	'title',
-	'desc'
-])
+const observedAttributes = ['title', 'desc']
 
-window.customElements.define('x-app', xApp)
-```
+const template = ([title, desc]) => main(title, desc)
 
-# Usage
-
-Basic usage:
-
-```ts
-import { html, render } from 'lit-html'
-import { component } from 'ullr/directive'
-
-const template = (title: string, desc: string) => html`
-	<h1>${title}</h1>
-	<p>${desc}</p>
-`
-
-const app = (title: string, desc: string) => html`
-	${component(html`
-		<style>
-			h1 {
-				font-weight: 400;
-			}
-			p {
-				font-size: 1rem;
-			}
-		</style>
-		${template(title, desc)}
-	`)}
-`
-
-render(app('The title', 'lorem ipsum'), document.getElementById('root'))
-```
-
-Create a Custom Elements:
-
-```ts
-import { html } from 'lit-html'
-import { customElements } from 'ullr'
-import { component } from 'ullr/directive'
-
-const template = (title: string, desc: string) => html`
-	<h1>${title}</h1>
-	<p>${desc}</p>
-`
-
-const app = (title: string, desc: string) => html`
-	${component(html`
-		<style>
-			h1 {
-				font-weight: 400;
-			}
-			p {
-				font-size: 1rem;
-			}
-		</style>
-		${template(title, desc)}
-	`)}
-`
-
-const xApp = customElements(([title, desc]) => app(title, desc), [
-	'title',
-	'desc'
-])
-
-window.customElements.define('x-app', xApp)
-```
-
-Template to subscribe RxJS and update:
-
-```ts
-import { subscribe } from 'ullr/directive'
-import { timer as _timer } from 'rxjs'
-import { take, filter } from 'rxjs/operators'
-
-const timer = _timer(10, 1).pipe(
-	filter(x => x > 0),
-	take(10)
+window.customElements.define(
+	'x-app',
+	customElements(template, observedAttributes)
 )
-
-export const template = html`
-	<main>
-		${subscribe(
-			timer,
-			x =>
-				html`
-					<p>${x}</p>
-				`,
-			html`
-				<p>Default content</p>
-			`
-		)}
-	</main>
-`
 ```
