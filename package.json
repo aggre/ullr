@@ -27,8 +27,11 @@
 	"dependencies": {
 		"lit-html": "^1.0.0",
 		"lodash": "^4.17.11",
-		"rxjs": "^6.4.0",
-		"typescript": "^3.3.1"
+		"rxjs": "^6.4.0"
+	},
+	"peerDependencies": {
+		"lit-html": "^1.0.0",
+		"rxjs": "^6.4.0"
 	},
 	"devDependencies": {
 		"@types/expect.js": "^0.3.29",
@@ -52,6 +55,7 @@
 		"tslint-config-prettier": "^1.18.0",
 		"tslint-plugin-prettier": "^2.0.1",
 		"tslint-xo": "^0.14.0",
+		"typescript": "^3.3.3333",
 		"typescript-lit-html-plugin": "^0.9.0"
 	},
 	"repository": {
