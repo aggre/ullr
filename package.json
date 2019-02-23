@@ -26,7 +26,7 @@
 	"license": "MIT",
 	"dependencies": {
 		"lit-html": "^1.0.0",
-		"lodash": "^4.17.11",
+		"ramda": "^0.26.1",
 		"rxjs": "^6.4.0"
 	},
 	"peerDependencies": {
@@ -38,6 +38,7 @@
 		"@types/lodash": "^4.14.121",
 		"@types/mocha": "^5.2.6",
 		"@types/node": "^11.9.5",
+		"@types/ramda": "^0.25.50",
 		"expect.js": "^0.3.1",
 		"karma": "^4.0.0",
 		"karma-chrome-launcher": "^2.2.0",

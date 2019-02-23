@@ -8,6 +8,9 @@ export const render = (template: TemplateResult, el: HTMLElement): void => {
 
 export class UllrElement extends HTMLElement {
 	connected: boolean
+	static get is(): string {
+		return ''
+	}
 	connectedCallback(): void {
 		this.connected = true
 	}
