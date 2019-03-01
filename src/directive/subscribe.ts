@@ -52,4 +52,8 @@ const f = <T>(
 	part.commit()
 }
 
-export const subscribe = directive(f)
+export const subscribe = directive(f) as <T>(
+	observable: Observable<T>,
+	template: TemplateCallback<T>,
+	defaultContent?: TemplateResult
+) => (part: Part) => void
