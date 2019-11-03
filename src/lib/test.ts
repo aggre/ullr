@@ -1,4 +1,4 @@
-// tslint:disable:no-unnecessary-type-annotation
+// Tslint:disable:no-unnecessary-type-annotation
 export const sleep = async (time: number): Promise<void> =>
 	new Promise(
 		(resolve: (value?: void | PromiseLike<void> | undefined) => void): void => {
@@ -11,18 +11,27 @@ export const slotSelector = (
 	slot: string,
 	selector: string
 ): Element | null | undefined => {
-	if (!element) {
+	if (element === null) {
 		return
 	}
+
 	const { shadowRoot } = element
-	const slotEl = (shadowRoot || element).querySelector(slot)
-	if (!slotEl) {
+	const slotEl = (() => {
+		if (shadowRoot !== undefined && shadowRoot !== null) {
+			return shadowRoot
+		}
+
+		return element
+	})().querySelector(slot)
+	if (slotEl === null) {
 		return
 	}
+
 	const [assigned] = (slotEl as HTMLSlotElement).assignedNodes()
 	const { parentElement } = assigned
-	if (!parentElement) {
+	if (parentElement === null) {
 		return
 	}
+
 	return parentElement.querySelector(selector)
 }

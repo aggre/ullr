@@ -1,7 +1,7 @@
 import { TemplateResult } from 'lit-html'
 import { render, UllrElement } from './lib/element'
 
-type Props = (string | null)[]
+type Props = Array<string | null>
 
 export const customElements = (
 	template: (props: Props) => TemplateResult,
@@ -13,9 +13,11 @@ export const customElements = (
 			super()
 			this.props = []
 		}
+
 		static get observedAttributes(): string[] {
 			return observedAttributes
 		}
+
 		attributeChangedCallback(
 			name: string,
 			_: string | null,
@@ -27,10 +29,12 @@ export const customElements = (
 				this._render()
 			}
 		}
+
 		connectedCallback(): void {
 			super.connectedCallback()
 			this._render()
 		}
+
 		_render(): void {
 			render(template(this.props), this)
 		}

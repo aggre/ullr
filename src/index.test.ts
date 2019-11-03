@@ -37,7 +37,7 @@ describe('Custom Elements', () => {
 		expect(app).to.be.ok()
 		expect(
 			((app as Element).shadowRoot as ShadowRoot).innerHTML.replace(
-				/<\!---->|\t|\n/g,
+				/<!---->|\t|\n/g,
 				''
 			)
 		).to.be('<main>App</main>')

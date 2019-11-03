@@ -6,7 +6,7 @@ import { define } from '../lib/define'
 
 type TemplateCallback<T> = (x: T) => TemplateResult
 
-const el = class<T> extends UllrElement {
+define(class<T> extends UllrElement {
 	observable: Observable<T>
 	template: TemplateCallback<T>
 	subscription: Subscription
@@ -14,27 +14,29 @@ const el = class<T> extends UllrElement {
 	static get is(): string {
 		return 'ullr-sbsc'
 	}
+
 	connectedCallback(): void {
-		if (this.defaultContent) {
+		if (this.defaultContent !== undefined) {
 			render(this.defaultContent, this)
 		}
-		if (!this.observable) {
+
+		if (this.observable === undefined) {
 			return
 		}
+
 		this.subscription = this.observable.subscribe(x => {
 			render(this.template(x), this)
 		})
 	}
+
 	disconnectedCallback(): void {
-		if (this.subscription) {
+		if (this.subscription !== undefined) {
 			this.subscription.unsubscribe()
 		}
 	}
-}
+})
 
-define(el)
-
-// tslint:disable:no-unnecessary-type-annotation
+// Tslint:disable:no-unnecessary-type-annotation
 const f = <T>(
 	observable: Observable<T>,
 	template: TemplateCallback<T>,

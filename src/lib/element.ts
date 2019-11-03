@@ -3,7 +3,16 @@ import { render as _render, TemplateResult } from 'lit-html'
 export const random = (): string => `${Math.random()}`.slice(2)
 
 export const render = (template: TemplateResult, el: HTMLElement): void => {
-	_render(template, el.shadowRoot || el.attachShadow({ mode: 'open' }))
+	_render(
+		template,
+		(() => {
+			if (el.shadowRoot === undefined || el.shadowRoot === null) {
+				return el.attachShadow({ mode: 'open' })
+			}
+
+			return el.shadowRoot
+		})()
+	)
 }
 
 export class UllrElement extends HTMLElement {
@@ -11,9 +20,11 @@ export class UllrElement extends HTMLElement {
 	static get is(): string {
 		return ''
 	}
+
 	connectedCallback(): void {
 		this.connected = true
 	}
+
 	disconnectedCallback(): void {
 		this.connected = false
 	}
