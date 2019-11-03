@@ -1,0 +1,33 @@
+{
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"project": "./tsconfig.json",
+		"tsconfigRootDir": "."
+	},
+	"plugins": ["@typescript-eslint", "prettier"],
+	"extends": [
+		"xo",
+		"xo-typescript",
+		"plugin:prettier/recommended",
+		"prettier/@typescript-eslint"
+	],
+	"rules": {
+		"prettier/prettier": "error"
+	},
+	"overrides": [
+		{
+			"files": ["**/*.test.ts"],
+			"globals": {
+				"describe": "readonly",
+				"expect": "readonly",
+				"it": "readonly",
+				"artifacts": "readonly",
+				"contract": "readonly",
+				"beforeEach": "readonly",
+				"before": "readonly",
+				"afterEach": "readonly",
+				"after": "readonly"
+			}
+		}
+	]
+}
