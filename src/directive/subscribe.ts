@@ -42,16 +42,28 @@ const f = <T>(
 	template: TemplateCallback<T>,
 	defaultContent?: TemplateResult
 ): DirectiveFunction => (part: Part): void => {
-	part.setValue(
-		html`
-			<ullr-sbsc
-				.observable="${observable}"
-				.template="${template}"
-				.defaultContent="${defaultContent}"
-			></ullr-sbsc>
-		`
-	)
-	part.commit()
+	if (typeof global === 'undefined') {
+		part.setValue(
+			html`
+				<ullr-sbsc
+					.observable="${observable}"
+					.template="${template}"
+					.defaultContent="${defaultContent}"
+				></ullr-sbsc>
+			`
+		)
+		part.commit()
+	} else {
+		part.setValue(defaultContent)
+		observable.subscribe(x => {
+			part.setValue(
+				html`
+					<ullr-sbsc>${template(x)}</ullr-sbsc>
+				`
+			)
+			part.commit()
+		})
+	}
 }
 
 export const subscribe = directive(f) as <T>(
