@@ -37,43 +37,59 @@ define(class<T> extends UllrElement {
 	}
 })
 
-const f = (isNode => {
-	if (isNode) {
-		return <T>(
-			observable: Observable<T>,
-			template: TemplateCallback<T>,
-			defaultContent?: TemplateResult
-		): DirectiveFunction => (part: Part): void => {
-			part.setValue(defaultContent)
-			observable.subscribe(x => {
+const f = ((
+	content: <T>(
+		observable: Observable<T>,
+		template: TemplateCallback<T>,
+		part: Part,
+		defaultContent?: TemplateResult
+	) => void
+): (<T>(
+	observable: Observable<T>,
+	template: TemplateCallback<T>,
+	defaultContent?: TemplateResult
+) => DirectiveFunction) => <T>(
+	observable: Observable<T>,
+	template: TemplateCallback<T>,
+	defaultContent?: TemplateResult
+) => (part: Part): void => {
+	content(observable, template, part, defaultContent)
+})(
+	isNodeEnv()
+		? <T>(
+				observable: Observable<T>,
+				template: TemplateCallback<T>,
+				part: Part,
+				defaultContent?: TemplateResult
+		  ): void => {
+				part.setValue(defaultContent)
+				observable.subscribe(x => {
+					part.setValue(
+						html`
+							<ullr-sbsc>${template(x)}</ullr-sbsc>
+						`
+					)
+					part.commit()
+				})
+		  }
+		: <T>(
+				observable: Observable<T>,
+				template: TemplateCallback<T>,
+				part: Part,
+				defaultContent?: TemplateResult
+		  ): void => {
 				part.setValue(
 					html`
-						<ullr-sbsc>${template(x)}</ullr-sbsc>
+						<ullr-sbsc
+							.observable="${observable}"
+							.template="${template}"
+							.defaultContent="${defaultContent}"
+						></ullr-sbsc>
 					`
 				)
 				part.commit()
-			})
-		}
-	}
-
-	return <T>(
-		observable: Observable<T>,
-		template: TemplateCallback<T>,
-		defaultContent?: TemplateResult
-	): DirectiveFunction => (part: Part): void => {
-		part.setValue(defaultContent)
-		part.setValue(
-			html`
-				<ullr-sbsc
-					.observable="${observable}"
-					.template="${template}"
-					.defaultContent="${defaultContent}"
-				></ullr-sbsc>
-			`
-		)
-		part.commit()
-	}
-})(isNodeEnv())
+		  }
+)
 
 export const subscribe = directive(f) as <T>(
 	observable: Observable<T>,
