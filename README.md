@@ -65,8 +65,6 @@ export const main = (title: string, desc: string) =>
 	`)
 ```
 
----
-
 | Browser | Node.js                                                                                             |
 | ------- | --------------------------------------------------------------------------------------------------- |
 | ✅      | 🚸 <br/> Shadow Dom isn't supported. An inside content of Shadow Dom is shown as just an innerHTML. |
@@ -101,8 +99,6 @@ export const timer = (initialDelay: number, period: number) =>
 	)
 ```
 
----
-
 | Browser | Node.js                                                                             |
 | ------- | ----------------------------------------------------------------------------------- |
 | ✅      | 🚸 <br/> Create string as a DOM is supported. But auto-unsubscribe isn't supported. |
@@ -126,8 +122,6 @@ window.customElements.define(
 	customElements(template, observedAttributes)
 )
 ```
-
----
 
 | Browser | Node.js |
 | ------- | ------- |
