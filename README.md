@@ -37,6 +37,8 @@ When creating a new project using lit-html as template and RxJS as the state man
 npm i ullr lit-html rxjs
 ```
 
+Partially supports run on Node.js (with jsdom).
+
 # APIs
 
 ## `component`
@@ -62,6 +64,14 @@ export const main = (title: string, desc: string) =>
 		</main>
 	`)
 ```
+
+---
+
+| Browser | Node.js                                                                                             |
+| ------- | --------------------------------------------------------------------------------------------------- |
+| ✅      | 🚸 <br/> Shadow Dom isn't supported. An inside content of Shadow Dom is shown as just an innerHTML. |
+
+---
 
 💡 How to preprocess style tags with PostCSS: 💅 https://github.com/aggre/lit-style
 
@@ -91,6 +101,14 @@ export const timer = (initialDelay: number, period: number) =>
 	)
 ```
 
+---
+
+| Browser | Node.js                                                                             |
+| ------- | ----------------------------------------------------------------------------------- |
+| ✅      | 🚸 <br/> Create string as a DOM is supported. But auto-unsubscribe isn't supported. |
+
+---
+
 ## `customElements`
 
 `customElements` creates a class that can be passed to `customElements.define`.
@@ -108,3 +126,11 @@ window.customElements.define(
 	customElements(template, observedAttributes)
 )
 ```
+
+---
+
+| Browser | Node.js |
+| ------- | ------- |
+| ✅      | ❌      |
+
+---
