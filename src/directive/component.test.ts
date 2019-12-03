@@ -1,5 +1,8 @@
+import { assert } from 'assertthat'
 import { html, render, TemplateResult } from 'lit-html'
 import { component } from '.'
+import { isNodeEnv } from '../lib/is-node-env'
+const { document } = window
 
 describe('component directive', () => {
 	afterEach(() => {
@@ -16,12 +19,12 @@ describe('component directive', () => {
 				)}
 			`
 		render(app('App'), document.body)
-		const shadow = document.body.querySelector('ullr-shdw')
-		const main = ((shadow as Element).shadowRoot as ShadowRoot).querySelector(
-			'main'
-		)
-		expect(main).to.be.ok()
-		expect((main as Element).innerHTML).to.be('<!---->App<!---->')
+		const main = isNodeEnv()
+			? (document.body.querySelector('ullr-shdw > main') as Element)
+			: ((document.body.querySelector('ullr-shdw') as Element)
+					.shadowRoot as ShadowRoot).querySelector('main')
+		assert.that(main).is.not.null()
+		assert.that((main as Element).innerHTML).is.equalTo('<!---->App<!---->')
 	})
 
 	it('Re-render if the template different from last time', () => {
@@ -39,7 +42,7 @@ describe('component directive', () => {
 		const prev = (shadow as Element).getAttribute('t')
 		render(app('Next', 'App Next'), document.body)
 		const next = (shadow as Element).getAttribute('t')
-		expect(next).to.not.be(prev)
+		assert.that(next).is.not.equalTo(prev)
 	})
 
 	it('Not re-render if the same template', () => {
@@ -57,6 +60,6 @@ describe('component directive', () => {
 		const prev = (shadow as Element).getAttribute('t')
 		render(app('Immutable', 'App Next'), document.body)
 		const next = (shadow as Element).getAttribute('t')
-		expect(next).to.be(prev)
+		assert.that(next).is.equalTo(prev)
 	})
 })

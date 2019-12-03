@@ -3,6 +3,7 @@
 		"target": "es2015",
 		"lib": ["es2015", "es2016", "es2017", "dom"],
 		"moduleResolution": "node",
+		"allowSyntheticDefaultImports": true,
 		"strictNullChecks": true,
 		"declaration": true,
 		"outDir": "./",

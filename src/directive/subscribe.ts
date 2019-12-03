@@ -3,6 +3,7 @@ import { html, directive, render, TemplateResult, Part } from 'lit-html'
 import { UllrElement } from '../lib/element'
 import { DirectiveFunction } from '.'
 import { define } from '../lib/define'
+import { isNodeEnv } from '../lib/is-node-env'
 
 type TemplateCallback<T> = (x: T) => TemplateResult
 
@@ -36,13 +37,31 @@ define(class<T> extends UllrElement {
 	}
 })
 
-// Tslint:disable:no-unnecessary-type-annotation
-const f = <T>(
-	observable: Observable<T>,
-	template: TemplateCallback<T>,
-	defaultContent?: TemplateResult
-): DirectiveFunction => (part: Part): void => {
-	if (typeof global === 'undefined') {
+const f = (isNode => {
+	if (isNode) {
+		return <T>(
+			observable: Observable<T>,
+			template: TemplateCallback<T>,
+			defaultContent?: TemplateResult
+		): DirectiveFunction => (part: Part): void => {
+			part.setValue(defaultContent)
+			observable.subscribe(x => {
+				part.setValue(
+					html`
+						<ullr-sbsc>${template(x)}</ullr-sbsc>
+					`
+				)
+				part.commit()
+			})
+		}
+	}
+
+	return <T>(
+		observable: Observable<T>,
+		template: TemplateCallback<T>,
+		defaultContent?: TemplateResult
+	): DirectiveFunction => (part: Part): void => {
+		part.setValue(defaultContent)
 		part.setValue(
 			html`
 				<ullr-sbsc
@@ -53,18 +72,8 @@ const f = <T>(
 			`
 		)
 		part.commit()
-	} else {
-		part.setValue(defaultContent)
-		observable.subscribe(x => {
-			part.setValue(
-				html`
-					<ullr-sbsc>${template(x)}</ullr-sbsc>
-				`
-			)
-			part.commit()
-		})
 	}
-}
+})(isNodeEnv())
 
 export const subscribe = directive(f) as <T>(
 	observable: Observable<T>,

@@ -4,6 +4,7 @@ import equals from 'ramda/es/equals'
 import { random, render, UllrElement } from '../lib/element'
 import { DirectiveFunction } from '.'
 import { define } from '../lib/define'
+import { isNodeEnv } from '../lib/is-node-env'
 
 const templates: Map<string, TemplateResult> = new Map()
 const parts: WeakMap<Part, TemplateResult> = new WeakMap()
@@ -57,24 +58,27 @@ define(class extends UllrElement {
 	}
 })
 
-const componentFn = (template: TemplateResult): TemplateResult => {
-	const token = random()
-	templates.set(token, template)
-	return html`
-		<ullr-shdw t="${token}"></ullr-shdw>
-	`
-}
+const f = (isNode =>
+	((
+		innerTemplate: (token: string, inner: TemplateResult) => TemplateResult
+	) => (template: TemplateResult): DirectiveFunction => (part: Part): void => {
+		const prev = parts.get(part)
+		if (prev !== undefined && equals(prev, template)) {
+			return
+		}
 
-const f = (template: TemplateResult): DirectiveFunction => (
-	part: Part
-): void => {
-	const prev = parts.get(part)
-	if (prev !== undefined && equals(prev, template)) {
-		return
-	}
-
-	parts.set(part, template)
-	part.setValue(componentFn(template))
-}
+		parts.set(part, template)
+		const token = random()
+		templates.set(token, template)
+		part.setValue(innerTemplate(token, template))
+	})(
+		isNode
+			? (token, inner) => html`
+					<ullr-shdw t="${token}">${inner}</ullr-shdw>
+			  `
+			: token => html`
+					<ullr-shdw t="${token}"></ullr-shdw>
+			  `
+	))(isNodeEnv())
 
 export const component = directive(f)
