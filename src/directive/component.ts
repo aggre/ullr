@@ -70,6 +70,7 @@ const f = ((
 	const token = random()
 	templates.set(token, template)
 	part.setValue(innerTemplate(token, template))
+	part.commit()
 })(
 	isNodeEnv()
 		? (token, inner) => html`
