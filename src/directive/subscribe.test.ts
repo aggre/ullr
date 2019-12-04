@@ -1,11 +1,14 @@
 import { assert } from 'assertthat'
-import { timer as _timer } from 'rxjs'
+import { timer as _timer, BehaviorSubject } from 'rxjs'
 import { take, filter } from 'rxjs/operators'
-import { html, render } from 'lit-html'
+import { html, render, directive, Part } from 'lit-html'
 import { sleep, removeExtraString } from '../lib/test'
 import { subscribe } from '.'
 import { isNodeEnv } from '../lib/is-node-env'
+import { component } from './component'
 const { document } = window
+
+const count = new BehaviorSubject(0)
 
 describe('subscribe directive', () => {
 	afterEach(() => {
@@ -95,4 +98,141 @@ describe('subscribe directive', () => {
 			assert.that(count).is.equalTo(1)
 		})
 	}
+
+	describe('Passing content', () => {
+		it('Pass a TemplateResult', () => {
+			count.next(1)
+			render(
+				html`
+					${subscribe(
+						count,
+						x => html`
+							<p>${x}</p>
+						`
+					)}
+				`,
+				document.body
+			)
+			const el = document.body.querySelector('ullr-sbsc > p') as Element
+			assert.that(removeExtraString(el.innerHTML)).is.equalTo('1')
+		})
+
+		it('Pass a TemplateResult containing a synchronous directive', () => {
+			const demo = directive((i: number) => (part: Part) => {
+				part.setValue(
+					html`
+						number: ${i}
+					`
+				)
+				part.commit()
+			})
+
+			count.next(2)
+			render(
+				html`
+					${subscribe(
+						count,
+						x => html`
+							<p>${demo(x)}</p>
+						`
+					)}
+				`,
+				document.body
+			)
+			const el = document.body.querySelector('ullr-sbsc > p') as Element
+			assert.that(removeExtraString(el.innerHTML)).is.equalTo('number: 2')
+		})
+
+		it('Pass a TemplateResult containing an asynchronous directive', async () => {
+			const timer = directive((i: number) => (part: Part) => {
+				setTimeout(() => {
+					part.setValue(
+						html`
+							Done ${i}
+						`
+					)
+					part.commit()
+				}, 100)
+			})
+
+			count.next(3)
+			render(
+				html`
+					${subscribe(
+						count,
+						x => html`
+							<p>${timer(x)}</p>
+						`
+					)}
+				`,
+				document.body
+			)
+			const el = (): Element =>
+				document.body.querySelector('ullr-sbsc > p') as Element
+
+			assert.that(removeExtraString(el().innerHTML)).is.equalTo('')
+			await sleep(100)
+			assert.that(removeExtraString(el().innerHTML)).is.equalTo('Done 3')
+		})
+
+		it('Pass a TemplateResult containing the subscribe directive', () => {
+			const subject = new BehaviorSubject(0)
+
+			count.next(4)
+			render(
+				html`
+					${subscribe(
+						count,
+						x => html`
+							<p>
+								${subscribe(
+									subject,
+									y =>
+										html`
+											${x + y}
+										`
+								)}
+							</p>
+						`
+					)}
+				`,
+				document.body
+			)
+			const el = (): Element =>
+				document.body.querySelector('ullr-sbsc > p > ullr-sbsc') as Element
+			assert.that(removeExtraString(el().innerHTML)).is.equalTo('4')
+			subject.next(1)
+			assert.that(removeExtraString(el().innerHTML)).is.equalTo('5')
+			subject.next(2)
+			assert.that(removeExtraString(el().innerHTML)).is.equalTo('6')
+		})
+
+		it('Pass a TemplateResult containing the component directive', () => {
+			count.next(5)
+			render(
+				html`
+					${subscribe(
+						count,
+						x => html`
+							${component(
+								html`
+									<p>${x}</p>
+								`
+							)}
+						`
+					)}
+				`,
+				document.body
+			)
+			const el = isNodeEnv()
+				? (document.body.querySelector(
+						`ullr-sbsc > ullr-shdw > p`
+				  ) as HTMLElement)
+				: ((((document.body.querySelector(
+						'ullr-sbsc'
+				  ) as Element).querySelector('ullr-shdw') as HTMLElement)
+						.shadowRoot as ShadowRoot).querySelector('p') as HTMLElement)
+			assert.that(removeExtraString(el.innerHTML)).is.equalTo('5')
+		})
+	})
 })
