@@ -6,8 +6,7 @@ import multiEntry from 'rollup-plugin-multi-entry'
 export const plugins = [
 	typescript(),
 	commonjs({
-		include: 'node_modules/**',
-		namedExports: { 'node_modules/lodash/lodash.js': ['isEqual' ] }
+		include: 'node_modules/**'
 	}),
 	resolve(),
 	multiEntry()

@@ -34,7 +34,6 @@
 		"rxjs": "^6.5.3"
 	},
 	"devDependencies": {
-		"@types/lodash": "^4.14.149",
 		"@types/mocha": "^5.2.7",
 		"@types/node": "^12.12.14",
 		"@types/ramda": "^0.26.36",
