@@ -1,17 +1,19 @@
 // Tslint:disable:no-unnecessary-type-annotation
-import { directive, html, TemplateResult, Part } from 'lit-html'
+import { directive, html, Part } from 'lit-html'
 import equals from 'ramda/es/equals'
 import { random, render, UllrElement } from '../lib/element'
 import { DirectiveFunction } from '.'
 import { define } from '../lib/define'
 import { isNodeEnv } from '../lib/is-node-env'
+import { Templatable } from '..'
+import { toTemplate } from '../lib/to-template'
 
-const templates: Map<string, TemplateResult> = new Map()
-const parts: WeakMap<Part, TemplateResult> = new WeakMap()
+const templates: Map<string, Templatable> = new Map()
+const parts: WeakMap<Part, Templatable> = new WeakMap()
 
 define(class extends UllrElement {
 	token: string
-	template: TemplateResult | undefined
+	template: Templatable | undefined
 	static get is(): string {
 		return 'ullr-shdw'
 	}
@@ -54,13 +56,13 @@ define(class extends UllrElement {
 			return
 		}
 
-		render(this.template, this)
+		render(toTemplate(this.template), this)
 	}
 })
 
 const f = ((
-	innerTemplate: (token: string, inner: TemplateResult) => TemplateResult
-) => (template: TemplateResult): DirectiveFunction => (part: Part): void => {
+	innerTemplate: (token: string, inner: Templatable) => Templatable
+) => (template: Templatable): DirectiveFunction => (part: Part): void => {
 	const prev = parts.get(part)
 	if (prev !== undefined && equals(prev, template)) {
 		return

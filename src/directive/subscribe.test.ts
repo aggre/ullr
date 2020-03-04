@@ -9,6 +9,9 @@ import { component } from './component'
 const { document } = window
 
 const count = new BehaviorSubject(0)
+const dir = directive((x: unknown) => (part: Part) => {
+	part.setValue(x)
+})
 
 describe('subscribe directive', () => {
 	afterEach(() => {
@@ -36,6 +39,26 @@ describe('subscribe directive', () => {
 		const p = document.body.querySelector('ullr-sbsc > p') as Element
 		assert.that(removeExtraString(p.innerHTML)).is.equalTo('10')
 		assert.that(count).is.equalTo(10)
+	})
+
+	it('Supports Directive function as a template', async () => {
+		const timer = _timer(10, 1).pipe(
+			filter(x => x > 0),
+			take(10)
+		)
+		render(
+			html`
+				<p>
+					${subscribe(timer, x => dir(x), dir(0))}
+				</p>
+			`,
+			document.body
+		)
+		const init = document.body.querySelector('p > ullr-sbsc') as Element
+		assert.that(removeExtraString(init.innerHTML)).is.equalTo('0')
+		await sleep(100)
+		const p = document.body.querySelector('p > ullr-sbsc') as Element
+		assert.that(removeExtraString(p.innerHTML)).is.equalTo('10')
 	})
 
 	it('When the third argument is provided, its value is rendered as initial content', async () => {

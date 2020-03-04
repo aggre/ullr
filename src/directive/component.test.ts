@@ -13,6 +13,10 @@ const contentInShadow = (selector: string): HTMLElement =>
 		: (((document.body.querySelector('ullr-shdw') as Element)
 				.shadowRoot as ShadowRoot).querySelector(selector) as HTMLElement)
 
+const dir = directive((x: unknown) => (part: Part) => {
+	part.setValue(x)
+})
+
 describe('component directive', () => {
 	afterEach(() => {
 		render(html``, document.body)
@@ -30,7 +34,28 @@ describe('component directive', () => {
 		render(app('App'), document.body)
 		const main = contentInShadow('main')
 		assert.that(main).is.not.null()
-		assert.that((main as Element).innerHTML).is.equalTo('<!---->App<!---->')
+		assert
+			.that(removeExtraString((main as Element).innerHTML))
+			.is.equalTo('App')
+	})
+
+	it('Supports Directive function as a template', async () => {
+		const app = (content: string): TemplateResult =>
+			html`
+				${component(
+					dir(
+						html`
+							<main>${content}</main>
+						`
+					)
+				)}
+			`
+		render(app('App'), document.body)
+		const main = contentInShadow('main')
+		assert.that(main).is.not.null()
+		assert
+			.that(removeExtraString((main as Element).innerHTML))
+			.is.equalTo('App')
 	})
 
 	it('Re-render if the template different from last time', () => {

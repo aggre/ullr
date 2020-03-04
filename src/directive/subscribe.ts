@@ -1,24 +1,26 @@
 import { Observable, Subscription } from 'rxjs'
-import { html, directive, render, TemplateResult, Part } from 'lit-html'
+import { html, directive, render, Part } from 'lit-html'
 import { UllrElement } from '../lib/element'
 import { DirectiveFunction } from '.'
 import { define } from '../lib/define'
 import { isNodeEnv } from '../lib/is-node-env'
+import { toTemplate } from '../lib/to-template'
+import { Templatable } from '..'
 
-type TemplateCallback<T> = (x: T) => TemplateResult
+type TemplateCallback<T> = (x: T) => Templatable
 
 define(class<T> extends UllrElement {
 	observable: Observable<T>
 	template: TemplateCallback<T>
 	subscription: Subscription
-	defaultContent: TemplateResult
+	defaultContent: Templatable
 	static get is(): string {
 		return 'ullr-sbsc'
 	}
 
 	connectedCallback(): void {
 		if (this.defaultContent !== undefined) {
-			render(this.defaultContent, this)
+			render(toTemplate(this.defaultContent), this)
 		}
 
 		if (this.observable === undefined) {
@@ -26,7 +28,7 @@ define(class<T> extends UllrElement {
 		}
 
 		this.subscription = this.observable.subscribe(x => {
-			render(this.template(x), this)
+			render(toTemplate(this.template(x)), this)
 		})
 	}
 
@@ -42,16 +44,16 @@ const f = ((
 		observable: Observable<T>,
 		template: TemplateCallback<T>,
 		part: Part,
-		defaultContent?: TemplateResult
+		defaultContent?: Templatable
 	) => void
 ): (<T>(
 	observable: Observable<T>,
 	template: TemplateCallback<T>,
-	defaultContent?: TemplateResult
+	defaultContent?: Templatable
 ) => DirectiveFunction) => <T>(
 	observable: Observable<T>,
 	template: TemplateCallback<T>,
-	defaultContent?: TemplateResult
+	defaultContent?: Templatable
 ) => (part: Part): void => {
 	content(observable, template, part, defaultContent)
 })(
@@ -60,9 +62,12 @@ const f = ((
 				observable: Observable<T>,
 				template: TemplateCallback<T>,
 				part: Part,
-				defaultContent?: TemplateResult
+				defaultContent?: Templatable
 		  ): void => {
 				part.setValue(defaultContent)
+				part.setValue(html`
+					<ullr-sbsc>${defaultContent}</ullr-sbsc>
+				`)
 				observable.subscribe(x => {
 					part.setValue(
 						html`
@@ -76,7 +81,7 @@ const f = ((
 				observable: Observable<T>,
 				template: TemplateCallback<T>,
 				part: Part,
-				defaultContent?: TemplateResult
+				defaultContent?: Templatable
 		  ): void => {
 				part.setValue(
 					html`
@@ -94,5 +99,5 @@ const f = ((
 export const subscribe = directive(f) as <T>(
 	observable: Observable<T>,
 	template: TemplateCallback<T>,
-	defaultContent?: TemplateResult
+	defaultContent?: Templatable
 ) => (part: Part) => void
