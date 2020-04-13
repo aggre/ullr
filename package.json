@@ -1,5 +1,5 @@
 {
-	"name": "@aggre/ullr",
+	"name": "ullr",
 	"version": "0.15.1",
 	"description": "Functional Web Components",
 	"main": "index.js",
