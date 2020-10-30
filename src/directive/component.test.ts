@@ -33,7 +33,7 @@ describe('component directive', () => {
 			.is.equalTo('App')
 	})
 
-	it('Supports Directive function as a template', async () => {
+	it('Supports Directive function as a template', () => {
 		const app = (content: string): TemplateResult =>
 			html` ${component(dir(html` <main>${content}</main> `))} `
 		render(app('App'), document.body)
@@ -117,7 +117,7 @@ describe('component directive', () => {
 			)
 			const el = isNodeEnv()
 				? (document.body.querySelector(
-						`ullr-shdw > ullr-shdw > p`
+						'ullr-shdw > ullr-shdw > p'
 				  ) as HTMLElement)
 				: (((((document.body.querySelector('ullr-shdw') as Element)
 						.shadowRoot as ShadowRoot).querySelector(

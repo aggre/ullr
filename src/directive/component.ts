@@ -8,7 +8,7 @@ import { isNodeEnv } from '../lib/is-node-env'
 import { Templatable } from '..'
 import { toTemplate } from '../lib/to-template'
 
-const templates: Map<string, Templatable> = new Map()
+const templates: Map<string, Templatable> = new Map<string, Templatable>()
 const parts: WeakMap<Part, Templatable> = new WeakMap()
 
 define(class extends UllrElement {

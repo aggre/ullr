@@ -188,7 +188,7 @@ describe('subscribe directive', () => {
 			)
 			const el = isNodeEnv()
 				? (document.body.querySelector(
-						`ullr-sbsc > ullr-shdw > p`
+						'ullr-sbsc > ullr-shdw > p'
 				  ) as HTMLElement)
 				: ((((document.body.querySelector(
 						'ullr-sbsc'
