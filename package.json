@@ -1,6 +1,6 @@
 {
 	"name": "@aggre/ullr",
-	"version": "0.15.3",
+	"version": "0.15.4",
 	"description": "Functional Web Components",
 	"main": "index.js",
 	"files": [
