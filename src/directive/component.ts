@@ -75,12 +75,8 @@ const f = ((
 	part.commit()
 })(
 	isNodeEnv()
-		? (token, inner) => html`
-				<ullr-shdw t="${token}">${inner}</ullr-shdw>
-		  `
-		: token => html`
-				<ullr-shdw t="${token}"></ullr-shdw>
-		  `
+		? (token, inner) => html` <ullr-shdw t="${token}">${inner}</ullr-shdw> `
+		: (token) => html` <ullr-shdw t="${token}"></ullr-shdw> `
 )
 
 export const component = directive(f)

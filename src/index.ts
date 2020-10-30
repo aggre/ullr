@@ -24,7 +24,7 @@ export const customElements = (
 			_: string | null,
 			next: string | null
 		): void {
-			const index = observedAttributes.findIndex(n => n === name)
+			const index = observedAttributes.findIndex((n) => n === name)
 			this.props[index] = next
 			if (this.connected) {
 				this._render()

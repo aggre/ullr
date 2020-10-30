@@ -89,13 +89,8 @@ import { timer as _timer } from 'rxjs'
 export const timer = (initialDelay: number, period: number) =>
 	subscribe(
 		_timer(initialDelay, period),
-		x =>
-			html`
-				<p>${x}</p>
-			`,
-		html`
-			<p>Default content</p>
-		`
+		(x) => html` <p>${x}</p> `,
+		html` <p>Default content</p> `
 	)
 ```
 

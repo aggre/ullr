@@ -27,7 +27,7 @@ define(class<T> extends UllrElement {
 			return
 		}
 
-		this.subscription = this.observable.subscribe(x => {
+		this.subscription = this.observable.subscribe((x) => {
 			render(toTemplate(this.template(x)), this)
 		})
 	}
@@ -65,15 +65,9 @@ const f = ((
 				defaultContent?: Templatable
 		  ): void => {
 				part.setValue(defaultContent)
-				part.setValue(html`
-					<ullr-sbsc>${defaultContent}</ullr-sbsc>
-				`)
-				observable.subscribe(x => {
-					part.setValue(
-						html`
-							<ullr-sbsc>${template(x)}</ullr-sbsc>
-						`
-					)
+				part.setValue(html` <ullr-sbsc>${defaultContent}</ullr-sbsc> `)
+				observable.subscribe((x) => {
+					part.setValue(html` <ullr-sbsc>${template(x)}</ullr-sbsc> `)
 					part.commit()
 				})
 		  }

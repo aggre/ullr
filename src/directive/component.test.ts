@@ -24,13 +24,7 @@ describe('component directive', () => {
 
 	it('Render to the ShadowRoot in "ullr-shdw" element', () => {
 		const app = (content: string): TemplateResult =>
-			html`
-				${component(
-					html`
-						<main>${content}</main>
-					`
-				)}
-			`
+			html` ${component(html` <main>${content}</main> `)} `
 		render(app('App'), document.body)
 		const main = contentInShadow('main')
 		assert.that(main).is.not.null()
@@ -41,15 +35,7 @@ describe('component directive', () => {
 
 	it('Supports Directive function as a template', async () => {
 		const app = (content: string): TemplateResult =>
-			html`
-				${component(
-					dir(
-						html`
-							<main>${content}</main>
-						`
-					)
-				)}
-			`
+			html` ${component(dir(html` <main>${content}</main> `))} `
 		render(app('App'), document.body)
 		const main = contentInShadow('main')
 		assert.that(main).is.not.null()
@@ -61,11 +47,7 @@ describe('component directive', () => {
 	it('Re-render if the template different from last time', () => {
 		const app = (main: string, content: string): TemplateResult =>
 			html`
-				${component(
-					html`
-						<main>${main}</main>
-					`
-				)}
+				${component(html` <main>${main}</main> `)}
 				<p>${content}</p>
 			`
 		render(app('Prev', 'App'), document.body)
@@ -79,11 +61,7 @@ describe('component directive', () => {
 	it('Not re-render if the same template', () => {
 		const app = (main: string, content: string): TemplateResult =>
 			html`
-				${component(
-					html`
-						<main>${main}</main>
-					`
-				)}
+				${component(html` <main>${main}</main> `)}
 				<p>${content}</p>
 			`
 		render(app('Immutable', 'App'), document.body)
@@ -96,16 +74,7 @@ describe('component directive', () => {
 
 	describe('Passing content', () => {
 		it('Pass a TemplateResult', () => {
-			render(
-				html`
-					${component(
-						html`
-							<p>Test</p>
-						`
-					)}
-				`,
-				document.body
-			)
+			render(html` ${component(html` <p>Test</p> `)} `, document.body)
 			assert
 				.that(removeExtraString(contentInShadow('p').innerHTML))
 				.is.equalTo('Test')
@@ -113,24 +82,11 @@ describe('component directive', () => {
 
 		it('Pass a TemplateResult containing a synchronous directive', () => {
 			const demo = directive((i: number) => (part: Part) => {
-				part.setValue(
-					html`
-						number: ${i}
-					`
-				)
+				part.setValue(html` number: ${i} `)
 				part.commit()
 			})
 
-			render(
-				html`
-					${component(
-						html`
-							<p>${demo(1)}</p>
-						`
-					)}
-				`,
-				document.body
-			)
+			render(html` ${component(html` <p>${demo(1)}</p> `)} `, document.body)
 			assert
 				.that(removeExtraString(contentInShadow('p').innerHTML))
 				.is.equalTo('number: 1')
@@ -139,25 +95,12 @@ describe('component directive', () => {
 		it('Pass a TemplateResult containing an asynchronous directive', async () => {
 			const timer = directive(() => (part: Part) => {
 				setTimeout(() => {
-					part.setValue(
-						html`
-							Done
-						`
-					)
+					part.setValue(html` Done `)
 					part.commit()
 				}, 100)
 			})
 
-			render(
-				html`
-					${component(
-						html`
-							<p>${timer()}</p>
-						`
-					)}
-				`,
-				document.body
-			)
+			render(html` ${component(html` <p>${timer()}</p> `)} `, document.body)
 			assert
 				.that(removeExtraString(contentInShadow('p').innerHTML))
 				.is.equalTo('')
@@ -169,17 +112,7 @@ describe('component directive', () => {
 
 		it('Pass a TemplateResult containing the component directive', () => {
 			render(
-				html`
-					${component(
-						html`
-							${component(
-								html`
-									<p>Test</p>
-								`
-							)}
-						`
-					)}
-				`,
+				html` ${component(html` ${component(html` <p>Test</p> `)} `)} `,
 				document.body
 			)
 			const el = isNodeEnv()
@@ -201,17 +134,7 @@ describe('component directive', () => {
 			render(
 				html`
 					${component(
-						html`
-							${subscribe(
-								subject,
-								x =>
-									html`
-										<p>
-											${x}
-										</p>
-									`
-							)}
-						`
+						html` ${subscribe(subject, (x) => html` <p>${x}</p> `)} `
 					)}
 				`,
 				document.body

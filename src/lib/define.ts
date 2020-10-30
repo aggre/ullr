@@ -5,7 +5,7 @@ export const define = when(
 	(el: typeof UllrElement) =>
 		typeof customElements !== 'undefined' &&
 		customElements.get(el.is) === undefined,
-	el => {
+	(el) => {
 		customElements.define(el.is, el)
 	}
 )
