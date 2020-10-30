@@ -7,16 +7,16 @@
 		"project": "./tsconfig.json",
 		"tsconfigRootDir": "."
 	},
-	"plugins": ["@typescript-eslint", "prettier"],
+	"plugins": ["@typescript-eslint"],
 	"extends": [
+		"eslint:recommended",
+		"plugin:@typescript-eslint/eslint-recommended",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:@typescript-eslint/recommended-requiring-type-checking",
 		"xo",
 		"xo-typescript",
-		"plugin:prettier/recommended",
-		"prettier/@typescript-eslint"
+		"prettier"
 	],
-	"rules": {
-		"prettier/prettier": "error"
-	},
 	"overrides": [
 		{
 			"files": ["**/*.test.ts"],
