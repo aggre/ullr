@@ -2,7 +2,7 @@ Functional Web Components
 
 **Building Web Components with Functional Programming.**
 
-[![Build Status](https://travis-ci.org/aggre/ullr.svg?branch=main)](https://travis-ci.org/aggre/ullr)
+![CI](https://github.com/aggre/ullr/workflows/CI/badge.svg)
 [![Published on npm](https://img.shields.io/npm/v/ullr.svg)](https://www.npmjs.com/package/ullr)
 
 ```
