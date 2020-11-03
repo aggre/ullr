@@ -40,7 +40,7 @@
 		"@types/ramda": "0.27.32",
 		"@typescript-eslint/eslint-plugin": "4.6.1",
 		"@typescript-eslint/parser": "4.6.1",
-		"assertthat": "5.2.3",
+		"assertthat": "5.2.5",
 		"browser-env": "3.3.0",
 		"eslint": "7.12.1",
 		"eslint-config-prettier": "6.15.0",
