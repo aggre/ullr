@@ -52,7 +52,7 @@
 		"karma-mocha-reporter": "2.2.5",
 		"mocha": "8.2.1",
 		"prettier": "2.1.2",
-		"puppeteer": "5.4.1",
+		"puppeteer": "5.5.0",
 		"rollup": "2.33.2",
 		"rollup-plugin-commonjs": "10.1.0",
 		"rollup-plugin-multi-entry": "2.1.0",
