@@ -78,8 +78,5 @@
 	"bugs": {
 		"url": "https://github.com/aggre/ullr/issues"
 	},
-	"homepage": "https://github.com/aggre/ullr#readme",
-	"publishConfig": {
-		"registry": "https://npm.pkg.github.com/"
-	}
+	"homepage": "https://github.com/aggre/ullr#readme"
 }
