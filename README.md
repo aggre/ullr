@@ -49,7 +49,7 @@ Encapsulate the template with Shadow DOM.
 
 ```ts
 import { html } from 'lit-html'
-import { component } from 'ullr'
+import { component } from '@aggre/ullr'
 
 export const main = (title: string, desc: string) =>
 	component(html`
@@ -83,7 +83,7 @@ When the directive part is removed, it will automatically `unsubscribe`.
 
 ```ts
 import { html } from 'lit-html'
-import { subscribe } from 'ullr'
+import { subscribe } from '@aggre/ullr'
 import { timer as _timer } from 'rxjs'
 
 export const timer = (initialDelay: number, period: number) =>
@@ -105,7 +105,7 @@ export const timer = (initialDelay: number, period: number) =>
 `customElements` creates a class that can be passed to `customElements.define`.
 
 ```ts
-import { customElements } from 'ullr'
+import { customElements } from '@aggre/ullr'
 import { main } from './main'
 
 const observedAttributes = ['title', 'desc']
