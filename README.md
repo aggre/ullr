@@ -3,7 +3,7 @@ Functional Web Components
 **Building Web Components with Functional Programming.**
 
 ![CI](https://github.com/aggre/ullr/workflows/CI/badge.svg)
-[![Published on npm](https://img.shields.io/npm/v/ullr.svg)](https://www.npmjs.com/package/ullr)
+[![Published on npm](https://img.shields.io/npm/v/@aggre/ullr.svg)](https://www.npmjs.com/package/@aggre/ullr)
 
 ```
 
@@ -28,13 +28,13 @@ Functional Web Components
 Add to lit-html project:
 
 ```bash
-npm i ullr
+npm i @aggre/ullr
 ```
 
 When creating a new project using lit-html as template and RxJS as the state management:
 
 ```bash
-npm i ullr lit-html rxjs
+npm i @aggre/ullr lit-html rxjs
 ```
 
 Partially supports run on Node.js (with jsdom).
