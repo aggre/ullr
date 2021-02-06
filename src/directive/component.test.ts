@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs'
 import { subscribe } from './subscribe'
 const { document } = window
 
-const contentInShadow = (selector: string): HTMLElement =>
+const contentInShadow = (selector: string): Element =>
 	isNodeEnv()
 		? document.body.querySelector(`ullr-shdw > ${selector}`)!
 		: document.body
@@ -29,9 +29,7 @@ describe('component directive', () => {
 		render(app('App'), document.body)
 		const main = contentInShadow('main')
 		assert.that(main).is.not.null()
-		assert
-			.that(removeExtraString((main as Element).innerHTML))
-			.is.equalTo('App')
+		assert.that(removeExtraString(main.innerHTML)).is.equalTo('App')
 	})
 
 	it('Supports Directive function as a template', () => {
@@ -40,9 +38,7 @@ describe('component directive', () => {
 		render(app('App'), document.body)
 		const main = contentInShadow('main')
 		assert.that(main).is.not.null()
-		assert
-			.that(removeExtraString((main as Element).innerHTML))
-			.is.equalTo('App')
+		assert.that(removeExtraString(main.innerHTML)).is.equalTo('App')
 	})
 
 	it('Re-render if the template different from last time', () => {
