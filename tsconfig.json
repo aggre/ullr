@@ -6,7 +6,8 @@
 		"allowSyntheticDefaultImports": true,
 		"strictNullChecks": true,
 		"declaration": true,
-		"outDir": "./",
+		"outDir": "dist",
+		"rootDir": ".",
 		"module": "esnext",
 		"plugins": [
 			{

@@ -75,4 +75,4 @@ typings/
 !rollup.config.js
 
 # rollup build output
-.rpt2_cache
+**/*.mjs
