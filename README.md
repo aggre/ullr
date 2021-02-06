@@ -49,7 +49,7 @@ Encapsulate the template with Shadow DOM.
 
 ```ts
 import { html } from 'lit-html'
-import { component } from 'ullr/directive'
+import { component } from 'ullr'
 
 export const main = (title: string, desc: string) =>
 	component(html`
@@ -83,7 +83,7 @@ When the directive part is removed, it will automatically `unsubscribe`.
 
 ```ts
 import { html } from 'lit-html'
-import { subscribe } from 'ullr/directive'
+import { subscribe } from 'ullr'
 import { timer as _timer } from 'rxjs'
 
 export const timer = (initialDelay: number, period: number) =>
