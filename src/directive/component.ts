@@ -27,7 +27,7 @@ define(class extends UllrElement {
 		prev: string | null,
 		next: string | null
 	): void {
-		this.token = next as string
+		this.token = next!
 		if (next !== null) {
 			this.template = templates.get(next)
 		}

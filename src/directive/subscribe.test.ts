@@ -34,7 +34,7 @@ describe('subscribe directive', () => {
 			document.body
 		)
 		await sleep(100)
-		const p = document.body.querySelector('ullr-sbsc > p') as Element
+		const p = document.body.querySelector('ullr-sbsc > p')!
 		assert.that(removeExtraString(p.innerHTML)).is.equalTo('10')
 		assert.that(count).is.equalTo(10)
 	})
@@ -48,10 +48,10 @@ describe('subscribe directive', () => {
 			html` <p>${subscribe(timer, (x) => dir(x), dir(0))}</p> `,
 			document.body
 		)
-		const init = document.body.querySelector('p > ullr-sbsc') as Element
+		const init = document.body.querySelector('p > ullr-sbsc')!
 		assert.that(removeExtraString(init.innerHTML)).is.equalTo('0')
 		await sleep(100)
-		const p = document.body.querySelector('p > ullr-sbsc') as Element
+		const p = document.body.querySelector('p > ullr-sbsc')!
 		assert.that(removeExtraString(p.innerHTML)).is.equalTo('10')
 	})
 
@@ -71,14 +71,10 @@ describe('subscribe directive', () => {
 			document.body
 		)
 		assert
-			.that(
-				removeExtraString(
-					(document.body.querySelector('p') as HTMLParagraphElement).innerHTML
-				)
-			)
+			.that(removeExtraString(document.body.querySelector('p')!.innerHTML))
 			.is.equalTo('placeholder')
 		await sleep(100)
-		const p = document.body.querySelector('ullr-sbsc > p') as Element
+		const p = document.body.querySelector('ullr-sbsc > p')!
 		assert.that(removeExtraString(p.innerHTML)).is.equalTo('1')
 	})
 
@@ -100,7 +96,7 @@ describe('subscribe directive', () => {
 				document.body
 			)
 			await sleep(20)
-			const p = document.body.querySelector('ullr-sbsc > p') as Element
+			const p = document.body.querySelector('ullr-sbsc > p')!
 			assert.that(removeExtraString(p.innerHTML)).is.equalTo('1')
 			assert.that(count).is.equalTo(1)
 			render(html``, document.body)
@@ -116,7 +112,7 @@ describe('subscribe directive', () => {
 				html` ${subscribe(count, (x) => html` <p>${x}</p> `)} `,
 				document.body
 			)
-			const el = document.body.querySelector('ullr-sbsc > p') as Element
+			const el = document.body.querySelector('ullr-sbsc > p')!
 			assert.that(removeExtraString(el.innerHTML)).is.equalTo('1')
 		})
 
@@ -131,7 +127,7 @@ describe('subscribe directive', () => {
 				html` ${subscribe(count, (x) => html` <p>${demo(x)}</p> `)} `,
 				document.body
 			)
-			const el = document.body.querySelector('ullr-sbsc > p') as Element
+			const el = document.body.querySelector('ullr-sbsc > p')!
 			assert.that(removeExtraString(el.innerHTML)).is.equalTo('number: 2')
 		})
 
@@ -148,8 +144,7 @@ describe('subscribe directive', () => {
 				html` ${subscribe(count, (x) => html` <p>${timer(x)}</p> `)} `,
 				document.body
 			)
-			const el = (): Element =>
-				document.body.querySelector('ullr-sbsc > p') as Element
+			const el = (): Element => document.body.querySelector('ullr-sbsc > p')!
 
 			assert.that(removeExtraString(el().innerHTML)).is.equalTo('')
 			await sleep(100)
@@ -170,7 +165,7 @@ describe('subscribe directive', () => {
 				document.body
 			)
 			const el = (): Element =>
-				document.body.querySelector('ullr-sbsc > p > ullr-sbsc') as Element
+				document.body.querySelector('ullr-sbsc > p > ullr-sbsc')!
 			assert.that(removeExtraString(el().innerHTML)).is.equalTo('4')
 			subject.next(1)
 			assert.that(removeExtraString(el().innerHTML)).is.equalTo('5')
@@ -187,13 +182,11 @@ describe('subscribe directive', () => {
 				document.body
 			)
 			const el = isNodeEnv()
-				? (document.body.querySelector(
-						'ullr-sbsc > ullr-shdw > p'
-				  ) as HTMLElement)
-				: ((((document.body.querySelector(
-						'ullr-sbsc'
-				  ) as Element).querySelector('ullr-shdw') as HTMLElement)
-						.shadowRoot as ShadowRoot).querySelector('p') as HTMLElement)
+				? document.body.querySelector('ullr-sbsc > ullr-shdw > p')!
+				: (document.body
+						.querySelector('ullr-sbsc')!
+						.querySelector('ullr-shdw')!
+						.shadowRoot!.querySelector('p') as HTMLElement)
 			assert.that(removeExtraString(el.innerHTML)).is.equalTo('5')
 		})
 	})

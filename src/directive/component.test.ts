@@ -9,9 +9,10 @@ const { document } = window
 
 const contentInShadow = (selector: string): HTMLElement =>
 	isNodeEnv()
-		? (document.body.querySelector(`ullr-shdw > ${selector}`) as HTMLElement)
-		: (((document.body.querySelector('ullr-shdw') as Element)
-				.shadowRoot as ShadowRoot).querySelector(selector) as HTMLElement)
+		? document.body.querySelector(`ullr-shdw > ${selector}`)!
+		: document.body
+				.querySelector('ullr-shdw')!
+				.shadowRoot!.querySelector(selector)!
 
 const dir = directive((x: unknown) => (part: Part) => {
 	part.setValue(x)
@@ -52,9 +53,9 @@ describe('component directive', () => {
 			`
 		render(app('Prev', 'App'), document.body)
 		const shadow = document.body.querySelector('ullr-shdw')
-		const prev = (shadow as Element).getAttribute('t')
+		const prev = shadow!.getAttribute('t')
 		render(app('Next', 'App Next'), document.body)
-		const next = (shadow as Element).getAttribute('t')
+		const next = shadow!.getAttribute('t')
 		assert.that(next).is.not.equalTo(prev)
 	})
 
@@ -66,9 +67,9 @@ describe('component directive', () => {
 			`
 		render(app('Immutable', 'App'), document.body)
 		const shadow = document.body.querySelector('ullr-shdw')
-		const prev = (shadow as Element).getAttribute('t')
+		const prev = shadow!.getAttribute('t')
 		render(app('Immutable', 'App Next'), document.body)
-		const next = (shadow as Element).getAttribute('t')
+		const next = shadow!.getAttribute('t')
 		assert.that(next).is.equalTo(prev)
 	})
 
@@ -116,15 +117,11 @@ describe('component directive', () => {
 				document.body
 			)
 			const el = isNodeEnv()
-				? (document.body.querySelector(
-						'ullr-shdw > ullr-shdw > p'
-				  ) as HTMLElement)
-				: (((((document.body.querySelector('ullr-shdw') as Element)
-						.shadowRoot as ShadowRoot).querySelector(
-						'ullr-shdw'
-				  ) as HTMLElement).shadowRoot as ShadowRoot).querySelector(
-						'p'
-				  ) as HTMLElement)
+				? document.body.querySelector('ullr-shdw > ullr-shdw > p')!
+				: (document.body
+						.querySelector('ullr-shdw')!
+						.shadowRoot!.querySelector('ullr-shdw')!
+						.shadowRoot!.querySelector('p') as HTMLElement)
 			assert.that(removeExtraString(el.innerHTML)).is.equalTo('Test')
 		})
 

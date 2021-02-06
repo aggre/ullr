@@ -18,9 +18,7 @@ if (!isNodeEnv()) {
 				render(template, document.body)
 				const h1 = document.body.querySelector('h1')
 				assert.that(h1).is.not.null()
-				assert
-					.that((h1 as HTMLHeadingElement).innerText)
-					.is.equalTo('The title')
+				assert.that(h1!.innerText).is.equalTo('The title')
 			})
 		})
 	})
@@ -34,11 +32,7 @@ if (!isNodeEnv()) {
 			const app = document.body.querySelector('x-app')
 			assert.that(app).is.not.null()
 			assert
-				.that(
-					removeExtraString(
-						((app as Element).shadowRoot as ShadowRoot).innerHTML
-					)
-				)
+				.that(removeExtraString(app!.shadowRoot!.innerHTML))
 				.is.equalTo('<main>App</main>')
 		})
 		describe('When the second argument is provided as an array', () => {
@@ -50,11 +44,10 @@ if (!isNodeEnv()) {
 					`
 				const xApp = customElements(template, ['message', 'description'])
 				const select = (p: string, c: string): Element | null =>
-					((document.body.querySelector(p) as Element)
-						.shadowRoot as ShadowRoot).querySelector(c)
+					document.body.querySelector(p)!.shadowRoot!.querySelector(c)
 				window.customElements.define('x-app-2', xApp)
 				render(html` <x-app-2></x-app-2> `, document.body)
-				const app = document.body.querySelector('x-app-2') as Element
+				const app = document.body.querySelector('x-app-2')!
 				app.setAttribute('message', 'Test message')
 				app.setAttribute('description', 'Test description')
 				assert
