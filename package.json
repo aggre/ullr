@@ -55,7 +55,7 @@
 		"@typescript-eslint/parser": "4.15.0",
 		"assertthat": "5.2.5",
 		"browser-env": "3.3.0",
-		"eslint": "7.19.0",
+		"eslint": "7.20.0",
 		"eslint-config-prettier": "7.2.0",
 		"eslint-config-xo": "0.34.0",
 		"eslint-config-xo-typescript": "0.37.0",
