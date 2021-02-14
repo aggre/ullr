@@ -46,7 +46,7 @@
 	"devDependencies": {
 		"@rollup/plugin-commonjs": "17.1.0",
 		"@rollup/plugin-multi-entry": "4.0.0",
-		"@rollup/plugin-node-resolve": "11.1.1",
+		"@rollup/plugin-node-resolve": "11.2.0",
 		"@rollup/plugin-typescript": "8.1.1",
 		"@types/mocha": "8.2.0",
 		"@types/node": "14.14.27",
