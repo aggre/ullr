@@ -68,7 +68,7 @@
 		"puppeteer": "7.1.0",
 		"rollup": "2.40.0",
 		"rollup-plugin-dts": "2.0.1",
-		"typescript": "4.2.2",
+		"typescript": "4.2.3",
 		"typescript-lit-html-plugin": "0.9.0"
 	},
 	"repository": {
