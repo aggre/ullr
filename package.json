@@ -41,7 +41,7 @@
 	},
 	"peerDependencies": {
 		"lit-html": "^1.3.0",
-		"rxjs": "^6.6.3 || ^6.6.3 || ^6.6.3"
+		"rxjs": "^6.6.3 || ^6.6.3 || ^6.6.3 || ^6.6.3"
 	},
 	"devDependencies": {
 		"@rollup/plugin-commonjs": "18.0.0",
