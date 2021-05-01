@@ -17,16 +17,16 @@
 	],
 	"scripts": {
 		"test": "karma start && mocha dist/test.js --require ./node_modules/browser-env/register.js",
-		"pretest": "npm run build",
-		"build": "npm run build:ts && npm run build:rollup",
+		"pretest": "yarn build",
+		"build": "yarn build:ts && yarn build:rollup",
 		"build:ts": "tsc -p ./",
 		"build:rollup": "rollup -c",
-		"prebuild": "npm run lint && npm run clean",
+		"prebuild": "yarn lint && yarn clean",
 		"clean": "rimraf dist",
-		"lint": "npm run lint:eslint && npm run lint:format",
+		"lint": "yarn lint:eslint && yarn lint:format",
 		"lint:eslint": "eslint . --ext .ts --fix",
 		"lint:format": "prettier --write '**/*.{ts,json,md,yml}'",
-		"prepack": "npm run build"
+		"prepack": "yarn build"
 	},
 	"author": "aggre",
 	"contributors": [
