@@ -76,3 +76,6 @@ typings/
 
 # rollup build output
 **/*.mjs
+
+# use yarn as a package manager
+package-lock.json
