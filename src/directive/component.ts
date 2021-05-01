@@ -27,6 +27,7 @@ define(class extends UllrElement {
 		prev: string | null,
 		next: string | null
 	): void {
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		this.token = next!
 		if (next !== null) {
 			this.template = templates.get(next)
