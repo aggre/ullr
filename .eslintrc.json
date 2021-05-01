@@ -15,8 +15,7 @@
 		"plugin:@typescript-eslint/recommended",
 		"xo",
 		"xo-typescript",
-		"prettier",
-		"prettier/@typescript-eslint"
+		"prettier"
 	],
 	"overrides": [
 		{
