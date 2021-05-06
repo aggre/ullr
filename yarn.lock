@@ -1753,10 +1753,10 @@ levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-lit-html@1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-1.4.0.tgz#5f18c08d11b52b1d01ceb263df42f115aecef5ca"
-  integrity sha512-cgaqPSgqHRaTH/P1DnWD/dQxudtrHqD0xo1AoyOGJZir2rXgsvTg77z6Pitwk9B+kL23EakD62HV3x8sT01aWQ==
+lit-html@1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-1.4.1.tgz#0c6f3ee4ad4eb610a49831787f0478ad8e9ae5e0"
+  integrity sha512-B9btcSgPYb1q4oSOb/PrOT6Z/H+r6xuNzfH4lFli/AWhYwdtrgQkQWBbIc6mdnf6E2IL3gDXdkkqNktpU0OZQA==
 
 locate-path@^5.0.0:
   version "5.0.0"
