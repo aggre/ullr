@@ -68,7 +68,7 @@
 		"rollup": "2.52.0",
 		"rollup-plugin-dts": "3.0.2",
 		"rxjs": "7.1.0",
-		"typescript": "4.3.2",
+		"typescript": "4.3.3",
 		"typescript-lit-html-plugin": "0.9.0"
 	},
 	"repository": {
