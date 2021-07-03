@@ -61,7 +61,7 @@
 		"karma-mocha": "2.0.1",
 		"karma-mocha-reporter": "2.2.5",
 		"lit-html": "1.4.1",
-		"mocha": "9.0.1",
+		"mocha": "9.0.2",
 		"prettier": "2.3.2",
 		"puppeteer": "10.1.0",
 		"rimraf": "3.0.2",
