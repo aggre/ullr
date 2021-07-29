@@ -1,4 +1,4 @@
-import { assert } from 'assertthat'
+import { expect } from '@esm-bundle/chai'
 import { html, render, TemplateResult, Part, directive } from 'lit-html'
 import { component } from '.'
 import { isNodeEnv } from '../lib/is-node-env'
@@ -28,8 +28,8 @@ describe('component directive', () => {
 			html` ${component(html` <main>${content}</main> `)} `
 		render(app('App'), document.body)
 		const main = contentInShadow('main')
-		assert.that(main).is.not.null()
-		assert.that(removeExtraString(main.innerHTML)).is.equalTo('App')
+		expect(main).to.not.equal(null)
+		expect(removeExtraString(main.innerHTML)).to.be.equal('App')
 	})
 
 	it('Supports Directive function as a template', () => {
@@ -37,8 +37,8 @@ describe('component directive', () => {
 			html` ${component(dir(html` <main>${content}</main> `))} `
 		render(app('App'), document.body)
 		const main = contentInShadow('main')
-		assert.that(main).is.not.null()
-		assert.that(removeExtraString(main.innerHTML)).is.equalTo('App')
+		expect(main).to.not.equal(null)
+		expect(removeExtraString(main.innerHTML)).to.be.equal('App')
 	})
 
 	it('Re-render if the template different from last time', () => {
@@ -52,7 +52,7 @@ describe('component directive', () => {
 		const prev = shadow!.getAttribute('t')
 		render(app('Next', 'App Next'), document.body)
 		const next = shadow!.getAttribute('t')
-		assert.that(next).is.not.equalTo(prev)
+		expect(next).to.not.be.equal(prev)
 	})
 
 	it('Not re-render if the same template', () => {
@@ -66,15 +66,15 @@ describe('component directive', () => {
 		const prev = shadow!.getAttribute('t')
 		render(app('Immutable', 'App Next'), document.body)
 		const next = shadow!.getAttribute('t')
-		assert.that(next).is.equalTo(prev)
+		expect(next).to.be.equal(prev)
 	})
 
 	describe('Passing content', () => {
 		it('Pass a TemplateResult', () => {
 			render(html` ${component(html` <p>Test</p> `)} `, document.body)
-			assert
-				.that(removeExtraString(contentInShadow('p').innerHTML))
-				.is.equalTo('Test')
+			expect(removeExtraString(contentInShadow('p').innerHTML)).to.be.equal(
+				'Test'
+			)
 		})
 
 		it('Pass a TemplateResult containing a synchronous directive', () => {
@@ -84,9 +84,9 @@ describe('component directive', () => {
 			})
 
 			render(html` ${component(html` <p>${demo(1)}</p> `)} `, document.body)
-			assert
-				.that(removeExtraString(contentInShadow('p').innerHTML))
-				.is.equalTo('number: 1')
+			expect(removeExtraString(contentInShadow('p').innerHTML)).to.be.equal(
+				'number: 1'
+			)
 		})
 
 		it('Pass a TemplateResult containing an asynchronous directive', async () => {
@@ -98,13 +98,11 @@ describe('component directive', () => {
 			})
 
 			render(html` ${component(html` <p>${timer()}</p> `)} `, document.body)
-			assert
-				.that(removeExtraString(contentInShadow('p').innerHTML))
-				.is.equalTo('')
+			expect(removeExtraString(contentInShadow('p').innerHTML)).to.be.equal('')
 			await sleep(100)
-			assert
-				.that(removeExtraString(contentInShadow('p').innerHTML))
-				.is.equalTo('Done')
+			expect(removeExtraString(contentInShadow('p').innerHTML)).to.be.equal(
+				'Done'
+			)
 		})
 
 		it('Pass a TemplateResult containing the component directive', () => {
@@ -118,7 +116,7 @@ describe('component directive', () => {
 						.querySelector('ullr-shdw')!
 						.shadowRoot!.querySelector('ullr-shdw')!
 						.shadowRoot!.querySelector('p') as HTMLElement)
-			assert.that(removeExtraString(el.innerHTML)).is.equalTo('Test')
+			expect(removeExtraString(el.innerHTML)).to.be.equal('Test')
 		})
 
 		it('Pass a TemplateResult containing the subscribe directive', () => {
@@ -132,17 +130,17 @@ describe('component directive', () => {
 				`,
 				document.body
 			)
-			assert
-				.that(removeExtraString(contentInShadow('ullr-sbsc > p').innerHTML))
-				.is.equalTo('0')
+			expect(
+				removeExtraString(contentInShadow('ullr-sbsc > p').innerHTML)
+			).to.be.equal('0')
 			subject.next(1)
-			assert
-				.that(removeExtraString(contentInShadow('ullr-sbsc > p').innerHTML))
-				.is.equalTo('1')
+			expect(
+				removeExtraString(contentInShadow('ullr-sbsc > p').innerHTML)
+			).to.be.equal('1')
 			subject.next(2)
-			assert
-				.that(removeExtraString(contentInShadow('ullr-sbsc > p').innerHTML))
-				.is.equalTo('2')
+			expect(
+				removeExtraString(contentInShadow('ullr-sbsc > p').innerHTML)
+			).to.be.equal('2')
 		})
 	})
 })

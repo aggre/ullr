@@ -1,4 +1,4 @@
-import { assert } from 'assertthat'
+import { expect } from '@esm-bundle/chai'
 import { timer as _timer, BehaviorSubject } from 'rxjs'
 import { take, filter } from 'rxjs/operators'
 import { html, render, directive, Part } from 'lit-html'
@@ -35,8 +35,8 @@ describe('subscribe directive', () => {
 		)
 		await sleep(100)
 		const p = document.body.querySelector('ullr-sbsc > p')!
-		assert.that(removeExtraString(p.innerHTML)).is.equalTo('10')
-		assert.that(count).is.equalTo(10)
+		expect(removeExtraString(p.innerHTML)).to.be.equal('10')
+		expect(count).to.be.equal(10)
 	})
 
 	it('Supports Directive function as a template', async () => {
@@ -49,10 +49,10 @@ describe('subscribe directive', () => {
 			document.body
 		)
 		const init = document.body.querySelector('p > ullr-sbsc')!
-		assert.that(removeExtraString(init.innerHTML)).is.equalTo('0')
+		expect(removeExtraString(init.innerHTML)).to.be.equal('0')
 		await sleep(100)
 		const p = document.body.querySelector('p > ullr-sbsc')!
-		assert.that(removeExtraString(p.innerHTML)).is.equalTo('10')
+		expect(removeExtraString(p.innerHTML)).to.be.equal('10')
 	})
 
 	it('When the third argument is provided, its value is rendered as initial content', async () => {
@@ -70,12 +70,12 @@ describe('subscribe directive', () => {
 			`,
 			document.body
 		)
-		assert
-			.that(removeExtraString(document.body.querySelector('p')!.innerHTML))
-			.is.equalTo('placeholder')
+		expect(
+			removeExtraString(document.body.querySelector('p')!.innerHTML)
+		).to.be.equal('placeholder')
 		await sleep(100)
 		const p = document.body.querySelector('ullr-sbsc > p')!
-		assert.that(removeExtraString(p.innerHTML)).is.equalTo('1')
+		expect(removeExtraString(p.innerHTML)).to.be.equal('1')
 	})
 
 	if (!isNodeEnv()) {
@@ -97,11 +97,11 @@ describe('subscribe directive', () => {
 			)
 			await sleep(20)
 			const p = document.body.querySelector('ullr-sbsc > p')!
-			assert.that(removeExtraString(p.innerHTML)).is.equalTo('1')
-			assert.that(count).is.equalTo(1)
+			expect(removeExtraString(p.innerHTML)).to.be.equal('1')
+			expect(count).to.be.equal(1)
 			render(html``, document.body)
 			await sleep(100)
-			assert.that(count).is.equalTo(1)
+			expect(count).to.be.equal(1)
 		})
 	}
 
@@ -113,7 +113,7 @@ describe('subscribe directive', () => {
 				document.body
 			)
 			const el = document.body.querySelector('ullr-sbsc > p')!
-			assert.that(removeExtraString(el.innerHTML)).is.equalTo('1')
+			expect(removeExtraString(el.innerHTML)).to.be.equal('1')
 		})
 
 		it('Pass a TemplateResult containing a synchronous directive', () => {
@@ -128,7 +128,7 @@ describe('subscribe directive', () => {
 				document.body
 			)
 			const el = document.body.querySelector('ullr-sbsc > p')!
-			assert.that(removeExtraString(el.innerHTML)).is.equalTo('number: 2')
+			expect(removeExtraString(el.innerHTML)).to.be.equal('number: 2')
 		})
 
 		it('Pass a TemplateResult containing an asynchronous directive', async () => {
@@ -146,9 +146,9 @@ describe('subscribe directive', () => {
 			)
 			const el = (): Element => document.body.querySelector('ullr-sbsc > p')!
 
-			assert.that(removeExtraString(el().innerHTML)).is.equalTo('')
+			expect(removeExtraString(el().innerHTML)).to.be.equal('')
 			await sleep(100)
-			assert.that(removeExtraString(el().innerHTML)).is.equalTo('Done 3')
+			expect(removeExtraString(el().innerHTML)).to.be.equal('Done 3')
 		})
 
 		it('Pass a TemplateResult containing the subscribe directive', () => {
@@ -166,11 +166,11 @@ describe('subscribe directive', () => {
 			)
 			const el = (): Element =>
 				document.body.querySelector('ullr-sbsc > p > ullr-sbsc')!
-			assert.that(removeExtraString(el().innerHTML)).is.equalTo('4')
+			expect(removeExtraString(el().innerHTML)).to.be.equal('4')
 			subject.next(1)
-			assert.that(removeExtraString(el().innerHTML)).is.equalTo('5')
+			expect(removeExtraString(el().innerHTML)).to.be.equal('5')
 			subject.next(2)
-			assert.that(removeExtraString(el().innerHTML)).is.equalTo('6')
+			expect(removeExtraString(el().innerHTML)).to.be.equal('6')
 		})
 
 		it('Pass a TemplateResult containing the component directive', () => {
@@ -187,7 +187,7 @@ describe('subscribe directive', () => {
 						.querySelector('ullr-sbsc')!
 						.querySelector('ullr-shdw')!
 						.shadowRoot!.querySelector('p') as HTMLElement)
-			assert.that(removeExtraString(el.innerHTML)).is.equalTo('5')
+			expect(removeExtraString(el.innerHTML)).to.be.equal('5')
 		})
 	})
 })
