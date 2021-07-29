@@ -1,4 +1,4 @@
-import { assert } from 'assertthat'
+import { expect } from '@esm-bundle/chai'
 import { customElements } from './index'
 import { html, render, TemplateResult } from 'lit-html'
 import { isNodeEnv } from './lib/is-node-env'
@@ -17,8 +17,8 @@ if (!isNodeEnv()) {
 				const template = html` <h1>The title</h1> `
 				render(template, document.body)
 				const h1 = document.body.querySelector('h1')
-				assert.that(h1).is.not.null()
-				assert.that(h1!.innerText).is.equalTo('The title')
+				expect(h1).to.not.equal(null)
+				expect(h1!.innerText).to.be.equal('The title')
 			})
 		})
 	})
@@ -30,10 +30,10 @@ if (!isNodeEnv()) {
 			window.customElements.define('x-app', xApp)
 			render(html` <x-app></x-app> `, document.body)
 			const app = document.body.querySelector('x-app')
-			assert.that(app).is.not.null()
-			assert
-				.that(removeExtraString(app!.shadowRoot!.innerHTML))
-				.is.equalTo('<main>App</main>')
+			expect(app).to.not.equal(null)
+			expect(removeExtraString(app!.shadowRoot!.innerHTML)).to.be.equal(
+				'<main>App</main>'
+			)
 		})
 		describe('When the second argument is provided as an array', () => {
 			it('Re-render when changing attribute values', () => {
@@ -50,12 +50,12 @@ if (!isNodeEnv()) {
 				const app = document.body.querySelector('x-app-2')!
 				app.setAttribute('message', 'Test message')
 				app.setAttribute('description', 'Test description')
-				assert
-					.that((select('x-app-2', 'p') as HTMLParagraphElement).innerText)
-					.is.equalTo('Test message')
-				assert
-					.that((select('x-app-2', 'p + p') as HTMLParagraphElement).innerText)
-					.is.equalTo('Test description')
+				expect(
+					(select('x-app-2', 'p') as HTMLParagraphElement).innerText
+				).to.be.equal('Test message')
+				expect(
+					(select('x-app-2', 'p + p') as HTMLParagraphElement).innerText
+				).to.be.equal('Test description')
 			})
 		})
 	})
