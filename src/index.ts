@@ -1,8 +1,9 @@
-import { TemplateResult, DirectiveFn } from 'lit-html'
+import { TemplateResult } from 'lit'
+import { DirectiveResult } from 'lit/directive'
 import { render, UllrElement } from './lib/element'
 
 type Props = Array<string | null>
-export type Templatable = TemplateResult | DirectiveFn
+export type Templatable = TemplateResult | DirectiveResult
 
 export const customElements = (
 	template: (props: Props) => TemplateResult,

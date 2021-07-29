@@ -1,15 +1,14 @@
 // Tslint:disable:no-unnecessary-type-annotation
-import { directive, html, Part } from 'lit-html'
+import { html } from 'lit'
+import { Directive, PartInfo, directive } from 'lit/directive'
 import equals from 'ramda/es/equals'
 import { random, render, UllrElement } from '../lib/element'
-import { DirectiveFunction } from '.'
 import { define } from '../lib/define'
 import { isNodeEnv } from '../lib/is-node-env'
 import { Templatable } from '..'
 import { toTemplate } from '../lib/to-template'
 
 const templates: Map<string, Templatable> = new Map<string, Templatable>()
-const parts: WeakMap<Part, Templatable> = new WeakMap()
 
 define(class extends UllrElement {
 	token: string
@@ -61,25 +60,28 @@ define(class extends UllrElement {
 	}
 })
 
-const f = (
-	(innerTemplate: (token: string, inner: Templatable) => Templatable) =>
-	(template: Templatable): DirectiveFunction =>
-	(part: Part): void => {
-		const prev = parts.get(part)
-		if (prev !== undefined && equals(prev, template)) {
+const innerTemplate = isNodeEnv()
+	? (token: string, inner: Templatable) =>
+			html` <ullr-shdw t="${token}">${inner}</ullr-shdw> `
+	: (token: string) => html` <ullr-shdw t="${token}"></ullr-shdw> `
+
+class Component extends Directive {
+	prev: Templatable | undefined
+
+	constructor(partInfo: PartInfo) {
+		super(partInfo)
+	}
+
+	render(inner: Templatable) {
+		if (this.prev !== undefined && equals(this.prev, inner)) {
 			return
 		}
 
-		parts.set(part, template)
-		const token = random()
-		templates.set(token, template)
-		part.setValue(innerTemplate(token, template))
-		part.commit()
+		this.prev = inner
+		const t = random()
+		templates.set(t, inner)
+		return innerTemplate(t, inner)
 	}
-)(
-	isNodeEnv()
-		? (token, inner) => html` <ullr-shdw t="${token}">${inner}</ullr-shdw> `
-		: (token) => html` <ullr-shdw t="${token}"></ullr-shdw> `
-)
+}
 
-export const component = directive(f)
+export const component = directive(Component)
