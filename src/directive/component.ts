@@ -61,20 +61,22 @@ define(class extends UllrElement {
 	}
 })
 
-const f = ((
-	innerTemplate: (token: string, inner: Templatable) => Templatable
-) => (template: Templatable): DirectiveFunction => (part: Part): void => {
-	const prev = parts.get(part)
-	if (prev !== undefined && equals(prev, template)) {
-		return
-	}
+const f = (
+	(innerTemplate: (token: string, inner: Templatable) => Templatable) =>
+	(template: Templatable): DirectiveFunction =>
+	(part: Part): void => {
+		const prev = parts.get(part)
+		if (prev !== undefined && equals(prev, template)) {
+			return
+		}
 
-	parts.set(part, template)
-	const token = random()
-	templates.set(token, template)
-	part.setValue(innerTemplate(token, template))
-	part.commit()
-})(
+		parts.set(part, template)
+		const token = random()
+		templates.set(token, template)
+		part.setValue(innerTemplate(token, template))
+		part.commit()
+	}
+)(
 	isNodeEnv()
 		? (token, inner) => html` <ullr-shdw t="${token}">${inner}</ullr-shdw> `
 		: (token) => html` <ullr-shdw t="${token}"></ullr-shdw> `

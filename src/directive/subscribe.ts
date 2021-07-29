@@ -39,24 +39,28 @@ define(class<T> extends UllrElement {
 	}
 })
 
-const f = ((
-	content: <T>(
+const f = (
+	(
+		content: <T>(
+			observable: Observable<T>,
+			template: TemplateCallback<T>,
+			part: Part,
+			defaultContent?: Templatable
+		) => void
+	): (<T>(
 		observable: Observable<T>,
 		template: TemplateCallback<T>,
-		part: Part,
 		defaultContent?: Templatable
-	) => void
-): (<T>(
-	observable: Observable<T>,
-	template: TemplateCallback<T>,
-	defaultContent?: Templatable
-) => DirectiveFunction) => <T>(
-	observable: Observable<T>,
-	template: TemplateCallback<T>,
-	defaultContent?: Templatable
-) => (part: Part): void => {
-	content(observable, template, part, defaultContent)
-})(
+	) => DirectiveFunction) =>
+	<T>(
+		observable: Observable<T>,
+		template: TemplateCallback<T>,
+		defaultContent?: Templatable
+	) =>
+	(part: Part): void => {
+		content(observable, template, part, defaultContent)
+	}
+)(
 	isNodeEnv()
 		? <T>(
 				observable: Observable<T>,
