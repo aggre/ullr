@@ -56,7 +56,7 @@
 		"browser-env": "3.3.0",
 		"eslint": "7.32.0",
 		"eslint-config-prettier": "8.3.0",
-		"eslint-config-xo": "0.37.0",
+		"eslint-config-xo": "0.38.0",
 		"eslint-config-xo-typescript": "0.43.0",
 		"lit-html": "1.4.1",
 		"mocha": "9.0.3",
