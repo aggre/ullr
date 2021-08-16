@@ -1,12 +1,11 @@
 // Tslint:disable:no-unnecessary-type-annotation
 import { html } from 'lit'
-import { Directive, PartInfo, directive } from 'lit/directive'
+import { Directive, PartInfo, directive } from 'lit/directive.js'
 import equals from 'ramda/es/equals'
 import { random, render, UllrElement } from '../lib/element'
 import { define } from '../lib/define'
 import { isNodeEnv } from '../lib/is-node-env'
 import { Templatable } from '..'
-import { toTemplate } from '../lib/to-template'
 
 const templates: Map<string, Templatable> = new Map<string, Templatable>()
 
@@ -56,7 +55,7 @@ define(class extends UllrElement {
 			return
 		}
 
-		render(toTemplate(this.template), this)
+		render(html`${this.template}`, this)
 	}
 })
 
@@ -68,6 +67,7 @@ const innerTemplate = isNodeEnv()
 class Component extends Directive {
 	prev: Templatable | undefined
 
+	// eslint-disable-next-line @typescript-eslint/no-useless-constructor
 	constructor(partInfo: PartInfo) {
 		super(partInfo)
 	}

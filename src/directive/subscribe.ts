@@ -1,14 +1,14 @@
 import { Observable, Subscription } from 'rxjs'
 import { noChange } from 'lit'
-import { DirectiveResult } from 'lit/directive'
-import { AsyncDirective, directive } from 'lit/async-directive'
+import { DirectiveResult } from 'lit/directive.js'
+import { AsyncDirective, directive } from 'lit/async-directive.js'
 import { Templatable } from '..'
 
 type TemplateCallback<T> = (x: T) => Templatable
 
 class Subscribe<T> extends AsyncDirective {
 	observable: Observable<T> | undefined
-	unsubscribe: Subscription | undefined
+	subscription: Subscription | undefined
 	template: TemplateCallback<T>
 
 	render(
@@ -18,24 +18,26 @@ class Subscribe<T> extends AsyncDirective {
 	) {
 		this.template = template
 		if (this.observable !== observable) {
-			this.unsubscribe?.()
+			this.subscription?.unsubscribe()
 			this.observable = observable
 			this.subscribe(observable)
 		}
+
 		if (defaultContent) {
 			return defaultContent
 		}
+
 		return noChange
 	}
 
 	subscribe(observable: Observable<T>) {
-		this.unsubscribe = observable.subscribe((x) => {
+		this.subscription = observable.subscribe((x) => {
 			this.setValue(this.template(x))
 		})
 	}
 
 	disconnected() {
-		this.unsubscribe!()
+		this.subscription?.unsubscribe()
 	}
 
 	reconnected() {
