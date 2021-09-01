@@ -51,7 +51,7 @@
 		"@types/ramda": "0.27.44",
 		"@typescript-eslint/eslint-plugin": "4.30.0",
 		"@typescript-eslint/parser": "4.30.0",
-		"@web/test-runner": "0.13.16",
+		"@web/test-runner": "0.13.17",
 		"@web/test-runner-puppeteer": "0.10.1",
 		"browser-env": "3.3.0",
 		"eslint": "7.32.0",
