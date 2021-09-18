@@ -5,7 +5,7 @@ import { html, render } from 'lit-html'
 import { sleep, removeExtraString } from '../lib/test'
 import { subscribe } from '.'
 import { isNodeEnv } from '../lib/is-node-env'
-import { component } from './component'
+import { shadow } from './shadow'
 const { document } = window
 
 const count = new BehaviorSubject(0)
@@ -125,7 +125,7 @@ describe('subscribe directive', () => {
 			count.next(5)
 			render(
 				html`
-					${subscribe(count, (x) => html` ${component(html` <p>${x}</p> `)} `)}
+					${subscribe(count, (x) => html` ${shadow(html` <p>${x}</p> `)} `)}
 				`,
 				document.body
 			)

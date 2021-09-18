@@ -1,6 +1,6 @@
 import { expect } from '@esm-bundle/chai'
 import { html, render, TemplateResult } from 'lit-html'
-import { component } from '.'
+import { shadow } from '.'
 import { isNodeEnv } from '../lib/is-node-env'
 import { removeExtraString } from '../lib/test'
 import { BehaviorSubject } from 'rxjs'
@@ -14,14 +14,14 @@ const contentInShadow = (selector: string): Element =>
 				.querySelector('ullr-shdw')!
 				.shadowRoot!.querySelector(selector)!
 
-describe('component directive', () => {
+describe('shadow directive', () => {
 	afterEach(() => {
 		render(html``, document.body)
 	})
 
 	it('Render to the ShadowRoot in "ullr-shdw" element', () => {
 		const app = (content: string): TemplateResult =>
-			html` ${component(html` <main>${content}</main> `)} `
+			html` ${shadow(html` <main>${content}</main> `)} `
 		render(app('App'), document.body)
 		const main = contentInShadow('main')
 		expect(main).to.not.equal(null)
@@ -31,34 +31,34 @@ describe('component directive', () => {
 	it('Re-render if the template different from last time', () => {
 		const app = (main: string, content: string): TemplateResult =>
 			html`
-				${component(html` <main>${main}</main> `)}
+				${shadow(html` <main>${main}</main> `)}
 				<p>${content}</p>
 			`
 		render(app('Prev', 'App'), document.body)
-		const shadow = document.body.querySelector('ullr-shdw')
-		const prev = shadow!.getAttribute('t')
+		const el = document.body.querySelector('ullr-shdw')
+		const prev = el!.getAttribute('t')
 		render(app('Next', 'App Next'), document.body)
-		const next = shadow!.getAttribute('t')
+		const next = el!.getAttribute('t')
 		expect(next).to.not.be.equal(prev)
 	})
 
 	it('Not re-render if the same template', () => {
 		const app = (main: string, content: string): TemplateResult =>
 			html`
-				${component(html` <main>${main}</main> `)}
+				${shadow(html` <main>${main}</main> `)}
 				<p>${content}</p>
 			`
 		render(app('Immutable', 'App'), document.body)
-		const shadow = document.body.querySelector('ullr-shdw')
-		const prev = shadow!.getAttribute('t')
+		const el = document.body.querySelector('ullr-shdw')
+		const prev = el!.getAttribute('t')
 		render(app('Immutable', 'App Next'), document.body)
-		const next = shadow!.getAttribute('t')
+		const next = el!.getAttribute('t')
 		expect(next).to.be.equal(prev)
 	})
 
 	describe('Passing content', () => {
 		it('Pass a TemplateResult', () => {
-			render(html` ${component(html` <p>Test</p> `)} `, document.body)
+			render(html` ${shadow(html` <p>Test</p> `)} `, document.body)
 			expect(removeExtraString(contentInShadow('p').innerHTML)).to.be.equal(
 				'Test'
 			)
@@ -66,7 +66,7 @@ describe('component directive', () => {
 
 		it('Pass a TemplateResult containing the component directive', () => {
 			render(
-				html` ${component(html` ${component(html` <p>Test</p> `)} `)} `,
+				html` ${shadow(html` ${shadow(html` <p>Test</p> `)} `)} `,
 				document.body
 			)
 			const el = isNodeEnv()
@@ -83,9 +83,7 @@ describe('component directive', () => {
 
 			render(
 				html`
-					${component(
-						html` ${subscribe(subject, (x) => html` <p>${x}</p> `)} `
-					)}
+					${shadow(html` ${subscribe(subject, (x) => html` <p>${x}</p> `)} `)}
 				`,
 				document.body
 			)

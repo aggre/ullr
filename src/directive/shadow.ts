@@ -64,7 +64,7 @@ const innerTemplate = isNodeEnv()
 			html` <ullr-shdw t="${token}">${inner}</ullr-shdw> `
 	: (token: string) => html` <ullr-shdw t="${token}"></ullr-shdw> `
 
-class Component extends Directive {
+class Shadow extends Directive {
 	prev: Templatable | undefined
 
 	// eslint-disable-next-line @typescript-eslint/no-useless-constructor
@@ -84,4 +84,4 @@ class Component extends Directive {
 	}
 }
 
-export const component = directive(Component)
+export const shadow = directive(Shadow)

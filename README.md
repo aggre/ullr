@@ -41,18 +41,18 @@ Partially supports run on Node.js (with jsdom).
 
 # APIs
 
-## `component`
+## `shadow`
 
-`component` is a lit-html directive.
+`shadow` is a lit-html directive.
 
 Encapsulate the template with Shadow DOM.
 
 ```ts
 import { html } from 'lit-html'
-import { component } from '@aggre/ullr'
+import { shadow } from '@aggre/ullr'
 
 export const main = (title: string, desc: string) =>
-	component(html`
+	shadow(html`
 		<style>
 			h1 {
 				color: blue;
