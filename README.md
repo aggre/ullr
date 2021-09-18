@@ -25,16 +25,16 @@ Functional Web Components
 
 # Installation
 
-Add to lit-html project:
+Add to lit project:
 
 ```bash
 npm i @aggre/ullr
 ```
 
-When creating a new project using lit-html as template and RxJS as the state management:
+When creating a new project using lit as template and RxJS as the state management:
 
 ```bash
-npm i @aggre/ullr lit-html rxjs
+npm i @aggre/ullr lit rxjs
 ```
 
 Partially supports run on Node.js (with jsdom).
@@ -43,12 +43,12 @@ Partially supports run on Node.js (with jsdom).
 
 ## `shadow`
 
-`shadow` is a lit-html directive.
+`shadow` is a lit directive.
 
 Encapsulate the template with Shadow DOM.
 
 ```ts
-import { html } from 'lit-html'
+import { html } from 'lit'
 import { shadow } from '@aggre/ullr'
 
 export const main = (title: string, desc: string) =>
@@ -75,14 +75,14 @@ export const main = (title: string, desc: string) =>
 
 ## `subscribe`
 
-`subscribe` is a lit-html directive.
+`subscribe` is a lit directive.
 
 Subscribe to `Observable<T>` of RxJS and re-rendering with a callback function.
 
 When the directive part is removed, it will automatically `unsubscribe`.
 
 ```ts
-import { html } from 'lit-html'
+import { html } from 'lit'
 import { subscribe } from '@aggre/ullr'
 import { timer as _timer } from 'rxjs'
 
