@@ -672,10 +672,10 @@
     picomatch "^2.2.2"
     v8-to-istanbul "^8.0.0"
 
-"@web/test-runner-mocha@^0.7.4":
-  version "0.7.4"
-  resolved "https://registry.yarnpkg.com/@web/test-runner-mocha/-/test-runner-mocha-0.7.4.tgz#a386db80b166cf264ebe16a44fc97cb2696d645c"
-  integrity sha512-EvAz6eCyBpVyXUq/bTSYpSwcSd/jH8XY+vAwS/xprWNo2WFY0LW0FcwcuWdq4LckDxTZVXaGb1dj3lDfEsOeVw==
+"@web/test-runner-mocha@^0.7.5":
+  version "0.7.5"
+  resolved "https://registry.yarnpkg.com/@web/test-runner-mocha/-/test-runner-mocha-0.7.5.tgz#696f8cb7f5118a72bd7ac5778367ae3bd3fb92cd"
+  integrity sha512-12/OBq6efPCAvJpcz3XJs2OO5nHe7GtBibZ8Il1a0QtsGpRmuJ4/m1EF0Fj9f6KHg7JdpGo18A37oE+5hXjHwg==
   dependencies:
     "@types/mocha" "^8.2.0"
     "@web/test-runner-core" "^0.10.20"
@@ -689,10 +689,10 @@
     "@web/test-runner-core" "^0.10.20"
     puppeteer "^10.2.0"
 
-"@web/test-runner@0.13.18":
-  version "0.13.18"
-  resolved "https://registry.yarnpkg.com/@web/test-runner/-/test-runner-0.13.18.tgz#126d61e44e670e4f7b71addc8bfa86dd857f5aad"
-  integrity sha512-VeKs5RG3PbGc466Ylr0kk1S8vtXQ71Ll7g+t3bkScqlAAUo17qRpetQQjhUWQdU4uAQfteL92GLyfCc06VeYpA==
+"@web/test-runner@0.13.19":
+  version "0.13.19"
+  resolved "https://registry.yarnpkg.com/@web/test-runner/-/test-runner-0.13.19.tgz#11eb4bb4b6e6b851eda79fea77127603e8eee28d"
+  integrity sha512-6msEG8GJuGL5Wck+ZQyfp8u1QOI5xgBQdCYGKS0gDGWL9QWOHB331R8KMbmX1b5H59ZqdvwT1ztk78jThS1biQ==
   dependencies:
     "@web/browser-logs" "^0.2.2"
     "@web/config-loader" "^0.1.3"
@@ -700,7 +700,7 @@
     "@web/test-runner-chrome" "^0.10.3"
     "@web/test-runner-commands" "^0.5.10"
     "@web/test-runner-core" "^0.10.21"
-    "@web/test-runner-mocha" "^0.7.4"
+    "@web/test-runner-mocha" "^0.7.5"
     camelcase "^6.2.0"
     command-line-args "^5.1.1"
     command-line-usage "^6.1.1"
