@@ -579,16 +579,6 @@
     "@types/parse5" "^5.0.3"
     parse5 "^6.0.1"
 
-"@web/test-runner-chrome@^0.10.3":
-  version "0.10.3"
-  resolved "https://registry.yarnpkg.com/@web/test-runner-chrome/-/test-runner-chrome-0.10.3.tgz#469b2f6a6de50cdbddfdc7300e6879fad2448805"
-  integrity sha512-tE0dH1K2iWJMFsJql1sXntRpNXIEaJVN2VVB/HW6nLMtIoqyI/TQgEPZuDGiW2+UlNrXEI9nuL3fOyxW/lZ38g==
-  dependencies:
-    "@web/test-runner-core" "^0.10.20"
-    "@web/test-runner-coverage-v8" "^0.4.8"
-    chrome-launcher "^0.14.0"
-    puppeteer-core "^10.2.0"
-
 "@web/test-runner-chrome@^0.10.4":
   version "0.10.4"
   resolved "https://registry.yarnpkg.com/@web/test-runner-chrome/-/test-runner-chrome-0.10.4.tgz#17452dbb889ee6bdf991b605f9e88c8367a2e327"
@@ -690,14 +680,14 @@
     "@types/mocha" "^8.2.0"
     "@web/test-runner-core" "^0.10.20"
 
-"@web/test-runner-puppeteer@0.10.2":
-  version "0.10.2"
-  resolved "https://registry.yarnpkg.com/@web/test-runner-puppeteer/-/test-runner-puppeteer-0.10.2.tgz#291e1557867a492feef99e632fe51ad6f35ebf53"
-  integrity sha512-wPaOY9zoWyegR/IuVsxIvkzDE+CQDbZwpJbPLHhpFcN7oWC/pOYEiA2qars6vXMQx7GoSPXyReiVVAz1MevFPQ==
+"@web/test-runner-puppeteer@0.10.3":
+  version "0.10.3"
+  resolved "https://registry.yarnpkg.com/@web/test-runner-puppeteer/-/test-runner-puppeteer-0.10.3.tgz#3e9e5e2fa01a30c824fb2cab58e512bef6c2fd75"
+  integrity sha512-fLf6nZLpxEC45XRsukgFXkAIAywAQowV6RlhvsH/vKum7ZeuS5MkTgJK6myVoE/pnpn9Yzh8goFKjtFy3ibLvQ==
   dependencies:
-    "@web/test-runner-chrome" "^0.10.3"
+    "@web/test-runner-chrome" "^0.10.4"
     "@web/test-runner-core" "^0.10.20"
-    puppeteer "^10.2.0"
+    puppeteer "^11.0.0"
 
 "@web/test-runner@0.13.21":
   version "0.13.21"
@@ -1239,7 +1229,7 @@ debounce@^1.2.0:
   resolved "https://registry.yarnpkg.com/debounce/-/debounce-1.2.1.tgz#38881d8f4166a5c5848020c11827b834bcb3e0a5"
   integrity sha512-XRRe6Glud4rd/ZGQfiV1ruXSfbvfJedlV9Y6zOlP+2K04vBYiJEte6stfFkCP03aMnY5tsipamumUjL14fofug==
 
-debug@4, debug@4.3.1, debug@^4.1.1:
+debug@4, debug@^4.1.1:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.1.tgz#f0d229c505e0c6d8c49ac553d1b13dc183f6b2ee"
   integrity sha512-doEwdvm4PCeK4K3RQN2ZC2BYUBaxwLARCqZmMjtF8a51J2Rb0xpVloFRnCODwqjpwnAoao4pelN8l3RJdv3gRQ==
@@ -2540,7 +2530,7 @@ mkdirp-classic@^0.5.2:
   resolved "https://registry.yarnpkg.com/mkdirp-classic/-/mkdirp-classic-0.5.3.tgz#fa10c9115cc6d8865be221ba47ee9bed78601113"
   integrity sha512-gKLcREMhtuZRwRAfqP3RFW+TK4JqApVBtOIftVgjuABpAtpxhPGaDcfvbhNvD0B8iD1oUr/txX35NjcaY6Ns/A==
 
-mkdirp@^0.5.1, mkdirp@^0.5.5:
+mkdirp@^0.5.5:
   version "0.5.5"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.5.5.tgz#d91cefd62d1436ca0f41620e251288d420099def"
   integrity sha512-NKmAlESf6jMGym1++R0Ra7wvhV+wFW63FaSOFPwRahvea0gMUcGUhVeAg/0BC0wiv9ih5NYPB1Wn1UEI1/L+xQ==
@@ -2616,11 +2606,6 @@ negotiator@0.6.2:
   version "0.6.2"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.2.tgz#feacf7ccf525a77ae9634436a64883ffeca346fb"
   integrity sha512-hZXc7K2e+PgeI1eDBe/10Ard4ekbfrrqG8Ep+8Jmf4JID2bNg7NvCPOZN+kfF574pFQI7mum2AUqDidoKqcTOw==
-
-node-fetch@2.6.1:
-  version "2.6.1"
-  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
-  integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
 
 node-fetch@2.6.5:
   version "2.6.5"
@@ -2839,11 +2824,6 @@ prettier@2.4.1:
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.4.1.tgz#671e11c89c14a4cfc876ce564106c4a6726c9f5c"
   integrity sha512-9fbDAXSBcc6Bs1mZrDYb3XKzDLm4EXXL9sC1LqKP5rZkT6KRr/rf9amVUcODVXgguK/isJz0d0hP72WeaKWsvA==
 
-progress@2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/progress/-/progress-2.0.1.tgz#c9242169342b1c29d275889c95734621b1952e31"
-  integrity sha512-OE+a6vzqazc+K6LxJrX5UPyKFvGnL5CYmq2jFGNIBWHpc4QyE49/YOumcrpQFJpfejmvRtbJzgO1zPmMCqlbBg==
-
 progress@2.0.3, progress@^2.0.0:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/progress/-/progress-2.0.3.tgz#7e8cf8d8f5b8f239c1bc68beb4eb78567d572ef8"
@@ -2872,24 +2852,6 @@ punycode@^2.1.0, punycode@^2.1.1:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
-puppeteer-core@^10.2.0:
-  version "10.2.0"
-  resolved "https://registry.yarnpkg.com/puppeteer-core/-/puppeteer-core-10.2.0.tgz#8d6606cf345fc0e421bc0612055579ea53234111"
-  integrity sha512-c1COxSnfynsE6Mtt+dW0t3TITjF9Ku4dnJbFMDDVhLQuMTYSpz4rkSP37qvzcSo3k02/Ac3GYWk0/ncp6DKZNA==
-  dependencies:
-    debug "4.3.1"
-    devtools-protocol "0.0.901419"
-    extract-zip "2.0.1"
-    https-proxy-agent "5.0.0"
-    node-fetch "2.6.1"
-    pkg-dir "4.2.0"
-    progress "2.0.1"
-    proxy-from-env "1.1.0"
-    rimraf "3.0.2"
-    tar-fs "2.0.0"
-    unbzip2-stream "1.3.3"
-    ws "7.4.6"
-
 puppeteer-core@^11.0.0:
   version "11.0.0"
   resolved "https://registry.yarnpkg.com/puppeteer-core/-/puppeteer-core-11.0.0.tgz#d7aa19634948671fa35d14027fa45be807c340cb"
@@ -2908,23 +2870,23 @@ puppeteer-core@^11.0.0:
     unbzip2-stream "1.4.3"
     ws "8.2.3"
 
-puppeteer@^10.2.0:
-  version "10.2.0"
-  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-10.2.0.tgz#7d8d7fda91e19a7cfd56986e0275448e6351849e"
-  integrity sha512-OR2CCHRashF+f30+LBOtAjK6sNtz2HEyTr5FqAvhf8lR/qB3uBRoIZOwQKgwoyZnMBsxX7ZdazlyBgGjpnkiMw==
+puppeteer@^11.0.0:
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-11.0.0.tgz#0808719c38e15315ecc1b1c28911f1c9054d201f"
+  integrity sha512-6rPFqN1ABjn4shgOICGDBITTRV09EjXVqhDERBDKwCLz0UyBxeeBH6Ay0vQUJ84VACmlxwzOIzVEJXThcF3aNg==
   dependencies:
-    debug "4.3.1"
+    debug "4.3.2"
     devtools-protocol "0.0.901419"
     extract-zip "2.0.1"
     https-proxy-agent "5.0.0"
-    node-fetch "2.6.1"
+    node-fetch "2.6.5"
     pkg-dir "4.2.0"
-    progress "2.0.1"
+    progress "2.0.3"
     proxy-from-env "1.1.0"
     rimraf "3.0.2"
-    tar-fs "2.0.0"
-    unbzip2-stream "1.3.3"
-    ws "7.4.6"
+    tar-fs "2.1.1"
+    unbzip2-stream "1.4.3"
+    ws "8.2.3"
 
 qs@^6.5.2:
   version "6.10.1"
@@ -3321,16 +3283,6 @@ table-layout@^1.0.1:
     typical "^5.2.0"
     wordwrapjs "^4.0.0"
 
-tar-fs@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/tar-fs/-/tar-fs-2.0.0.tgz#677700fc0c8b337a78bee3623fdc235f21d7afad"
-  integrity sha512-vaY0obB6Om/fso8a8vakQBzwholQ7v5+uy+tF3Ozvxv1KNezmVQAiWtcNmMHFSFPqL3dJA8ha6gdtFbfX9mcxA==
-  dependencies:
-    chownr "^1.1.1"
-    mkdirp "^0.5.1"
-    pump "^3.0.0"
-    tar-stream "^2.0.0"
-
 tar-fs@2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/tar-fs/-/tar-fs-2.1.1.tgz#489a15ab85f1f0befabb370b7de4f9eb5cbe8784"
@@ -3341,7 +3293,7 @@ tar-fs@2.1.1:
     pump "^3.0.0"
     tar-stream "^2.1.4"
 
-tar-stream@^2.0.0, tar-stream@^2.1.4:
+tar-stream@^2.1.4:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/tar-stream/-/tar-stream-2.2.0.tgz#acad84c284136b060dc3faa64474aa9aebd77287"
   integrity sha512-ujeqbceABgwMZxEJnk2HDY2DlnUZ+9oEcb1KzTVfYHio0UE6dG71n60d8D2I4qNvleWrrXpmjpt7vZeF1LnMZQ==
@@ -3511,14 +3463,6 @@ typical@^5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/typical/-/typical-5.2.0.tgz#4daaac4f2b5315460804f0acf6cb69c52bb93066"
   integrity sha512-dvdQgNDNJo+8B2uBQoqdb11eUCE1JQXhvjC/CZtgvZseVd5TYMXnq0+vuUemXbd/Se29cTaUuPX3YIc2xgbvIg==
-
-unbzip2-stream@1.3.3:
-  version "1.3.3"
-  resolved "https://registry.yarnpkg.com/unbzip2-stream/-/unbzip2-stream-1.3.3.tgz#d156d205e670d8d8c393e1c02ebd506422873f6a"
-  integrity sha512-fUlAF7U9Ah1Q6EieQ4x4zLNejrRvDWUYmxXUpN3uziFYCHapjWFaCAnreY9bGgxzaMCFAPPpYNng57CypwJVhg==
-  dependencies:
-    buffer "^5.2.1"
-    through "^2.3.8"
 
 unbzip2-stream@1.4.3:
   version "1.4.3"
@@ -3746,11 +3690,6 @@ wrappy@1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
   integrity sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=
-
-ws@7.4.6:
-  version "7.4.6"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-7.4.6.tgz#5654ca8ecdeee47c33a9a4bf6d28e2be2980377c"
-  integrity sha512-YmhHDO4MzaDLB+M9ym/mDA5z0naX8j7SIlT8f8z+I0VtzsRbekxEutHSme7NPS2qE8StCYQNUnfWdXta/Yu85A==
 
 ws@8.2.3:
   version "8.2.3"

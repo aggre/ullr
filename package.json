@@ -52,7 +52,7 @@
 		"@typescript-eslint/eslint-plugin": "5.3.0",
 		"@typescript-eslint/parser": "5.3.0",
 		"@web/test-runner": "0.13.21",
-		"@web/test-runner-puppeteer": "0.10.2",
+		"@web/test-runner-puppeteer": "0.10.3",
 		"browser-env": "3.3.0",
 		"eslint": "8.1.0",
 		"eslint-config-prettier": "8.3.0",
