@@ -579,16 +579,6 @@
     "@types/parse5" "^5.0.3"
     parse5 "^6.0.1"
 
-"@web/test-runner-chrome@^0.10.4":
-  version "0.10.4"
-  resolved "https://registry.yarnpkg.com/@web/test-runner-chrome/-/test-runner-chrome-0.10.4.tgz#17452dbb889ee6bdf991b605f9e88c8367a2e327"
-  integrity sha512-MqdmhOh/v7KakDYUnXIpypC5/mxAP/0jw475n8k6eqdMxJ4KIVirwIv582iEV4LU64RQAl8NXxSZkzAapzKC7Q==
-  dependencies:
-    "@web/test-runner-core" "^0.10.20"
-    "@web/test-runner-coverage-v8" "^0.4.8"
-    chrome-launcher "^0.14.0"
-    puppeteer-core "^11.0.0"
-
 "@web/test-runner-chrome@^0.10.5":
   version "0.10.5"
   resolved "https://registry.yarnpkg.com/@web/test-runner-chrome/-/test-runner-chrome-0.10.5.tgz#66b4390a78149bfc5b696cba6b26deac665a1703"
@@ -690,12 +680,12 @@
     "@types/mocha" "^8.2.0"
     "@web/test-runner-core" "^0.10.20"
 
-"@web/test-runner-puppeteer@0.10.3":
-  version "0.10.3"
-  resolved "https://registry.yarnpkg.com/@web/test-runner-puppeteer/-/test-runner-puppeteer-0.10.3.tgz#3e9e5e2fa01a30c824fb2cab58e512bef6c2fd75"
-  integrity sha512-fLf6nZLpxEC45XRsukgFXkAIAywAQowV6RlhvsH/vKum7ZeuS5MkTgJK6myVoE/pnpn9Yzh8goFKjtFy3ibLvQ==
+"@web/test-runner-puppeteer@0.10.4":
+  version "0.10.4"
+  resolved "https://registry.yarnpkg.com/@web/test-runner-puppeteer/-/test-runner-puppeteer-0.10.4.tgz#6ea8345ea4e6be6bf8ddf4854ec69fb462502b46"
+  integrity sha512-FyyqEQczRZ7sb4Zh2P4lW5gWKMpWm088NgovSzSXSqF33leKhx+Yd+TUOKcr4OPjQmS+gRCeo7E0IL0mkrRsrQ==
   dependencies:
-    "@web/test-runner-chrome" "^0.10.4"
+    "@web/test-runner-chrome" "^0.10.5"
     "@web/test-runner-core" "^0.10.20"
     puppeteer "^11.0.0"
 
@@ -1045,16 +1035,6 @@ chownr@^1.1.1:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/chownr/-/chownr-1.1.4.tgz#6fc9d7b42d32a583596337666e7d08084da2cc6b"
   integrity sha512-jJ0bqzaylmJtVnNgzTeSOs8DPavpbYgEr/b0YL8/2GO3xJEhInFmhKMUnEJQjZumK7KXGFhUy89PrsJWlakBVg==
-
-chrome-launcher@^0.14.0:
-  version "0.14.0"
-  resolved "https://registry.yarnpkg.com/chrome-launcher/-/chrome-launcher-0.14.0.tgz#de8d8a534ccaeea0f36ea8dc12dd99e3169f3320"
-  integrity sha512-W//HpflaW6qBGrmuskup7g+XJZN6w03ko9QSIe5CtcTal2u0up5SeReK3Ll1Why4Ey8dPkv8XSodZyHPnGbVHQ==
-  dependencies:
-    "@types/node" "*"
-    escape-string-regexp "^4.0.0"
-    is-wsl "^2.2.0"
-    lighthouse-logger "^1.0.0"
 
 chrome-launcher@^0.15.0:
   version "0.15.0"
