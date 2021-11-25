@@ -60,7 +60,7 @@
 		"eslint-config-xo-typescript": "0.47.1",
 		"lit": "2.0.2",
 		"mocha": "9.1.3",
-		"prettier": "2.4.1",
+		"prettier": "2.5.0",
 		"rimraf": "3.0.2",
 		"rollup": "2.60.1",
 		"rollup-plugin-dts": "4.0.1",
