@@ -2406,10 +2406,10 @@ lit-html@^2.1.0:
   dependencies:
     "@types/trusted-types" "^2.0.2"
 
-lit@2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/lit/-/lit-2.1.0.tgz#27b8767efbc400bd31bf62257113951fb878dd01"
-  integrity sha512-C0YoUUzxHA1S8gR7AmgD+k9GZlw3QD2ECgARo/jMx76RfVEAmEubF9t5sON9frMEZ++YvuokR5o8FgIUF7nnag==
+lit@2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/lit/-/lit-2.1.1.tgz#65f43abca945988f696391f762c645ba51966b0b"
+  integrity sha512-yqDqf36IhXwOxIQSFqCMgpfvDCRdxLCLZl7m/+tO5C9W/OBHUj17qZpiMBT35v97QMVKcKEi1KZ3hZRyTwBNsQ==
   dependencies:
     "@lit/reactive-element" "^1.1.0"
     lit-element "^3.1.0"
