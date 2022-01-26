@@ -620,6 +620,16 @@
     chrome-launcher "^0.15.0"
     puppeteer-core "^11.0.0"
 
+"@web/test-runner-chrome@^0.10.6":
+  version "0.10.6"
+  resolved "https://registry.yarnpkg.com/@web/test-runner-chrome/-/test-runner-chrome-0.10.6.tgz#cdb50a5c4b3b259b31e40b5d6956e8f23ae6ece3"
+  integrity sha512-oktBTPy1SLxbmwvC5dD3xnFvMnHwGwJ051SKBR1SPSR5wAXqyYQcsYEpcwk/jNrpZPXm1m+jJxk7SuPZflc+SQ==
+  dependencies:
+    "@web/test-runner-core" "^0.10.20"
+    "@web/test-runner-coverage-v8" "^0.4.8"
+    chrome-launcher "^0.15.0"
+    puppeteer-core "^13.1.2"
+
 "@web/test-runner-commands@^0.6.0":
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/@web/test-runner-commands/-/test-runner-commands-0.6.0.tgz#aa1e2729582d506e5c4bc85c11179359be65d74b"
@@ -720,15 +730,15 @@
     "@web/test-runner-core" "^0.10.20"
     puppeteer "^11.0.0"
 
-"@web/test-runner@0.13.25":
-  version "0.13.25"
-  resolved "https://registry.yarnpkg.com/@web/test-runner/-/test-runner-0.13.25.tgz#ba4bf33886e576a4d8cf51f73ef99048486eff24"
-  integrity sha512-biKE36ygFu7F4cO31WAM0oeDecJygzjiTUPg4MHBaeM8U+wj8uzhYfGr2T4iAKkx1IDCcSRF95nkrqF9C2Wpqw==
+"@web/test-runner@0.13.26":
+  version "0.13.26"
+  resolved "https://registry.yarnpkg.com/@web/test-runner/-/test-runner-0.13.26.tgz#955e0abc709420e20e6c86923063e3e8d7a270df"
+  integrity sha512-hiujl3GekUWbF/q1QJKDVcVWCB5zIbD05E+km2666SsP5+JCsnciDMm670TSaS4g8xoH/8WIJEyZnDVNQy/X6A==
   dependencies:
     "@web/browser-logs" "^0.2.2"
     "@web/config-loader" "^0.1.3"
     "@web/dev-server" "^0.1.24"
-    "@web/test-runner-chrome" "^0.10.5"
+    "@web/test-runner-chrome" "^0.10.6"
     "@web/test-runner-commands" "^0.6.0"
     "@web/test-runner-core" "^0.10.22"
     "@web/test-runner-mocha" "^0.7.5"
@@ -1379,6 +1389,11 @@ devtools-protocol@0.0.901419:
   version "0.0.901419"
   resolved "https://registry.yarnpkg.com/devtools-protocol/-/devtools-protocol-0.0.901419.tgz#79b5459c48fe7e1c5563c02bd72f8fec3e0cebcd"
   integrity sha512-4INMPwNm9XRpBukhNbF7OB6fNTTCaI8pzy/fXg0xQzAy5h3zL1P8xT3QazgKqBrb/hAYwIBizqDBZ7GtJE74QQ==
+
+devtools-protocol@0.0.948846:
+  version "0.0.948846"
+  resolved "https://registry.yarnpkg.com/devtools-protocol/-/devtools-protocol-0.0.948846.tgz#bff47e2d1dba060130fa40ed2e5f78b916ba285f"
+  integrity sha512-5fGyt9xmMqUl2VI7+rnUkKCiAQIpLns8sfQtTENy5L70ktbNw0Z3TFJ1JoFNYdx/jffz4YXU45VF75wKZD7sZQ==
 
 diff@5.0.0, diff@^5.0.0:
   version "5.0.0"
@@ -2676,6 +2691,13 @@ node-fetch@2.6.5:
   dependencies:
     whatwg-url "^5.0.0"
 
+node-fetch@2.6.7:
+  version "2.6.7"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.7.tgz#24de9fba827e3b4ae44dc8b20256a379160052ad"
+  integrity sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==
+  dependencies:
+    whatwg-url "^5.0.0"
+
 normalize-path@^3.0.0, normalize-path@~3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/normalize-path/-/normalize-path-3.0.0.tgz#0dcd69ff23a1c9b11fd0978316644a0388216a65"
@@ -2924,6 +2946,24 @@ puppeteer-core@^11.0.0:
     extract-zip "2.0.1"
     https-proxy-agent "5.0.0"
     node-fetch "2.6.5"
+    pkg-dir "4.2.0"
+    progress "2.0.3"
+    proxy-from-env "1.1.0"
+    rimraf "3.0.2"
+    tar-fs "2.1.1"
+    unbzip2-stream "1.4.3"
+    ws "8.2.3"
+
+puppeteer-core@^13.1.2:
+  version "13.1.2"
+  resolved "https://registry.yarnpkg.com/puppeteer-core/-/puppeteer-core-13.1.2.tgz#ff4b8f4aacc167b428e3c8df38d23b2121995a04"
+  integrity sha512-A60/BJkYKpvoWPN0sq0WbOUYey6Wqpn1vlWCt8Ov7PxGIjyuGX2Wb39LObGjOxh4UN+YxCVE+oYQlkIFSmHJtg==
+  dependencies:
+    debug "4.3.2"
+    devtools-protocol "0.0.948846"
+    extract-zip "2.0.1"
+    https-proxy-agent "5.0.0"
+    node-fetch "2.6.7"
     pkg-dir "4.2.0"
     progress "2.0.3"
     proxy-from-env "1.1.0"
