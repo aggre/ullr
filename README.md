@@ -77,7 +77,7 @@ export const main = (title: string, desc: string) =>
 
 Subscribe to `Observable<T>` of RxJS and re-rendering with the passed callback function.
 
-When the directive part is removed, the observable will automatically `unsubscribe`.
+When the directive part is removed or the passed observable is changed, the unused subscription will automatically `unsubscribe`.
 
 ```ts
 import { html } from 'lit'
