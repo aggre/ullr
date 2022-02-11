@@ -81,6 +81,43 @@ describe('subscribe directive', () => {
 		expect(_count).to.be.equal(1)
 	})
 
+	it('When changed the observable, unsubscribe the old subscription', async () => {
+		const o1 = new BehaviorSubject(0)
+		const o2 = new BehaviorSubject('x')
+		const ob: BehaviorSubject<BehaviorSubject<number | string>> =
+			new BehaviorSubject(o1)
+		let _x = 0
+		render(
+			html`
+				${subscribe(ob, (x) =>
+					subscribe(x, (value) => {
+						if (typeof value === 'number') {
+							_x = value
+						}
+
+						return html` <p>${value}</p> `
+					})
+				)}
+			`,
+			document.body
+		)
+		o1.next(123)
+		const p1 = document.body.querySelector('p')!
+		expect(removeExtraString(p1.innerHTML)).to.be.equal('123')
+		expect(_x).to.be.equal(123)
+
+		// Change the observable
+		ob.next(o2)
+
+		o2.next('y')
+		o1.next(456)
+		const p2 = document.body.querySelector('p')!
+		expect(removeExtraString(p2.innerHTML)).to.be.equal('y')
+
+		// The old subscription is unsubscribed
+		expect(_x).to.be.equal(123)
+	})
+
 	describe('Passing content', () => {
 		it('Pass a TemplateResult', () => {
 			count.next(1)
