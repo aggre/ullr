@@ -57,32 +57,29 @@ describe('subscribe directive', () => {
 		expect(removeExtraString(el().innerHTML)).to.be.equal('1')
 	})
 
-	if (!isNodeEnv()) {
-		// This spec is only supported on a browser.
-		it('When removed the node, unsubscribe the subscription', async () => {
-			const timer = _timer(0, 10).pipe(
-				filter((x) => x > 0),
-				take(1000)
-			)
-			let _count = 0
-			render(
-				html`
-					${subscribe(timer, (x) => {
-						_count += 1
-						return html` <p>${x}</p> `
-					})}
-				`,
-				document.body
-			)
-			await sleep(20)
-			const p = document.body.querySelector('p')!
-			expect(removeExtraString(p.innerHTML)).to.be.equal('1')
-			expect(_count).to.be.equal(1)
-			render(html``, document.body)
-			await sleep(100)
-			expect(_count).to.be.equal(1)
-		})
-	}
+	it('When removed the node, unsubscribe the subscription', async () => {
+		const timer = _timer(0, 10).pipe(
+			filter((x) => x > 0),
+			take(1000)
+		)
+		let _count = 0
+		render(
+			html`
+				${subscribe(timer, (x) => {
+					_count += 1
+					return html` <p>${x}</p> `
+				})}
+			`,
+			document.body
+		)
+		await sleep(20)
+		const p = document.body.querySelector('p')!
+		expect(removeExtraString(p.innerHTML)).to.be.equal('1')
+		expect(_count).to.be.equal(1)
+		render(html``, document.body)
+		await sleep(100)
+		expect(_count).to.be.equal(1)
+	})
 
 	describe('Passing content', () => {
 		it('Pass a TemplateResult', () => {
