@@ -7,11 +7,11 @@ export const sleep = async (time: number): Promise<void> =>
 	)
 
 export const slotSelector = (
-	element: Element | null,
+	element: Element | undefined,
 	slot: string,
 	selector: string
-): Element | null | undefined => {
-	if (element === null) {
+): Element | undefined => {
+	if (element === null || element === undefined) {
 		return
 	}
 
@@ -33,7 +33,7 @@ export const slotSelector = (
 		return
 	}
 
-	return parentElement.querySelector(selector)
+	return parentElement.querySelector(selector) ?? undefined
 }
 
 export const removeExtraString = (c: string): string =>

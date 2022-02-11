@@ -43,8 +43,9 @@ if (!isNodeEnv()) {
 						<p>${description}</p>
 					`
 				const xApp = customElements(template, ['message', 'description'])
-				const select = (p: string, c: string): Element | null =>
-					document.body.querySelector(p)!.shadowRoot!.querySelector(c)
+				const select = (p: string, c: string): Element | undefined =>
+					document.body.querySelector(p)!.shadowRoot!.querySelector(c) ??
+					undefined
 				window.customElements.define('x-app-2', xApp)
 				render(html` <x-app-2></x-app-2> `, document.body)
 				const app = document.body.querySelector('x-app-2')!

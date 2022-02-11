@@ -2,7 +2,7 @@ import { TemplateResult } from 'lit'
 import { DirectiveResult } from 'lit/directive'
 import { render, UllrElement } from './lib/element'
 
-type Props = Array<string | null>
+type Props = Array<string | undefined>
 export type Templatable = TemplateResult | DirectiveResult
 
 export const customElements = (
@@ -22,8 +22,8 @@ export const customElements = (
 
 		attributeChangedCallback(
 			name: string,
-			_: string | null,
-			next: string | null
+			_: string | undefined,
+			next: string | undefined
 		): void {
 			const index = observedAttributes.findIndex((n) => n === name)
 			this.props[index] = next
