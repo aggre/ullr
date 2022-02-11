@@ -19,6 +19,10 @@
 	],
 	"overrides": [
 		{
+			"files": ["**/*.ts"],
+			"rules": { "@typescript-eslint/no-redeclare": "off" }
+		},
+		{
 			"files": ["**/*.test.ts"],
 			"rules": {
 				"@typescript-eslint/no-non-null-assertion": "off"
