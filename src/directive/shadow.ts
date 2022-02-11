@@ -7,7 +7,10 @@ import { define } from '../lib/define'
 import { isNodeEnv } from '../lib/is-node-env'
 import { Templatable } from '..'
 
-const templates: Map<string, Templatable> = new Map<string, Templatable>()
+const templates: Map<string | undefined, Templatable> = new Map<
+	string | undefined,
+	Templatable
+>()
 
 define(class extends UllrElement {
 	token: string
@@ -22,8 +25,8 @@ define(class extends UllrElement {
 
 	attributeChangedCallback(
 		_: string,
-		prev: string | null,
-		next: string | null
+		prev: string | undefined,
+		next: string | undefined
 	): void {
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		this.token = next!
