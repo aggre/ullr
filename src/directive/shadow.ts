@@ -1,7 +1,7 @@
 // Tslint:disable:no-unnecessary-type-annotation
 import { html } from 'lit'
 import { Directive, PartInfo, directive } from 'lit/directive.js'
-import equals from 'ramda/es/equals'
+import { equals } from 'ramda'
 import { random, render, UllrElement } from '../lib/element'
 import { define } from '../lib/define'
 import { isNodeEnv } from '../lib/is-node-env'
