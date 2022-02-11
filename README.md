@@ -25,7 +25,7 @@ Functional Web Components
 
 # Installation
 
-Add to lit project:
+Add to a lit project:
 
 ```bash
 npm i @aggre/ullr
@@ -71,15 +71,13 @@ export const main = (title: string, desc: string) =>
 
 ---
 
-💡 How to preprocess style tags with PostCSS: 💅 https://github.com/aggre/lit-style
-
 ## `subscribe`
 
 `subscribe` is a lit directive.
 
-Subscribe to `Observable<T>` of RxJS and re-rendering with a callback function.
+Subscribe to `Observable<T>` of RxJS and re-rendering with the passed callback function.
 
-When the directive part is removed, it will automatically `unsubscribe`.
+When the directive part is removed, the observable will automatically `unsubscribe`.
 
 ```ts
 import { html } from 'lit'
@@ -94,9 +92,9 @@ export const timer = (initialDelay: number, period: number) =>
 	)
 ```
 
-| Browser | Node.js                                                                             |
-| ------- | ----------------------------------------------------------------------------------- |
-| ✅      | 🚸 <br/> Create string as a DOM is supported. But auto-unsubscribe isn't supported. |
+| Browser | Node.js |
+| ------- | ------- |
+| ✅      | ✅      |
 
 ---
 
