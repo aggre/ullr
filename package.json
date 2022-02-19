@@ -59,7 +59,7 @@
 		"eslint-config-xo": "0.40.0",
 		"eslint-config-xo-typescript": "0.50.0",
 		"lit": "2.2.0",
-		"mocha": "9.2.0",
+		"mocha": "9.2.1",
 		"prettier": "2.5.1",
 		"rimraf": "3.0.2",
 		"rollup": "2.67.3",
