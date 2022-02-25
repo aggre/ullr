@@ -29,31 +29,23 @@ describe('shadow directive', () => {
 	})
 
 	it('Re-render if the template different from last time', () => {
-		const app = (main: string, content: string): TemplateResult =>
-			html`
-				${shadow(html` <main>${main}</main> `)}
-				<p>${content}</p>
-			`
-		render(app('Prev', 'App'), document.body)
-		const el = document.body.querySelector('ullr-shdw')
-		const prev = el!.getAttribute('t')
-		render(app('Next', 'App Next'), document.body)
-		const next = el!.getAttribute('t')
-		expect(next).to.not.be.equal(prev)
-	})
+		const subject = new BehaviorSubject(0)
 
-	it('Not re-render if the same template', () => {
-		const app = (main: string, content: string): TemplateResult =>
-			html`
-				${shadow(html` <main>${main}</main> `)}
-				<p>${content}</p>
-			`
-		render(app('Immutable', 'App'), document.body)
-		const el = document.body.querySelector('ullr-shdw')
-		const prev = el!.getAttribute('t')
-		render(app('Immutable', 'App Next'), document.body)
-		const next = el!.getAttribute('t')
-		expect(next).to.be.equal(prev)
+		render(
+			html` ${subscribe(subject, (x) => shadow(html` <main>${x}</main> `))} `,
+			document.body
+		)
+		expect(removeExtraString(contentInShadow('main').innerHTML)).to.be.equal(
+			'0'
+		)
+		subject.next(1)
+		expect(removeExtraString(contentInShadow('main').innerHTML)).to.be.equal(
+			'1'
+		)
+		subject.next(2)
+		expect(removeExtraString(contentInShadow('main').innerHTML)).to.be.equal(
+			'2'
+		)
 	})
 
 	describe('Passing content', () => {
@@ -64,7 +56,7 @@ describe('shadow directive', () => {
 			)
 		})
 
-		it('Pass a TemplateResult containing the component directive', () => {
+		it('Pass a TemplateResult containing the shadow directive', () => {
 			render(
 				html` ${shadow(html` ${shadow(html` <p>Test</p> `)} `)} `,
 				document.body
