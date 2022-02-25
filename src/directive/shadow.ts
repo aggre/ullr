@@ -1,46 +1,24 @@
 // Tslint:disable:no-unnecessary-type-annotation
 import { html } from 'lit'
 import { Directive, PartInfo, directive } from 'lit/directive.js'
-import { equals } from 'ramda'
-import { random, render, UllrElement } from '../lib/element'
+import { render, UllrElement } from '../lib/element'
 import { define } from '../lib/define'
 import { isNodeEnv } from '../lib/is-node-env'
 import { Templatable } from '..'
 
-const templates: Map<string | undefined, Templatable> = new Map<
-	string | undefined,
-	Templatable
->()
-
 define(class extends UllrElement {
-	token: string
-	template: Templatable | undefined
+	_template: Templatable | undefined
 	static get is(): string {
 		return 'ullr-shdw'
 	}
 
-	static get observedAttributes(): string[] {
-		return ['t']
+	get template(): Templatable | undefined {
+		return this._template
 	}
 
-	attributeChangedCallback(
-		_: string,
-		prev: string | undefined,
-		next: string | undefined
-	): void {
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-		this.token = next!
-		if (next !== null) {
-			this.template = templates.get(next)
-		}
-
-		if (prev !== null) {
-			templates.delete(prev)
-		}
-
-		if (this.connected) {
-			this._render()
-		}
+	set template(tmp: Templatable | undefined) {
+		this._template = tmp
+		this._render()
 	}
 
 	connectedCallback(): void {
@@ -50,7 +28,6 @@ define(class extends UllrElement {
 
 	disconnectedCallback(): void {
 		super.disconnectedCallback()
-		templates.delete(this.token)
 	}
 
 	private _render(): void {
@@ -63,9 +40,8 @@ define(class extends UllrElement {
 })
 
 const innerTemplate = isNodeEnv()
-	? (token: string, inner: Templatable) =>
-			html` <ullr-shdw t="${token}">${inner}</ullr-shdw> `
-	: (token: string) => html` <ullr-shdw t="${token}"></ullr-shdw> `
+	? (inner: Templatable) => html` <ullr-shdw>${inner}</ullr-shdw> `
+	: (inner: Templatable) => html` <ullr-shdw .template="${inner}"></ullr-shdw> `
 
 class Shadow extends Directive {
 	prev: Templatable | undefined
@@ -76,14 +52,7 @@ class Shadow extends Directive {
 	}
 
 	render(inner: Templatable) {
-		if (this.prev !== undefined && equals(this.prev, inner)) {
-			return
-		}
-
-		this.prev = inner
-		const t = random()
-		templates.set(t, inner)
-		return innerTemplate(t, inner)
+		return innerTemplate(inner)
 	}
 }
 
