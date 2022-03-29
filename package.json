@@ -48,7 +48,7 @@
 		"@rollup/plugin-typescript": "8.3.1",
 		"@types/mocha": "9.1.0",
 		"@types/node": "16.11.26",
-		"@types/ramda": "0.28.4",
+		"@types/ramda": "0.28.5",
 		"@typescript-eslint/eslint-plugin": "5.17.0",
 		"@typescript-eslint/parser": "5.17.0",
 		"@web/test-runner": "0.13.27",
