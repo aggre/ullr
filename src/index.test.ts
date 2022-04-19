@@ -37,7 +37,10 @@ if (!isNodeEnv()) {
 		})
 		describe('When the second argument is provided as an array', () => {
 			it('Re-render when changing attribute values', () => {
-				const template = ([message, description]: string[]): TemplateResult =>
+				const template = ([
+					message,
+					description,
+				]: readonly string[]): TemplateResult =>
 					html`
 						<p>${message}</p>
 						<p>${description}</p>
