@@ -98,12 +98,12 @@ export const timer = (initialDelay: number, period: number) =>
 
 ---
 
-## `customElements`
+## `createCustomElements`
 
-`customElements` creates a class that can be passed to `customElements.define`.
+`createCustomElements` creates a class that can be passed to `customElements.define`.
 
 ```ts
-import { customElements } from '@aggre/ullr'
+import { createCustomElements } from '@aggre/ullr'
 import { main } from './main'
 
 const observedAttributes = ['title', 'desc']
@@ -112,7 +112,7 @@ const template = ([title, desc]) => main(title, desc)
 
 window.customElements.define(
 	'x-app',
-	customElements(template, observedAttributes)
+	createCustomElements(template, observedAttributes)
 )
 ```
 

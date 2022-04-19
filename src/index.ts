@@ -5,18 +5,154 @@ import { render, UllrElement } from './lib/element'
 type Props = Array<string | undefined>
 export type Templatable = TemplateResult | DirectiveResult
 
-export const customElements = (
-	template: (props: Props) => TemplateResult,
-	observedAttributes: string[] = []
-): typeof UllrElement =>
-	class extends UllrElement {
+export function createCustomElements<Attrs extends [undefined]>(
+	template: (props: Attrs) => TemplateResult,
+	observedAttributes?: Attrs
+): typeof UllrElement
+
+export function createCustomElements<Attrs extends [string]>(
+	template: (props: Attrs) => TemplateResult,
+	observedAttributes: Attrs
+): typeof UllrElement
+
+export function createCustomElements<Attrs extends [string, string]>(
+	template: (props: Attrs) => TemplateResult,
+	observedAttributes: Attrs
+): typeof UllrElement
+
+export function createCustomElements<Attrs extends [string, string, string]>(
+	template: (props: Attrs) => TemplateResult,
+	observedAttributes: Attrs
+): typeof UllrElement
+
+export function createCustomElements<
+	Attrs extends [string, string, string, string]
+>(
+	template: (props: Attrs) => TemplateResult,
+	observedAttributes: Attrs
+): typeof UllrElement
+
+export function createCustomElements<
+	Attrs extends [string, string, string, string]
+>(
+	template: (props: Attrs) => TemplateResult,
+	observedAttributes: Attrs
+): typeof UllrElement
+
+export function createCustomElements<
+	Attrs extends [string, string, string, string, string]
+>(
+	template: (props: Attrs) => TemplateResult,
+	observedAttributes: Attrs
+): typeof UllrElement
+
+export function createCustomElements<
+	Attrs extends [string, string, string, string, string, string]
+>(
+	template: (props: Attrs) => TemplateResult,
+	observedAttributes: Attrs
+): typeof UllrElement
+
+export function createCustomElements<
+	Attrs extends [string, string, string, string, string, string, string]
+>(
+	template: (props: Attrs) => TemplateResult,
+	observedAttributes: Attrs
+): typeof UllrElement
+
+export function createCustomElements<
+	Attrs extends [string, string, string, string, string, string, string, string]
+>(
+	template: (props: Attrs) => TemplateResult,
+	observedAttributes: Attrs
+): typeof UllrElement
+
+export function createCustomElements<
+	Attrs extends [
+		string,
+		string,
+		string,
+		string,
+		string,
+		string,
+		string,
+		string,
+		string
+	]
+>(
+	template: (props: Attrs) => TemplateResult,
+	observedAttributes: Attrs
+): typeof UllrElement
+
+export function createCustomElements<
+	Attrs extends [
+		string,
+		string,
+		string,
+		string,
+		string,
+		string,
+		string,
+		string,
+		string,
+		string
+	]
+>(
+	template: (props: Attrs) => TemplateResult,
+	observedAttributes: Attrs
+): typeof UllrElement
+
+export function createCustomElements<
+	Attrs extends [
+		string,
+		string,
+		string,
+		string,
+		string,
+		string,
+		string,
+		string,
+		string,
+		string,
+		string
+	]
+>(
+	template: (props: Attrs) => TemplateResult,
+	observedAttributes: Attrs
+): typeof UllrElement
+
+export function createCustomElements<
+	Attrs extends [
+		string,
+		string,
+		string,
+		string,
+		string,
+		string,
+		string,
+		string,
+		string,
+		string,
+		string,
+		string
+	]
+>(
+	template: (props: Attrs) => TemplateResult,
+	observedAttributes: Attrs
+): typeof UllrElement
+
+export function createCustomElements(
+	template: (props: unknown) => TemplateResult,
+	observedAttributes: [undefined] = [undefined]
+): unknown {
+	return class extends UllrElement {
 		props: Props
 		constructor() {
 			super()
 			this.props = []
 		}
 
-		static get observedAttributes(): string[] {
+		static get observedAttributes(): typeof observedAttributes {
 			return observedAttributes
 		}
 
@@ -41,3 +177,4 @@ export const customElements = (
 			render(template(this.props), this)
 		}
 	}
+}

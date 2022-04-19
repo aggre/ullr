@@ -1,5 +1,5 @@
 import { expect } from '@esm-bundle/chai'
-import { customElements } from './index'
+import { createCustomElements } from './index'
 import { html, render, TemplateResult } from 'lit-html'
 import { isNodeEnv } from './lib/is-node-env'
 import { removeExtraString } from './lib/test'
@@ -26,7 +26,7 @@ if (!isNodeEnv()) {
 	describe('Custom Elements', () => {
 		it('Create Custom Elements', () => {
 			const template = (): TemplateResult => html` <main>App</main> `
-			const xApp = customElements(template)
+			const xApp = createCustomElements(template)
 			window.customElements.define('x-app', xApp)
 			render(html` <x-app></x-app> `, document.body)
 			const app = document.body.querySelector('x-app')
@@ -42,7 +42,7 @@ if (!isNodeEnv()) {
 						<p>${message}</p>
 						<p>${description}</p>
 					`
-				const xApp = customElements(template, ['message', 'description'])
+				const xApp = createCustomElements(template, ['message', 'description'])
 				const select = (p: string, c: string): Element | undefined =>
 					document.body.querySelector(p)!.shadowRoot!.querySelector(c) ??
 					undefined
