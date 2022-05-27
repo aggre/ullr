@@ -54,7 +54,7 @@
 		"@web/test-runner": "0.13.28",
 		"@web/test-runner-puppeteer": "0.10.5",
 		"browser-env": "3.3.0",
-		"eslint": "8.13.0",
+		"eslint": "8.16.0",
 		"eslint-config-prettier": "8.5.0",
 		"eslint-config-xo": "0.40.0",
 		"eslint-config-xo-typescript": "0.50.0",
