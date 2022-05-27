@@ -1,5 +1,5 @@
 import { expect } from '@esm-bundle/chai'
-import { createCustomElements } from './index'
+import { AttributeValue, createCustomElements } from './index'
 import { html, render, TemplateResult } from 'lit-html'
 import { isNodeEnv } from './lib/is-node-env'
 import { removeExtraString } from './lib/test'
@@ -37,10 +37,10 @@ if (!isNodeEnv()) {
 		})
 		describe('When the second argument is provided as an array', () => {
 			it('Re-render when changing attribute values', () => {
-				const template = ([
-					message,
-					description,
-				]: readonly string[]): TemplateResult =>
+				const template = ([message, description]: readonly [
+					AttributeValue,
+					AttributeValue
+				]): TemplateResult =>
 					html`
 						<p>${message}</p>
 						<p>${description}</p>

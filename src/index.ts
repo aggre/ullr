@@ -2,7 +2,8 @@ import { TemplateResult } from 'lit'
 import { DirectiveResult } from 'lit/directive'
 import { render, UllrElement } from './lib/element'
 
-type Props = Array<string | undefined>
+export type AttributeValue = string | undefined
+export type Props = Array<string | undefined>
 export type Templatable = TemplateResult | DirectiveResult
 
 export function createCustomElements<Attrs extends readonly [undefined]>(
@@ -10,46 +11,20 @@ export function createCustomElements<Attrs extends readonly [undefined]>(
 	observedAttributes?: Attrs
 ): typeof UllrElement
 
-export function createCustomElements<Attrs extends readonly [string]>(
-	template: (props: Attrs) => TemplateResult,
-	observedAttributes: Attrs
-): typeof UllrElement
-
-export function createCustomElements<Attrs extends readonly [string, string]>(
+export function createCustomElements<Attrs extends readonly [AttributeValue]>(
 	template: (props: Attrs) => TemplateResult,
 	observedAttributes: Attrs
 ): typeof UllrElement
 
 export function createCustomElements<
-	Attrs extends readonly [string, string, string]
+	Attrs extends readonly [AttributeValue, AttributeValue]
 >(
 	template: (props: Attrs) => TemplateResult,
 	observedAttributes: Attrs
 ): typeof UllrElement
 
 export function createCustomElements<
-	Attrs extends readonly [string, string, string, string]
->(
-	template: (props: Attrs) => TemplateResult,
-	observedAttributes: Attrs
-): typeof UllrElement
-
-export function createCustomElements<
-	Attrs extends readonly [string, string, string, string]
->(
-	template: (props: Attrs) => TemplateResult,
-	observedAttributes: Attrs
-): typeof UllrElement
-
-export function createCustomElements<
-	Attrs extends readonly [string, string, string, string, string]
->(
-	template: (props: Attrs) => TemplateResult,
-	observedAttributes: Attrs
-): typeof UllrElement
-
-export function createCustomElements<
-	Attrs extends readonly [string, string, string, string, string, string]
+	Attrs extends readonly [AttributeValue, AttributeValue, AttributeValue]
 >(
 	template: (props: Attrs) => TemplateResult,
 	observedAttributes: Attrs
@@ -57,13 +32,10 @@ export function createCustomElements<
 
 export function createCustomElements<
 	Attrs extends readonly [
-		string,
-		string,
-		string,
-		string,
-		string,
-		string,
-		string
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue
 	]
 >(
 	template: (props: Attrs) => TemplateResult,
@@ -72,14 +44,11 @@ export function createCustomElements<
 
 export function createCustomElements<
 	Attrs extends readonly [
-		string,
-		string,
-		string,
-		string,
-		string,
-		string,
-		string,
-		string
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue
 	]
 >(
 	template: (props: Attrs) => TemplateResult,
@@ -88,15 +57,12 @@ export function createCustomElements<
 
 export function createCustomElements<
 	Attrs extends readonly [
-		string,
-		string,
-		string,
-		string,
-		string,
-		string,
-		string,
-		string,
-		string
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue
 	]
 >(
 	template: (props: Attrs) => TemplateResult,
@@ -105,16 +71,13 @@ export function createCustomElements<
 
 export function createCustomElements<
 	Attrs extends readonly [
-		string,
-		string,
-		string,
-		string,
-		string,
-		string,
-		string,
-		string,
-		string,
-		string
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue
 	]
 >(
 	template: (props: Attrs) => TemplateResult,
@@ -123,17 +86,14 @@ export function createCustomElements<
 
 export function createCustomElements<
 	Attrs extends readonly [
-		string,
-		string,
-		string,
-		string,
-		string,
-		string,
-		string,
-		string,
-		string,
-		string,
-		string
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue
 	]
 >(
 	template: (props: Attrs) => TemplateResult,
@@ -142,18 +102,72 @@ export function createCustomElements<
 
 export function createCustomElements<
 	Attrs extends readonly [
-		string,
-		string,
-		string,
-		string,
-		string,
-		string,
-		string,
-		string,
-		string,
-		string,
-		string,
-		string
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue
+	]
+>(
+	template: (props: Attrs) => TemplateResult,
+	observedAttributes: Attrs
+): typeof UllrElement
+
+export function createCustomElements<
+	Attrs extends readonly [
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue
+	]
+>(
+	template: (props: Attrs) => TemplateResult,
+	observedAttributes: Attrs
+): typeof UllrElement
+
+export function createCustomElements<
+	Attrs extends readonly [
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue
+	]
+>(
+	template: (props: Attrs) => TemplateResult,
+	observedAttributes: Attrs
+): typeof UllrElement
+
+export function createCustomElements<
+	Attrs extends readonly [
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue,
+		AttributeValue
 	]
 >(
 	template: (props: Attrs) => TemplateResult,
