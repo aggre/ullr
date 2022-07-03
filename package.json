@@ -48,7 +48,7 @@
 		"@rollup/plugin-node-resolve": "13.3.0",
 		"@rollup/plugin-typescript": "8.3.3",
 		"@types/mocha": "9.1.1",
-		"@types/node": "16.11.42",
+		"@types/node": "16.11.43",
 		"@types/ramda": "0.28.14",
 		"@typescript-eslint/eslint-plugin": "5.30.4",
 		"@typescript-eslint/parser": "5.30.4",
