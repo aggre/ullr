@@ -59,7 +59,7 @@
 		"eslint-config-prettier": "8.5.0",
 		"eslint-config-xo": "0.41.0",
 		"eslint-config-xo-typescript": "0.52.0",
-		"lit": "2.2.7",
+		"lit": "2.2.8",
 		"mocha": "9.2.2",
 		"prettier": "2.7.1",
 		"rimraf": "3.0.2",
