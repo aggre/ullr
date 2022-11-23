@@ -46,7 +46,7 @@
 		"@rollup/plugin-commonjs": "22.0.2",
 		"@rollup/plugin-multi-entry": "4.1.0",
 		"@rollup/plugin-node-resolve": "14.1.0",
-		"@rollup/plugin-typescript": "8.5.0",
+		"@rollup/plugin-typescript": "9.0.2",
 		"@types/mocha": "9.1.1",
 		"@types/node": "18.11.9",
 		"@types/ramda": "0.28.20",
