@@ -809,10 +809,10 @@
     "@web/test-runner-core" "^0.10.20"
     puppeteer "^13.1.2"
 
-"@web/test-runner@0.15.0":
-  version "0.15.0"
-  resolved "https://registry.yarnpkg.com/@web/test-runner/-/test-runner-0.15.0.tgz#789d4599228b6e991bfeb14db4dfffb50b7ffb4a"
-  integrity sha512-8gliiQPRY4oDeq90i53mb5LiilCIzfW6SRGkmZ3K62c1DpOdZsCIgt7GH2OsFF8mB9rb4olK7qQ0gdmRgm27jw==
+"@web/test-runner@0.15.1":
+  version "0.15.1"
+  resolved "https://registry.yarnpkg.com/@web/test-runner/-/test-runner-0.15.1.tgz#1cf973a4e7b5f68a4803fdc044584bee633b5fcc"
+  integrity sha512-61L4mvDSvs8Dp3TdKe7WHc8kxHndHlGheWiIFEMgbfetJua6MZ4jyPThISIHSEq3LdAv9key2aDIdmyzk0YJ6w==
   dependencies:
     "@web/browser-logs" "^0.2.2"
     "@web/config-loader" "^0.1.3"
