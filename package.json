@@ -43,7 +43,7 @@
 	},
 	"devDependencies": {
 		"@esm-bundle/chai": "4.3.4",
-		"@rollup/plugin-commonjs": "22.0.2",
+		"@rollup/plugin-commonjs": "24.1.0",
 		"@rollup/plugin-multi-entry": "4.1.0",
 		"@rollup/plugin-node-resolve": "14.1.0",
 		"@rollup/plugin-typescript": "8.5.0",
