@@ -34,7 +34,7 @@
 	],
 	"license": "MIT",
 	"dependencies": {
-		"ramda": "^0.28.0",
+		"ramda": "^0.29.0",
 		"type-fest": "^2.13.0"
 	},
 	"peerDependencies": {
@@ -49,7 +49,7 @@
 		"@rollup/plugin-typescript": "8.5.0",
 		"@types/mocha": "9.1.1",
 		"@types/node": "18.16.8",
-		"@types/ramda": "0.28.23",
+		"@types/ramda": "0.29.1",
 		"@typescript-eslint/eslint-plugin": "5.57.1",
 		"@typescript-eslint/parser": "5.57.1",
 		"@web/test-runner": "0.15.1",
