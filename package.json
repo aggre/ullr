@@ -5,7 +5,8 @@
 	"main": "dist/index.js",
 	"exports": {
 		"import": "./dist/index.mjs",
-		"require": "./dist/index.js"
+		"require": "./dist/index.js",
+		"types": "./dist/ullr.d.ts"
 	},
 	"types": "dist/ullr.d.ts",
 	"files": [
