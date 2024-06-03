@@ -7,7 +7,7 @@
 		"import": "./dist/index.mjs",
 		"require": "./dist/index.js"
 	},
-	"types": "./dist/ullr.d.ts",
+	"types": "dist/ullr.d.ts",
 	"files": [
 		"dist/*.mjs",
 		"dist/*.js",
