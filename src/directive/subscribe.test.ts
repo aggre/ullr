@@ -84,8 +84,7 @@ describe('subscribe directive', () => {
 	it('When changed the observable, unsubscribe the old subscription', async () => {
 		const o1 = new BehaviorSubject(0)
 		const o2 = new BehaviorSubject('x')
-		const ob: BehaviorSubject<BehaviorSubject<number | string>> =
-			new BehaviorSubject(o1)
+		const ob = new BehaviorSubject<BehaviorSubject<number | string>>(o1)
 		let _x = 0
 		render(
 			html`

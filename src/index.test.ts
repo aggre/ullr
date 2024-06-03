@@ -1,6 +1,6 @@
 import { expect } from '@esm-bundle/chai'
-import { AttributeValue, createCustomElements } from './index'
-import { html, render, TemplateResult } from 'lit-html'
+import { type AttributeValue, createCustomElements } from './index'
+import { html, render, type TemplateResult } from 'lit-html'
 import { isNodeEnv } from './lib/is-node-env'
 import { removeExtraString } from './lib/test'
 const { document } = window

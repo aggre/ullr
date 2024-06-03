@@ -1,4 +1,4 @@
-import { UllrElement } from './element'
+import { type UllrElement } from './element'
 import { when } from 'ramda'
 
 export const define = when(

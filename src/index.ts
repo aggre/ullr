@@ -1,5 +1,5 @@
-import { TemplateResult } from 'lit'
-import { DirectiveResult } from 'lit/directive'
+import { type TemplateResult } from 'lit'
+import { type DirectiveResult } from 'lit/directive'
 import { render, UllrElement } from './lib/element'
 import type { FixedLengthArray, ReadonlyTuple } from 'type-fest'
 

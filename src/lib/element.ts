@@ -1,4 +1,4 @@
-import { render as _render, TemplateResult } from 'lit-html'
+import { render as _render, type TemplateResult } from 'lit-html'
 
 export const render = (template: TemplateResult, el: HTMLElement): void => {
 	_render(

@@ -1,4 +1,4 @@
-import { Part } from 'lit-html'
+import { type Part } from 'lit-html'
 import { shadow } from './shadow'
 import { subscribe } from './subscribe'
 

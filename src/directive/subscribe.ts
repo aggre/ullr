@@ -1,8 +1,8 @@
-import { Observable, Subscription } from 'rxjs'
+import { type Observable, type Subscription } from 'rxjs'
 import { noChange } from 'lit'
-import { DirectiveResult } from 'lit/directive.js'
+import { type DirectiveResult } from 'lit/directive.js'
 import { AsyncDirective, directive } from 'lit/async-directive.js'
-import { Templatable } from '..'
+import { type Templatable } from '..'
 
 type TemplateCallback<T> = (x: T) => Templatable
 

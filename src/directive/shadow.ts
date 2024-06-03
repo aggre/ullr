@@ -1,10 +1,10 @@
 // Tslint:disable:no-unnecessary-type-annotation
 import { html } from 'lit'
-import { Directive, PartInfo, directive } from 'lit/directive.js'
+import { Directive, type PartInfo, directive } from 'lit/directive.js'
 import { render, UllrElement } from '../lib/element'
 import { define } from '../lib/define'
 import { isNodeEnv } from '../lib/is-node-env'
-import { Templatable } from '..'
+import { type Templatable } from '..'
 
 define(class extends UllrElement {
 	_template: Templatable | undefined

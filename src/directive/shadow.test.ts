@@ -1,5 +1,5 @@
 import { expect } from '@esm-bundle/chai'
-import { html, render, TemplateResult } from 'lit-html'
+import { html, render, type TemplateResult } from 'lit-html'
 import { shadow } from '.'
 import { isNodeEnv } from '../lib/is-node-env'
 import { removeExtraString } from '../lib/test'
