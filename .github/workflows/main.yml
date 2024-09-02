@@ -19,10 +19,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: install deps
-        run: yarn
+        run: npm ci
 
       - name: lint
-        run: yarn lint
+        run: npm run lint
 
       - name: test
-        run: yarn test
+        run: npm test

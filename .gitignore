@@ -75,6 +75,3 @@ typings/
 
 # rollup build output
 dist
-
-# use yarn as a package manager
-package-lock.json

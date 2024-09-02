@@ -19,16 +19,16 @@
 	],
 	"scripts": {
 		"test": "wtr dist/test.js --node-resolve --puppeteer && mocha dist/test.js --require ./node_modules/browser-env/register.js",
-		"pretest": "yarn build",
-		"build": "yarn build:ts && yarn build:rollup",
+		"pretest": "npm run build",
+		"build": "npm run build:ts && npm run build:rollup",
 		"build:ts": "tsc -p ./",
 		"build:rollup": "rollup -c",
-		"prebuild": "yarn lint && yarn clean",
+		"prebuild": "npm run lint && npm run clean",
 		"clean": "rimraf dist",
-		"lint": "yarn lint:eslint && yarn lint:format",
+		"lint": "npm run lint:eslint && npm run lint:format",
 		"lint:eslint": "eslint ./src --fix",
 		"lint:format": "prettier --write '**/*.{ts,json,md,yml}'",
-		"prepack": "yarn build"
+		"prepack": "npm run build"
 	},
 	"author": "aggre",
 	"contributors": [
