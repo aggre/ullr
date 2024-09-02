@@ -32,19 +32,18 @@ if (!isNodeEnv()) {
 			const app = document.body.querySelector('x-app')
 			expect(app).to.not.equal(null)
 			expect(removeExtraString(app!.shadowRoot!.innerHTML)).to.be.equal(
-				'<main>App</main>'
+				'<main>App</main>',
 			)
 		})
 		describe('When the second argument is provided as an array', () => {
 			it('Re-render when changing attribute values', () => {
 				const template = ([message, description]: readonly [
 					AttributeValue,
-					AttributeValue
-				]): TemplateResult =>
-					html`
-						<p>${message}</p>
-						<p>${description}</p>
-					`
+					AttributeValue,
+				]): TemplateResult => html`
+					<p>${message}</p>
+					<p>${description}</p>
+				`
 				const xApp = createCustomElements(template, ['message', 'description'])
 				const select = (p: string, c: string): Element | undefined =>
 					document.body.querySelector(p)!.shadowRoot!.querySelector(c) ??
@@ -55,10 +54,10 @@ if (!isNodeEnv()) {
 				app.setAttribute('message', 'Test message')
 				app.setAttribute('description', 'Test description')
 				expect(
-					(select('x-app-2', 'p') as HTMLParagraphElement).innerText
+					(select('x-app-2', 'p') as HTMLParagraphElement).innerText,
 				).to.be.equal('Test message')
 				expect(
-					(select('x-app-2', 'p + p') as HTMLParagraphElement).innerText
+					(select('x-app-2', 'p + p') as HTMLParagraphElement).innerText,
 				).to.be.equal('Test description')
 			})
 		})

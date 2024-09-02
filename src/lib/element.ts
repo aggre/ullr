@@ -9,7 +9,7 @@ export const render = (template: TemplateResult, el: HTMLElement): void => {
 			}
 
 			return el.shadowRoot
-		})()
+		})(),
 	)
 }
 

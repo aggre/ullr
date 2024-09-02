@@ -3,13 +3,13 @@ export const sleep = async (time: number): Promise<void> =>
 	new Promise(
 		(resolve: (value?: void | PromiseLike<void> | undefined) => void): void => {
 			setTimeout(resolve, time)
-		}
+		},
 	)
 
 export const slotSelector = (
 	element: Element | undefined,
 	slot: string,
-	selector: string
+	selector: string,
 ): Element | undefined => {
 	if (element === null || element === undefined) {
 		return

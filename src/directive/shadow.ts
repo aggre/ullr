@@ -46,7 +46,6 @@ const innerTemplate = isNodeEnv()
 class Shadow extends Directive {
 	prev: Templatable | undefined
 
-	// eslint-disable-next-line @typescript-eslint/no-useless-constructor
 	constructor(partInfo: PartInfo) {
 		super(partInfo)
 	}

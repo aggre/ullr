@@ -18,7 +18,7 @@ describe('subscribe directive', () => {
 	it('Subscribe to observable', async () => {
 		const timer = _timer(10, 1).pipe(
 			filter((x) => x > 0),
-			take(10)
+			take(10),
 		)
 		let _count = 0
 		render(
@@ -28,7 +28,7 @@ describe('subscribe directive', () => {
 					return html` <p>${x}</p> `
 				})}
 			`,
-			document.body
+			document.body,
 		)
 		await sleep(100)
 		const p = document.body.querySelector('body > p')!
@@ -39,17 +39,17 @@ describe('subscribe directive', () => {
 	it('When the third argument is provided, its value is rendered as initial content', async () => {
 		const timer = _timer(50, 1).pipe(
 			filter((x) => x > 0),
-			take(1)
+			take(1),
 		)
 		render(
 			html`
 				${subscribe(
 					timer,
 					(x) => html` <p>${x}</p> `,
-					html` <p>placeholder</p> `
+					html` <p>placeholder</p> `,
 				)}
 			`,
-			document.body
+			document.body,
 		)
 		const el = (): Element => document.body.querySelector('body > p')!
 		expect(el().innerHTML).to.be.equal('placeholder')
@@ -60,7 +60,7 @@ describe('subscribe directive', () => {
 	it('When removed the node, unsubscribe the subscription', async () => {
 		const timer = _timer(0, 10).pipe(
 			filter((x) => x > 0),
-			take(1000)
+			take(1000),
 		)
 		let _count = 0
 		render(
@@ -70,7 +70,7 @@ describe('subscribe directive', () => {
 					return html` <p>${x}</p> `
 				})}
 			`,
-			document.body
+			document.body,
 		)
 		await sleep(20)
 		const p = document.body.querySelector('p')!
@@ -95,10 +95,10 @@ describe('subscribe directive', () => {
 						}
 
 						return html` <p>${value}</p> `
-					})
+					}),
 				)}
 			`,
-			document.body
+			document.body,
 		)
 		o1.next(123)
 		const p1 = document.body.querySelector('p')!
@@ -122,7 +122,7 @@ describe('subscribe directive', () => {
 			count.next(1)
 			render(
 				html` ${subscribe(count, (x) => html` <p>${x}</p> `)} `,
-				document.body
+				document.body,
 			)
 			const el = document.body.querySelector('p')!
 			expect(removeExtraString(el.innerHTML)).to.be.equal('1')
@@ -136,15 +136,12 @@ describe('subscribe directive', () => {
 				html`
 					${subscribe(
 						count,
-						(x) =>
-							html`
-								<p>
-									${subscribe(subject, (y) => html`<span> ${x + y} </span>`)}
-								</p>
-							`
+						(x) => html`
+							<p>${subscribe(subject, (y) => html`<span> ${x + y} </span>`)}</p>
+						`,
 					)}
 				`,
-				document.body
+				document.body,
 			)
 			const el = (): Element => document.body.querySelector('p > span')!
 			expect(removeExtraString(el().innerHTML)).to.be.equal('4')
@@ -160,7 +157,7 @@ describe('subscribe directive', () => {
 				html`
 					${subscribe(count, (x) => html` ${shadow(html` <p>${x}</p> `)} `)}
 				`,
-				document.body
+				document.body,
 			)
 			const el = isNodeEnv()
 				? document.body.querySelector('ullr-shdw > p')!

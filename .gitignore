@@ -74,7 +74,7 @@ typings/
 !rollup.config.js
 
 # rollup build output
-**/*.mjs
+dist
 
 # use yarn as a package manager
 package-lock.json

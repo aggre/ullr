@@ -14,7 +14,7 @@ class Subscribe<T> extends AsyncDirective {
 	render(
 		observable: Observable<T>,
 		template: TemplateCallback<T>,
-		defaultContent?: Templatable
+		defaultContent?: Templatable,
 	) {
 		this.template = template
 		if (this.observable !== observable) {
@@ -48,5 +48,5 @@ class Subscribe<T> extends AsyncDirective {
 export const subscribe = directive(Subscribe) as <T>(
 	observable: Observable<T>,
 	template: TemplateCallback<T>,
-	defaultContent?: Templatable
+	defaultContent?: Templatable,
 ) => DirectiveResult

@@ -88,7 +88,7 @@ export const timer = (initialDelay: number, period: number) =>
 	subscribe(
 		_timer(initialDelay, period),
 		(x) => html` <p>${x}</p> `,
-		html` <p>Default content</p> `
+		html` <p>Default content</p> `,
 	)
 ```
 
@@ -112,7 +112,7 @@ const template = ([title, desc]) => main(title, desc)
 
 window.customElements.define(
 	'x-app',
-	createCustomElements(template, observedAttributes)
+	createCustomElements(template, observedAttributes),
 )
 ```
 

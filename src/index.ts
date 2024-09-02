@@ -7,108 +7,108 @@ export type AttributeValue = string | undefined
 export type Templatable = TemplateResult | DirectiveResult
 
 export function createCustomElements<Props extends ReadonlyTuple<never, 0>>(
-	template: (props: Props) => TemplateResult
+	template: (props: Props) => TemplateResult,
 ): typeof UllrElement
 
 export function createCustomElements<
 	Props extends ReadonlyTuple<AttributeValue, 1>,
-	Attrs extends FixedLengthArray<string, 1>
+	Attrs extends FixedLengthArray<string, 1>,
 >(
 	template: (props: Props) => TemplateResult,
-	observedAttributes: Attrs
+	observedAttributes: Attrs,
 ): typeof UllrElement
 
 export function createCustomElements<
 	Props extends ReadonlyTuple<AttributeValue, 2>,
-	Attrs extends FixedLengthArray<string, 2>
+	Attrs extends FixedLengthArray<string, 2>,
 >(
 	template: (props: Props) => TemplateResult,
-	observedAttributes: Attrs
+	observedAttributes: Attrs,
 ): typeof UllrElement
 
 export function createCustomElements<
 	Props extends ReadonlyTuple<AttributeValue, 3>,
-	Attrs extends FixedLengthArray<string, 3>
+	Attrs extends FixedLengthArray<string, 3>,
 >(
 	template: (props: Props) => TemplateResult,
-	observedAttributes: Attrs
+	observedAttributes: Attrs,
 ): typeof UllrElement
 
 export function createCustomElements<
 	Props extends ReadonlyTuple<AttributeValue, 4>,
-	Attrs extends FixedLengthArray<string, 4>
+	Attrs extends FixedLengthArray<string, 4>,
 >(
 	template: (props: Props) => TemplateResult,
-	observedAttributes: Attrs
+	observedAttributes: Attrs,
 ): typeof UllrElement
 
 export function createCustomElements<
 	Props extends ReadonlyTuple<AttributeValue, 5>,
-	Attrs extends FixedLengthArray<string, 5>
+	Attrs extends FixedLengthArray<string, 5>,
 >(
 	template: (props: Props) => TemplateResult,
-	observedAttributes: Attrs
+	observedAttributes: Attrs,
 ): typeof UllrElement
 
 export function createCustomElements<
 	Props extends ReadonlyTuple<AttributeValue, 6>,
-	Attrs extends FixedLengthArray<string, 6>
+	Attrs extends FixedLengthArray<string, 6>,
 >(
 	template: (props: Props) => TemplateResult,
-	observedAttributes: Attrs
+	observedAttributes: Attrs,
 ): typeof UllrElement
 
 export function createCustomElements<
 	Props extends ReadonlyTuple<AttributeValue, 7>,
-	Attrs extends FixedLengthArray<string, 7>
+	Attrs extends FixedLengthArray<string, 7>,
 >(
 	template: (props: Props) => TemplateResult,
-	observedAttributes: Attrs
+	observedAttributes: Attrs,
 ): typeof UllrElement
 
 export function createCustomElements<
 	Props extends ReadonlyTuple<AttributeValue, 8>,
-	Attrs extends FixedLengthArray<string, 8>
+	Attrs extends FixedLengthArray<string, 8>,
 >(
 	template: (props: Props) => TemplateResult,
-	observedAttributes: Attrs
+	observedAttributes: Attrs,
 ): typeof UllrElement
 
 export function createCustomElements<
 	Props extends ReadonlyTuple<AttributeValue, 9>,
-	Attrs extends FixedLengthArray<string, 9>
+	Attrs extends FixedLengthArray<string, 9>,
 >(
 	template: (props: Props) => TemplateResult,
-	observedAttributes: Attrs
+	observedAttributes: Attrs,
 ): typeof UllrElement
 
 export function createCustomElements<
 	Props extends ReadonlyTuple<AttributeValue, 10>,
-	Attrs extends FixedLengthArray<string, 10>
+	Attrs extends FixedLengthArray<string, 10>,
 >(
 	template: (props: Props) => TemplateResult,
-	observedAttributes: Attrs
+	observedAttributes: Attrs,
 ): typeof UllrElement
 
 export function createCustomElements<
 	Props extends ReadonlyTuple<AttributeValue, 11>,
-	Attrs extends FixedLengthArray<string, 11>
+	Attrs extends FixedLengthArray<string, 11>,
 >(
 	template: (props: Props) => TemplateResult,
-	observedAttributes: Attrs
+	observedAttributes: Attrs,
 ): typeof UllrElement
 
 export function createCustomElements<
 	Props extends ReadonlyTuple<AttributeValue, 12>,
-	Attrs extends FixedLengthArray<string, 12>
+	Attrs extends FixedLengthArray<string, 12>,
 >(
 	template: (props: Props) => TemplateResult,
-	observedAttributes: Attrs
+	observedAttributes: Attrs,
 ): typeof UllrElement
 
 export function createCustomElements(
 	template: (props: unknown) => TemplateResult,
-	observedAttributes: [undefined] = [undefined]
+	observedAttributes: [undefined] = [undefined],
 ): unknown {
 	return class extends UllrElement {
 		private _props: AttributeValue[]
@@ -123,10 +123,8 @@ export function createCustomElements(
 
 		attributeChangedCallback(
 			name: string,
-			// eslint-disable-next-line @typescript-eslint/ban-types
 			_: string | null,
-			// eslint-disable-next-line @typescript-eslint/ban-types
-			next: string | null
+			next: string | null,
 		): void {
 			const index = observedAttributes?.findIndex((n) => n === name)
 			if (index !== undefined) {

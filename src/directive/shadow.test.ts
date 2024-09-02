@@ -20,8 +20,9 @@ describe('shadow directive', () => {
 	})
 
 	it('Render to the ShadowRoot in "ullr-shdw" element', () => {
-		const app = (content: string): TemplateResult =>
-			html` ${shadow(html` <main>${content}</main> `)} `
+		const app = (content: string): TemplateResult => html`
+			${shadow(html` <main>${content}</main> `)}
+		`
 		render(app('App'), document.body)
 		const main = contentInShadow('main')
 		expect(main).to.not.equal(null)
@@ -33,18 +34,18 @@ describe('shadow directive', () => {
 
 		render(
 			html` ${subscribe(subject, (x) => shadow(html` <main>${x}</main> `))} `,
-			document.body
+			document.body,
 		)
 		expect(removeExtraString(contentInShadow('main').innerHTML)).to.be.equal(
-			'0'
+			'0',
 		)
 		subject.next(1)
 		expect(removeExtraString(contentInShadow('main').innerHTML)).to.be.equal(
-			'1'
+			'1',
 		)
 		subject.next(2)
 		expect(removeExtraString(contentInShadow('main').innerHTML)).to.be.equal(
-			'2'
+			'2',
 		)
 	})
 
@@ -52,14 +53,14 @@ describe('shadow directive', () => {
 		it('Pass a TemplateResult', () => {
 			render(html` ${shadow(html` <p>Test</p> `)} `, document.body)
 			expect(removeExtraString(contentInShadow('p').innerHTML)).to.be.equal(
-				'Test'
+				'Test',
 			)
 		})
 
 		it('Pass a TemplateResult containing the shadow directive', () => {
 			render(
 				html` ${shadow(html` ${shadow(html` <p>Test</p> `)} `)} `,
-				document.body
+				document.body,
 			)
 			const el = isNodeEnv()
 				? document.body.querySelector('ullr-shdw > ullr-shdw > p')!
@@ -77,7 +78,7 @@ describe('shadow directive', () => {
 				html`
 					${shadow(html` ${subscribe(subject, (x) => html` <p>${x}</p> `)} `)}
 				`,
-				document.body
+				document.body,
 			)
 			expect(removeExtraString(contentInShadow('p').innerHTML)).to.be.equal('0')
 			subject.next(1)

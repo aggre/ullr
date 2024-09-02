@@ -7,5 +7,5 @@ export const define = when(
 		customElements.get(el.is) === undefined,
 	(el) => {
 		customElements.define(el.is, el)
-	}
+	},
 )
