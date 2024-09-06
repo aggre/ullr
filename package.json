@@ -57,7 +57,7 @@
 		"@web/test-runner": "0.18.3",
 		"@web/test-runner-puppeteer": "0.16.0",
 		"browser-env": "3.3.0",
-		"eslint": "9.9.1",
+		"eslint": "9.10.0",
 		"eslint-config-prettier": "9.1.0",
 		"lit": "3.2.0",
 		"mocha": "10.7.3",
