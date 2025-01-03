@@ -50,7 +50,7 @@
 		"@rollup/plugin-node-resolve": "16.0.0",
 		"@rollup/plugin-typescript": "12.1.2",
 		"@types/mocha": "10.0.10",
-		"@types/node": "22.10.3",
+		"@types/node": "22.10.4",
 		"@types/ramda": "0.30.2",
 		"@typescript-eslint/eslint-plugin": "8.19.0",
 		"@typescript-eslint/parser": "8.19.0",
