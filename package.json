@@ -18,7 +18,7 @@
 		"!**/test.js"
 	],
 	"scripts": {
-		"test": "wtr dist/test.js --node-resolve --puppeteer && mocha dist/test.js --require ./node_modules/browser-env/register.js",
+		"test": "wtr && mocha dist/test.js --require ./node_modules/browser-env/register.js",
 		"pretest": "npm run build",
 		"build": "npm run build:ts && npm run build:rollup",
 		"build:ts": "tsc -p ./",
