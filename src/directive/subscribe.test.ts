@@ -10,6 +10,27 @@ const { document } = window
 
 const count = new BehaviorSubject(0)
 
+// Simple Zustand-like store implementation for testing
+const createStore = <T>(initialState: T) => {
+	let state = initialState
+	const listeners = new Set<(state: T, prevState: T) => void>()
+
+	return {
+		getState: () => state,
+		setState: (partial: Partial<T> | ((state: T) => Partial<T>)) => {
+			const prevState = state
+			const nextPartial =
+				typeof partial === 'function' ? partial(state) : partial
+			state = { ...state, ...nextPartial }
+			listeners.forEach((listener) => listener(state, prevState))
+		},
+		subscribe: (listener: (state: T, prevState: T) => void) => {
+			listeners.add(listener)
+			return () => listeners.delete(listener)
+		},
+	}
+}
+
 describe('subscribe directive', () => {
 	afterEach(() => {
 		render(html``, document.body)
@@ -151,6 +172,44 @@ describe('subscribe directive', () => {
 			expect(removeExtraString(el().innerHTML)).to.be.equal('6')
 		})
 
+		it('Pass a TemplateResult containing nested observable subscriptions', () => {
+			const outerSubject = new BehaviorSubject(2)
+			const innerSubject = new BehaviorSubject(5)
+
+			render(
+				html`
+					${subscribe(
+						outerSubject,
+						(multiplier) => html`
+							<div>
+								${subscribe(
+									innerSubject,
+									(value) => html`<span>${multiplier * value}</span>`,
+								)}
+							</div>
+						`,
+					)}
+				`,
+				document.body,
+			)
+
+			const el = (): Element => document.body.querySelector('span')!
+			expect(removeExtraString(el().innerHTML)).to.be.equal('10')
+
+			innerSubject.next(10)
+			expect(removeExtraString(el().innerHTML)).to.be.equal('20')
+
+			// When outer observable emits, inner subscribe re-renders with current inner value
+			outerSubject.next(3)
+			// 3 * 10 = 30
+			expect(removeExtraString(el().innerHTML)).to.be.equal('30')
+
+			// Verify inner observable still updates correctly
+			innerSubject.next(4)
+			// 3 * 4 = 12
+			expect(removeExtraString(el().innerHTML)).to.be.equal('12')
+		})
+
 		it('Pass a TemplateResult containing the component directive', () => {
 			count.next(5)
 			render(
@@ -165,6 +224,159 @@ describe('subscribe directive', () => {
 						.querySelector('ullr-shdw')!
 						.shadowRoot!.querySelector('p') as HTMLElement)
 			expect(removeExtraString(el.innerHTML)).to.be.equal('5')
+		})
+	})
+
+	describe('Zustand-like store support', () => {
+		it('Subscribe to store and render initial state', () => {
+			const store = createStore({ count: 42 })
+			render(
+				html` ${subscribe(store, (state) => html` <p>${state.count}</p> `)} `,
+				document.body,
+			)
+			const p = document.body.querySelector('p')!
+			expect(removeExtraString(p.innerHTML)).to.be.equal('42')
+		})
+
+		it('Update template when store state changes', () => {
+			const store = createStore({ count: 0 })
+			render(
+				html` ${subscribe(store, (state) => html` <p>${state.count}</p> `)} `,
+				document.body,
+			)
+			const el = (): Element => document.body.querySelector('p')!
+			expect(removeExtraString(el().innerHTML)).to.be.equal('0')
+
+			store.setState({ count: 1 })
+			expect(removeExtraString(el().innerHTML)).to.be.equal('1')
+
+			store.setState({ count: 100 })
+			expect(removeExtraString(el().innerHTML)).to.be.equal('100')
+		})
+
+		it('When removed the node, unsubscribe from store', () => {
+			const store = createStore({ count: 0 })
+			let renderCount = 0
+			render(
+				html`
+					${subscribe(store, (state) => {
+						renderCount += 1
+						return html` <p>${state.count}</p> `
+					})}
+				`,
+				document.body,
+			)
+			expect(renderCount).to.be.equal(1)
+
+			store.setState({ count: 1 })
+			expect(renderCount).to.be.equal(2)
+
+			// Remove the node
+			render(html``, document.body)
+
+			// State changes should not trigger template update
+			store.setState({ count: 2 })
+			store.setState({ count: 3 })
+			expect(renderCount).to.be.equal(2)
+		})
+
+		it('When changed the store, unsubscribe the old subscription', () => {
+			const store1 = createStore({ value: 'store1' })
+			const store2 = createStore({ value: 'store2' })
+
+			let lastValue = ''
+			const template = (state: { value: string }) => {
+				lastValue = state.value
+				return html` <p>${state.value}</p> `
+			}
+
+			render(html` ${subscribe(store1, template)} `, document.body)
+			expect(lastValue).to.be.equal('store1')
+
+			store1.setState({ value: 'updated1' })
+			expect(lastValue).to.be.equal('updated1')
+
+			// Switch to store2
+			render(html` ${subscribe(store2, template)} `, document.body)
+			expect(lastValue).to.be.equal('store2')
+
+			// Old store updates should not trigger template update
+			store1.setState({ value: 'ignored' })
+			expect(lastValue).to.be.equal('store2')
+
+			// New store updates should work
+			store2.setState({ value: 'updated2' })
+			expect(lastValue).to.be.equal('updated2')
+		})
+
+		it('Pass a TemplateResult containing nested store subscriptions', () => {
+			const outerStore = createStore({ multiplier: 2 })
+			const innerStore = createStore({ value: 5 })
+
+			render(
+				html`
+					${subscribe(
+						outerStore,
+						(outer) => html`
+							<div>
+								${subscribe(
+									innerStore,
+									(inner) =>
+										html`<span>${outer.multiplier * inner.value}</span>`,
+								)}
+							</div>
+						`,
+					)}
+				`,
+				document.body,
+			)
+
+			const el = (): Element => document.body.querySelector('span')!
+			expect(removeExtraString(el().innerHTML)).to.be.equal('10')
+
+			innerStore.setState({ value: 10 })
+			expect(removeExtraString(el().innerHTML)).to.be.equal('20')
+
+			// When outer store changes, inner subscribe re-renders with current inner state
+			outerStore.setState({ multiplier: 3 })
+			// 3 * 10 = 30
+			expect(removeExtraString(el().innerHTML)).to.be.equal('30')
+
+			// Verify inner store still updates correctly
+			innerStore.setState({ value: 4 })
+			// 3 * 4 = 12
+			expect(removeExtraString(el().innerHTML)).to.be.equal('12')
+		})
+
+		it('Mix Observable and store subscriptions', () => {
+			const observable = new BehaviorSubject(10)
+			const store = createStore({ multiplier: 2 })
+
+			render(
+				html`
+					${subscribe(
+						observable,
+						(value) => html`
+							<div>
+								${subscribe(
+									store,
+									(state) => html`<span>${value * state.multiplier}</span>`,
+								)}
+							</div>
+						`,
+					)}
+				`,
+				document.body,
+			)
+
+			const el = (): Element => document.body.querySelector('span')!
+			expect(removeExtraString(el().innerHTML)).to.be.equal('20')
+
+			store.setState({ multiplier: 3 })
+			expect(removeExtraString(el().innerHTML)).to.be.equal('30')
+
+			observable.next(5)
+			expect(removeExtraString(el().innerHTML)).to.be.equal('15')
 		})
 	})
 })

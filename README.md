@@ -75,9 +75,11 @@ export const main = (title: string, desc: string) =>
 
 `subscribe` is a lit directive.
 
-Subscribe to `Observable<T>` of RxJS and re-rendering with the passed callback function.
+Subscribe to RxJS `Observable<T>` or Zustand-like stores and re-render with the passed callback function.
 
-When the directive part is removed or the passed observable is changed, the unused subscription will automatically `unsubscribe`.
+When the directive part is removed or the passed observable/store is changed, the unused subscription will automatically `unsubscribe`.
+
+### With RxJS Observable
 
 ```ts
 import { html } from 'lit'
@@ -90,6 +92,22 @@ export const timer = (initialDelay: number, period: number) =>
 		(x) => html` <p>${x}</p> `,
 		html` <p>Default content</p> `,
 	)
+```
+
+### With Zustand-like Store
+
+```ts
+import { html } from 'lit'
+import { subscribe } from '@aggre/ullr'
+import { createStore } from 'zustand/vanilla'
+
+const store = createStore((set) => ({
+	count: 0,
+	increment: () => set((state) => ({ count: state.count + 1 })),
+}))
+
+export const counter = () =>
+	subscribe(store, (state) => html` <p>${state.count}</p> `)
 ```
 
 | Browser | Node.js |
