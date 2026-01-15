@@ -37,7 +37,7 @@
 	"license": "MIT",
 	"dependencies": {
 		"ramda": "^0.32.0",
-		"type-fest": "^4.26.0"
+		"type-fest": "^5.0.0"
 	},
 	"peerDependencies": {
 		"lit": "^2.0.0-rc.2 || ^3.0.0",
