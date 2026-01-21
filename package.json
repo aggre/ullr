@@ -61,7 +61,7 @@
 		"mocha": "11.7.5",
 		"prettier": "3.8.0",
 		"rimraf": "6.1.2",
-		"rollup": "4.55.2",
+		"rollup": "4.55.3",
 		"rollup-plugin-dts": "6.3.0",
 		"rxjs": "7.8.2",
 		"typescript": "5.9.3",
