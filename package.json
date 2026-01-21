@@ -59,7 +59,7 @@
 		"eslint-config-prettier": "10.1.8",
 		"lit": "3.3.2",
 		"mocha": "11.7.5",
-		"prettier": "3.8.0",
+		"prettier": "3.8.1",
 		"rimraf": "6.1.2",
 		"rollup": "4.55.3",
 		"rollup-plugin-dts": "6.3.0",
