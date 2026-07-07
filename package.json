@@ -52,7 +52,7 @@
 		"@types/mocha": "10.0.10",
 		"@types/node": "24.13.2",
 		"@types/ramda": "0.32.0",
-		"@web/test-runner": "0.20.2",
+		"@web/test-runner": "1.0.0",
 		"@web/test-runner-puppeteer": "0.18.0",
 		"browser-env": "3.3.0",
 		"eslint": "9.39.4",
